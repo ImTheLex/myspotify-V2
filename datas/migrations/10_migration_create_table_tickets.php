@@ -14,7 +14,7 @@
 
         public function up(){
 
-            $sql = "CREATE TABLE IF NOT EXISTS ticketss (
+            $sql = "CREATE TABLE IF NOT EXISTS tickets (
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     `content`TEXT NOT NULL,
                     response TEXT,
@@ -23,7 +23,7 @@
                     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
                     user_id INT NOT NULL,
-                    FOREIGN KEY (id) REFERENCES userss(id) ON DELETE CASCADE ON UPDATE CASCADE
+                    FOREIGN KEY (id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE
                 )";
 
             $request = $this->db->prepare($sql);

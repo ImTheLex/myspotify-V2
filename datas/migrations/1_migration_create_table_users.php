@@ -12,7 +12,7 @@ class CreateTableUsers {
 
     public function up(){
 
-        $sql = "CREATE TABLE IF NOT EXISTS userss (
+        $sql = "CREATE TABLE IF NOT EXISTS users (
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 username VARCHAR(100) COLLATE utf8_bin NOT NULL UNIQUE,
                 email VARCHAR(150) NOT NULL UNIQUE,

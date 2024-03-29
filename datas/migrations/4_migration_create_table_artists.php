@@ -14,7 +14,7 @@
 
         public function up(){
 
-            $sql = "CREATE TABLE IF NOT EXISTS artistss (
+            $sql = "CREATE TABLE IF NOT EXISTS artists (
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     `name` VARCHAR(100) NOT NULL UNIQUE,
                     email VARCHAR(150) NOT NULL UNIQUE,
@@ -24,7 +24,7 @@
                     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
                     user_id INT NOT NULL UNIQUE,
-                    FOREIGN KEY (user_id) REFERENCES userss(id) ON DELETE CASCADE ON UPDATE CASCADE
+                    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE
                 )";
 
             $request = $this->db->prepare($sql);

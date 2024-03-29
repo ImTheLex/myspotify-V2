@@ -14,7 +14,7 @@
 
         public function up(){
 
-            $sql = "CREATE TABLE IF NOT EXISTS categoriess (
+            $sql = "CREATE TABLE IF NOT EXISTS categories (
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     `name` VARCHAR(100) NOT NULL UNIQUE,
                     picture VARCHAR(255)
