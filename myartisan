@@ -1,0 +1,145 @@
+#!/usr/bin/env php
+<?php
+// myartisan
+
+if ($argc < 2) {
+    echo "Usage: php myartisan command:subcommand [arguments]\n";
+    exit(1);
+}
+
+list($command, $subcommand) = explode(':', $argv[1]);
+
+switch ($command) {
+    case 'make':
+        switch ($subcommand) {
+            case 'migration':
+                if ($argc < 3) {
+                    echo "Usage: php myartisan make:migration MigrationName\n";
+                    exit(1);
+                }
+
+                $migrationName = $argv[2];
+                $className= str_replace('_',' ',$migrationName);
+                $queryStarter = strtoupper(explode(' ',$className)[0]);
+                $queryStarter = $queryStarter === "CREATE" ? $queryStarter . " TABLE IF NOT EXISTS  
+                    (id INT AUTO_INCREMENT PRIMARY KEY,
+                    name VARCHAR(100))" 
+                    : "";
+                $className= ucwords($className);
+                $className= str_replace(' ','',$className);
+                $fileName = date('YmdHis') . "_migration_{$migrationName}.php";
+
+                $template = <<<EOT
+<?php
+class $className {
+    private \$db;
+
+    public function __construct(\$db) {
+        \$this->db = \$db;
+    }
+
+    public function up() {
+        \$query = \$this->db->prepare("$queryStarter");
+        \$query->execute();
+        // TODO: Add your migration code here
+    }
+}
+EOT;
+
+                file_put_contents("datas/migrations/$fileName", $template);
+
+                echo "Migration $fileName created.\n";
+                break;
+
+            case 'model':
+                if ($argc < 3) {
+                    echo "Usage: php myartisan make:model ModelName\n";
+                    exit(1);
+                }
+
+                $modelName = $argv[2];
+                $className= str_replace('_',' ',$modelName);
+                $parts = explode(' ',$className); 
+                $functionName = ucwords(end($parts));
+                $className= ucwords($className);
+                $className= str_replace(' ','',$className);
+                $fileName = "{$className}.php";
+                $template = <<<EOT
+<?php
+require_once '../dependencies/MyModel.php';
+use myspotifyV2\dependencies\MyModel;
+class $className extends MyModel {
+
+    protected \$rules = ([
+        'field1'=>'required|min:3',
+        'field2'=>'required|min:3'
+    ]);
+
+    public function create$functionName(){
+        \$request = \$this->db->prepare("INSERT INTO table (column) VALUES (:colum)");
+        \$request->execute([
+            'colum'=>'John'
+        ]);
+    }
+    /**
+     * Executes a query in a short form
+     * @param string \$sql The sql takes the whole query.
+     * @param array \$sql The params takes the parametters.
+    */
+    public function query(\$sql, \$params = []) {
+        \$request = \$this->db->prepare(\$sql);
+        \$request->execute(\$params);
+        return \$request;
+    }
+
+}
+EOT;
+                file_put_contents("models/$fileName", $template);
+
+                echo "Migration $fileName created.\n";
+                break;
+
+            // Add more subcommands here
+        }
+        break;
+
+    case 'migrate':
+        require_once 'models/DatabaseConnection.php';
+        $client = new DatabaseConnection();
+        $db = $client->get_pdo();
+  
+        // var_dump($client,$db);exit;
+
+
+        function migrate($db) {
+
+            $files = glob('datas/migrations/*.php');
+
+            var_dump($files);
+
+            natsort($files);
+            foreach($files as $file){
+
+                require_once $file;
+        
+                $className = pathinfo($file,PATHINFO_FILENAME);
+                var_dump($className);
+
+                $className= preg_replace('/^\d+_migration_/','',$className);
+                $className= str_replace('_',' ',$className);
+                $className= ucwords($className);
+                $className= str_replace(' ','',$className);
+                
+                $migration = new $className($db);
+                $migration->up();
+        
+        
+                echo "\n\nLa migration concernant " . $className . " a été effectuée." . PHP_EOL;
+        
+            }
+
+        }
+        migrate($db);
+    break;
+    // Add more commands here
+}

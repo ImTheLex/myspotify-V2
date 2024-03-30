@@ -38,9 +38,10 @@
                             </div>
                             <div> 
                                 <label class="flex-col mb-5" for="ticketResponse">Réponse:
-                                    <input type="text" class="input" autofocus>
+                                    <input type="text" class="input" name="ticketResponse"  id="ticketResponse" <?= $tickettodisplay['state'] !== 3 ? 'autofocus' : 'disabled'?> value="<?=$tickettodisplay['response'] ?? ''?>">
                                 </label>
-                            </div>       
+                            </div>
+                            <input type="hidden" name="ticketId" value="<?= $tickettodisplay['id']?>">       
                     <!-- If userCreation -->
                     <?php elseif(isset($_GET['admin-create-user'])):?>
                         <form action="/controllers/AuthController.php" method="post">
@@ -80,8 +81,11 @@
 
                     <?php if($_SERVER['REQUEST_URI'] !== "/views/admin.php"):?>
                     <div class="d-fx jc-sb">
-                        <button  class=" br-1-s br-cus-c-7 text-cus-1 rounded-xs c-p px-4 py-2 w-fit bg-cus-5 td-3 hovr-bx-shadow-cus-2" name="bAdminCrud" type="submit">Créer</button>
-                        <a href="<?= $_SERVER['HTTP_REFERER']?>" class="br-1-s br-cus-c-7 text-cus-1 rounded-xs c-p px-4 py-2 w-fit bg-cus-5 td-3 hovr-bx-shadow-cus-2">Retour</a>
+                        <button   class=" br-1-s br-cus-c-7 text-cus-1 rounded-xs <?= (int)$tickettodisplay['state'] === 3 ? 'hidden c-na' : 'c-p'?>  px-4 py-2 w-fit bg-cus-5 td-3 hovr-bx-shadow-cus-2" name="<?= $_SERVER['REQUEST_URI'] === '/views/admin.php?admin-create-user' ?  'bAdminCrud' : 'bRespondTicket'?>" type="submit" 
+                    >
+                            <?= $_SERVER['REQUEST_URI'] === '/views/admin.php?admin-create-user' ?  'Créer utilisateur' : 'Répondre'?>
+                        </button>
+                        <a href="<?= $_SERVER['SCRIPT_NAME']?>" class="br-1-s br-cus-c-7 text-cus-1 rounded-xs c-p px-4 py-2 w-fit bg-cus-5 td-3 hovr-bx-shadow-cus-2">Retour</a>
                     </div>
                     <?php else: ?> 
                         <a class="center br-1-s br-cus-c-7 text-cus-1 rounded-xs c-p px-4 py-2 w-fit bg-cus-5 td-3 hovr-bx-shadow-cus-2" href="<?='?admin-create-user'?>">Creer un utilisateur</a>

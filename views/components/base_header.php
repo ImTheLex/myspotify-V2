@@ -25,6 +25,7 @@
             $playlistdatas = $playlist->show_my_playlist($relationSubmits); 
     }
     $playlisttodisplay = SessionManager::getSession('playlist_to_display') ?? false;
+    $unreadtickets = SessionManager::getSession('unread_tickets') ?? false;
 
 
     // var_dump($_SESSION);

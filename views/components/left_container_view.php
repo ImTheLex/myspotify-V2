@@ -25,10 +25,15 @@
                                         <path opacity="1" fill="currentColor" d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/>
                                     </svg>
                                 </div>
-                                <ul class="p-1 hidden rounded-xs bg-cus-6 br-1-s br-cus-c-1" id="Create_Playlist_Options">
-                                    <li class="p-1 w-50 c-p rounded-xs hovr-white hovr-bg-cus-8" id="Option_1" onclick="create_playlist()">Créer une playlist</li>
-                                    <li class="p-1 w-50 c-p rounded-xs hovr-white hovr-bg-cus-8" id="Option_2">Créer un dossier de playlist</li>
-                                </ul>
+                                    <ul class="p-1 hidden rounded-xs bg-cus-6 br-1-s br-cus-c-1" id="Create_Playlist_Options">
+                                        <li class="p-1 w-50 c-p rounded-xs hovr-white hovr-bg-cus-8" id="Option_1">
+                                            <a href="../controllers/PlaylistController.php?bCreatePlaylist">
+                                                Créer une playlist
+                                            </a>
+                                        </li>
+                                        <li class="p-1 w-50 c-p rounded-xs hovr-white hovr-bg-cus-8" id="Option_2">Créer un dossier de playlist</li>
+                                    </ul>
+                                </a>
                             </div>
                             
                             
