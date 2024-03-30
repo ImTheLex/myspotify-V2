@@ -1,6 +1,6 @@
 <?php 
     require_once $_SERVER['DOCUMENT_ROOT'] . '../config/spotify_access.php';
-    require '../models/DatabaseConnection.php';
+    require_once '../models/DatabaseConnection.php';
     global $tracksDatas;
     $client = new DatabaseConnection();
     $db = $client->get_pdo();
