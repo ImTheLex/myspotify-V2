@@ -1,1 +1,5 @@
 .env
+myartisan
+generate_css.php
+/public/js/generate_css_php.js
+/public/js/Spotify_api.js
