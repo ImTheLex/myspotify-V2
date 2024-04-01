@@ -8,7 +8,9 @@
                             <?php foreach($unreadtickets as $unreadticket):?>
                                 <li class="bg-cus-6 gap-x-3 p-2 center-b">
                                     <div>
-                                        <h5 class="text-red">Réponse à votre contact</h5>
+                                        <h5 class="">Sujet:</h5>
+                                        <p class="text-cus-2"><?=$unreadticket['content']?></p>
+                                        <h5 class="">Réponse:</h5>
                                         <p class="text-cus-2"><?= $unreadticket['response']?></p>
                                     </div>
                                     <a href="/controllers/TicketController.php?bIsReadTicket=<?=$unreadticket['id']?>" class="center bg-cus-10 br-2-s br-cus-c-5 rounded-xs">

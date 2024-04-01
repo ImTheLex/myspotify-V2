@@ -25,6 +25,7 @@
                     </li>
                     <hr class="my-5">
                     <button class="bConsentSignupRisk c-p mb-5 bg-cus-2 scale-1 td-3 mx-auto px-8 py-2 items-center br-none block rounded-2xl" type="button" name="bConsentSignupRisk" id="bConsentSignUpRisk" onclick="consentSignUpRisk()">Je confirme avoir pris connaissance  de ce message.</button>
+                    <?=SessionManager::getSession('error')['model'] ?? '' ?>
                 </ul>                
                 <!-- Form Signup -->
                 <form action="/controllers/AuthController.php"  method="post">

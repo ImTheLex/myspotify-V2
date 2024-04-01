@@ -1,4 +1,7 @@
-<?php 
+<?php
+
+use myspotifyV2\models\User;
+
     session_start();
     require_once $_SERVER['DOCUMENT_ROOT'] . '/models/SessionManager.php';
     require_once $_SERVER['DOCUMENT_ROOT'] . '/models/DatabaseConnection.php';
@@ -14,6 +17,9 @@
         endif; 
     endforeach;
 
+
+
+    // var_dump($_SESSION);
     $client = new DatabaseConnection();
     $db = $client->get_pdo();
     $playlist = new Playlist($db);
@@ -55,7 +61,7 @@
                 <li>
                     <a class=" hovr-white" href="/views/admin.php">Admin</a>   
                     <?php $ticket = new Ticket($db);?>         
-                    <?php $user = new User($db);?>         
+                    <?php $user = new User();?>         
                      
                 </li>
                 <?php endif?>

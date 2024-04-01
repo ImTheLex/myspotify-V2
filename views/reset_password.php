@@ -14,6 +14,7 @@
                 <label class="flex-col mb-5" for="resetInput" aria-label="Entrez nom d'utilisateur">Introduisez un nouveau mot de passe
                     <input class="input" type="text" name="resetInput" id="resetInput">
                 <?= $_SESSION['errors'][0] ?? '' ?>
+                <?= SessionManager::getSession('error')['model'] ?? ''?>
                 </label>
                 <button class="bLogin scale-1 td-3 c-p bg-cus-2 mb-5 mx-auto px-8 py-2 items-center br-none block rounded-2xl" type="submit" name="bResetPassword">Confirmer la réinitialisation du mot de passe</button>
             </form>

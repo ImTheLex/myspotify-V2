@@ -49,22 +49,21 @@
                 <tr class="bg-black br-1-s w-full">
                     <th class="py-4 px-2 ta-s">#</th>
                     <th class=" py-4 px-2 ta-s">Titre</th>
-                    <th class=" py-4 px-2 ta-s">duation</th>
+                    <th class=" py-4 px-2 ta-s">duration</th>
                     <th class="py-4 px-2 ta-s">options</th>
                 </tr>
             </thead>
             <tbody >
-            <tr class="br-4-s-t br-cus-c-5">
-                    <?php $tracks = ['John','Marc','Paul']?>
-                    <?php foreach($tracks as $k => $track):?>
-                        
+                <?php $tracks = ['John','Marc','Paul']?>
+                <?php foreach($tracks as $k => $track):?>
+                    <tr class="br-4-s-t br-cus-c-5">    
+                        <td class="bg-cus-3 py-2 br-b-1-s br-cus-5 px-2 ta-s hovr-bg-cus-9"><?= $track[$k]?></td>
+                        <td class="bg-cus-3 py-2 px-2 ta-s hovr-bg-cus-9"><?= $track[$k]?></td>
+                        <td class="bg-cus-3 py-2 px-2 ta-s hovr-bg-cus-8"><?= $track ?></td>
+                    </tr>
+            <!-- <tr class="br-1-s br-cus-c-5"> -->
 
-                        <!-- <td> . track . </td><td> . track . </td></tr>   -->
-                    <td class="bg-cus-3 py-2 mb-2 px-2 ta-s hovr-bg-cus-9"><?= $track[$k] ?></td>
-                    <td class="bg-cus-3 py-2 mb-2 px-2 ta-s hovr-bg-cus-8"><?= $track ?></td>
-                </tr> <tr class="br-1-s br-cus-c-5">
-
-                    <?php endforeach?>
+                <?php endforeach?>
             </tbody>
         </table>   
     </div>

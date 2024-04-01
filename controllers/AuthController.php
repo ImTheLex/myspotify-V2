@@ -1,19 +1,20 @@
 <?php
+
+use myspotifyV2\models\User;
+
 session_start();
 require_once $_SERVER['DOCUMENT_ROOT'] . '/models/SessionManager.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/models/DatabaseConnection.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/models/User.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/models/Ticket.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/models/User.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/requests/Validator.php';
 
 $db = new DatabaseConnection();
-$user = new User($db->get_pdo());
+$user = new User();
 $userdatas = SessionManager::getSession('userdatas');
 $ticket = new Ticket($db->get_pdo());
 
 
-// var_dump($db,$user,$_SESSION);
-// exit;
 // Login
 if(isset($_POST['bLogin'])){
 
@@ -26,7 +27,7 @@ if(isset($_POST['bLogin'])){
     if (empty($errors)) {
 
         try{
-            $is_User = $user->getAuth($validatedRequest['loginInput'], $validatedRequest['loginPassword']);
+            $is_User = $user->authUser($validatedRequest['loginInput'], $validatedRequest['loginPassword']);
         }catch(Exception $e){
             if($e->getMessage() === "get_auth_no_match"){
 
@@ -35,7 +36,6 @@ if(isset($_POST['bLogin'])){
             }
             if($e->getMessage() === "get_auth_wrong_password"){
                 SessionManager::setSession('error',["login_password" => "<p style='color:red'>Le password est incorrect.</p>"]);
-                    
             } 
             header('Location: /views/login.php');
             exit;  
@@ -60,7 +60,7 @@ elseif (isset($_POST['bSignUp'])){
     $validatedRequest = $validator->get_request();
 
     try {
-        $responseSignUp = $user->signUp(MY_USERS_PDO,$validatedRequest);
+        $responseSignUp = $user->searchUser($validatedRequest['signUpUsername'],$validatedRequest['signUpEmail'],null);
     }catch(Exception $e){
         if ($e->getMessage() === "email"){
             SessionManager::setSession('error',["signUpEmail"=>"<p style='color:red'>L'email existe déjà</p>"]);
@@ -68,9 +68,19 @@ elseif (isset($_POST['bSignUp'])){
         if ($e->getMessage() === "username"){
             SessionManager::setSession('error',['signUpUsername' => "<p style='color:red'>Le username existe déjà</p>"]);
         }
+        header('Location: /views/signup.php');
+        exit;
     }
-
     if ($responseSignUp){
+        try{
+            $datas = intval($user->createUser($validatedRequest));
+        }catch(Exception $e){
+            SessionManager::setSession('error',['model' => "<p style='color:red'>{$e->getMessage()}</p>"]);
+            header('Location: /views/signup.php');
+            exit;
+        }
+        $recoverTokenTicket = $ticket->createTicket($datas,'RecoverToken');
+        $ticket->closeTicket($recoverTokenTicket,$user->getUserinfos($datas,null)['recover_token']);
         $message['create_user'] = "<p class='text-cus-2'> Création réussie, vous pouvez vous connecter</p>" ;
         SessionManager::setSession('success',$message);
         header('Location: /views/login.php');
@@ -82,7 +92,7 @@ elseif (isset($_POST['bSignUp'])){
 elseif (isset($_POST['bUserUpdate'])){
 
     $validator = new Validator($_POST);
-    $validator->validate_fields(['usernameUpdate', 'userEmailUpdate', 'userDateUpdate','sexUpdate']);
+    $validator->validate_fields(['usernameUpdate', 'userEmailUpdate', 'userBirthUpdate','userGenderUpdate']);
 
     $errors = $validator->get_errors();
     $validatedRequest = $validator->get_request();
@@ -108,7 +118,8 @@ elseif (isset($_POST['bUserUpdate'])){
             SessionManager::setSession('success',$message);
             header('Location: /views/profile.php');
             exit;
-        }  
+        } 
+        // die('COUCOU'); 
     }
     SessionManager::setSession('error',$errors);
     header('Location: /views/profile.php');
@@ -153,21 +164,30 @@ elseif (isset($_POST['bForgotPassword'])){
 elseif(isset($_POST['bResetPassword'])){
 
     $password = htmlspecialchars(trim($_POST['resetInput']));
-    $newpassword = password_hash($password,PASSWORD_DEFAULT);
+    try{
+        $user->initiatePassword($_SESSION['user_recover_datas'],$password);
+    }catch(Exception $e){
 
-    $user->initiatePassword($_SESSION['user_recover_datas'],$newpassword);
+        if($e->getMessage() === 'resetPasswordFailed'){
+            SessionManager::setSession('error',['resetPassword' => "<p style='color:red'>Update failed.</p>"]);
+        }
+        SessionManager::setSession('error',['model' => "<p style='color:red'>{$e->getMessage()}</p>"]);
+        header('Location: /views/reset_password.php?token');
+        exit;
 
+
+    }
 }
 
-elseif(isset($_POST['bAdminCrud']) && $userdatas['role'] == 9){
+// elseif(isset($_POST['bAdminCrud']) && $userdatas['role'] == 9){
 
-    $validator = new Validator($_POST);
-    $validator->validate_fields(['newAdminUserUsername','newAdminUserEmail','newAdminUserPassword','newAdminUserGender','newAdminUserBirth','newAdminUserRole']);
+//     $validator = new Validator($_POST);
+//     $validator->validate_fields(['newAdminUserUsername','newAdminUserEmail','newAdminUserPassword','newAdminUserGender','newAdminUserBirth','newAdminUserRole']);
 
-    $errors = $validator->get_errors();
-    $validatedRequest = $validator->get_request();
-    $user->createAdminUser($validatedRequest);
-}
+//     $errors = $validator->get_errors();
+//     $validatedRequest = $validator->get_request();
+//     $user->createAdminUser($validatedRequest);
+// }
 
 
 

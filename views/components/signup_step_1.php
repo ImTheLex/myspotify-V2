@@ -1,4 +1,11 @@
 <?php if(!isset($userdatas)):?>
+<!-- Username -->
+<label class="flex-col mb-5" for="signUpUsername">Choisissez un nom d'utilisateur
+    <input class="input" type="text" name="signUpUsername" id="signUpUsername" onchange="validateForm()" required>
+    <p style="color: red;" id="signUpUsernameError" class="hidden">Username invalide</p>
+    <?= SessionManager::getSession('error')['signUpUsername'] ?? ""?> 
+</label>
+
 <!-- Mail -->
 <label class="flex-col mb-5" for="signUpEmail">Entrez une adresse mail valide
     <input class="input"  type="email" name="signUpEmail" id="signUpEmail" required title="Attention, le formulaire ne correspond pas aux attentes." onchange="validateForm()">
@@ -17,12 +24,7 @@
 </label>
 
 
-<!-- Username -->
-<label class="flex-col mb-5" for="signUpUsername">Choisissez un nom d'utilisateur
-    <input class="input" type="text" name="signUpUsername" id="signUpUsername" onchange="validateForm()" required>
-    <p style="color: red;" id="signUpUsernameError" class="hidden">Username invalide</p>
-    <?= SessionManager::getSession('error')['signUpUsername'] ?? ""?> 
-</label>
+
 <?php else: 
     header("Location: /views/home.php");
     exit;

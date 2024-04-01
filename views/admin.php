@@ -28,7 +28,7 @@
                         <form action="/controllers/TicketController.php" method="post">
                             <div class="d-gd grid-col-2 mb-5">
                                 <p> Auteur:</p> 
-                                <p class="text-cus-2"><?= $user->getUserName($tickettodisplay['user_id'])?>
+                                <p class="text-cus-2"><?= $user->getUsername($tickettodisplay['user_id'])?>
                                 </p>
                             </div>
                             <div class="mb-5"> 

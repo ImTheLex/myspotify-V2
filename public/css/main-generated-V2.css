@@ -162,3 +162,7 @@
 .jc-fe{justify-content: flex-end;}
 .w-6{/*24px*/width: 1.5rem;}
 .h-6{/*24px*/height: 1.5rem;}
+.mb-3{/*12px*/margin-bottom: 0.75rem;}
+.gap-y-3{/*12px*/row-gap: 0.75rem;}
+.increment::before{counter-increment: auto-increment-numbers;content: counter(auto-increment-numbers)')';margin-right: 5px;/*Optionnel: pourl'espaceentrelenuméroetletexte*/}
+.mb-6{/*24px*/margin-bottom: 1.5rem;}

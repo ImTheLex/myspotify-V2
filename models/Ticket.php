@@ -14,10 +14,11 @@ class Ticket {
             $sql = $this->db->prepare("INSERT INTO tickets (content, `user_id`)  VALUES (:content, :user_id)");
             $sql->bindValue(":content",$content);
             $sql->bindValue(":user_id",$user_id);
-            $sql->execute();
+            $result = $sql->execute();
 
+            return  $this->db->lastInsertId();
        
-        }   
+        }  
         return false;      
     }
 

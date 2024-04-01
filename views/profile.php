@@ -33,12 +33,12 @@
         <?= SessionManager::getSession('error')['updateEmail'] ?? ''?>
         </label>
         <!-- Date -->
-        <label class="flex-col mb-5"  for="userDateUpdate">Votre date de naissance
-            <input class="input" type="date" name="userDateUpdate" id="userDateUpdate" value="<?= $userdatas['birth']?>">
+        <label class="flex-col mb-5"  for="userBirthUpdate">Votre date de naissance
+            <input class="input" type="date" name="userBirthUpdate" id="userBirthUpdate" value="<?= $userdatas['birth']?>">
         </label>
         <!-- gender -->
-        <label class="flex-col mb-5"  for="sexUpdate">Votre genre
-            <select class="input" name="sexUpdate" id="sexUpdate" value="<?= $userdatas['gender']?>">
+        <label class="flex-col mb-5"  for="userGenderUpdate">Votre genre
+            <select class="input" name="userGenderUpdate" id="userGenderUpdate" value="<?= $userdatas['gender']?>">
                 <option <?= $userdatas['gender'] === 'Male' ? 'selected' : '' ?> class="text-black px-2" value="Male">M</option>
                 <option <?= $userdatas['gender'] === 'Female' ? 'selected' : '' ?> class="text-black px-2" value="Female">F</option>
                 <option <?= $userdatas['gender'] === 'No-binary' ? 'selected' : '' ?> class="text-black px-2" value="No-binary">Non-binaire</option>

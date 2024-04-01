@@ -2,7 +2,7 @@
 
 // Gère la création d'un menu d'options de création de playlist sur base de l'interaction avec le bouton create-playlist.
 if(document.querySelector('.left-container')){
-console.log('coucou')
+// console.log('coucou')
 let createPlaylistContainer = document.querySelector('.create-playlist')
 let createPlaylistOptions = document.getElementById('Create_Playlist_Options')
 

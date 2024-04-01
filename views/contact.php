@@ -13,6 +13,9 @@
                     <?= SessionManager::getSession('error')['ticket_exists'] ?? ''?>
                     <input class="input" type="text" id="contactUsername" name="contactUsername">
                 </label>
+                <label class="flex-col mb-5" for="contactUsername">Sujet
+                    <input class="input" type="text" id="contactSubject" name="contactSubject">
+                </label>
                 <label class="flex-col mb-5" for="contactContent">Votre message
                     <textarea class=" input-height-l h-40 p-1" id="contactContent" name="contactContent"></textarea>
                 </label>

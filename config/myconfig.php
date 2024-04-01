@@ -1,5 +1,4 @@
 <?php
-
 define("MY_USERS_FILE",dirname(__DIR__) . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'users.csv');
 define("MY_USERS_PDO",[
     'email',
