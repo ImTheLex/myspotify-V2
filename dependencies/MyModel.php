@@ -3,10 +3,6 @@
 namespace myspotifyV2\dependencies;
 require_once 'DatabaseConnection.php';
 
-
-use DatabaseConnection;
-use PDOStatement;
-
 class MyModel{
 
     // Protected variables seem to be inherited by extensions of the Class they're declared in.
@@ -19,11 +15,13 @@ class MyModel{
     // This goes the same way for the table kinda "ORM Eloquent like from laravel"
     // We consider a model should be linked by a table with the same name but on lowerCase and eventually separated by underscores on every capital letter.
     public function __construct() {
-        $db = new DatabaseConnection;
+        $db = new DatabaseConnection();
         $this->db = $db->get_pdo();
         $className = get_class($this);
         $className = preg_replace('/(?<=\\w)(?=[A-Z])/',"_", $className);
         $this->table = basename(strtolower($className)) . 's';
+        // die(var_dump($className,$this->table,$this->db));
+
     }
 
     // This establish an array of rules available in all childrens.
@@ -62,8 +60,11 @@ class MyModel{
                             throw new \Exception("Missing field: $field");
                         }
                         $value = $data[$inputName];
-                        if($rule === 'required' && !$value){
+                        if($rule === 'required' && !$value && $value !== '0'){
                             throw new \Exception("Field $field is required");
+                        }
+                        if($rule === 'int' && !is_numeric($value)){
+                            throw new \Exception("Field $field is not a number");
                         }
                         if(preg_match('/min:(\d+)/', $rule, $matches) && strlen($value) < $matches[1]) {
                             throw new \Exception("Field $field must be at least {$matches[1]} characters long");

@@ -47,9 +47,13 @@
 .fx-1{flex: 1;}
 .fw-w{flex-wrap: wrap;}
 .fw-wr{flex-wrap: wrap-reverse;}
+.grid-r-col-1{ grid-template-columns: repeat(auto-fill, minmax(6rem, 1fr));}
+.grid-r-col-2{ grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));}
 .grid-col-2{grid-template-columns: 1fr 1fr;}
+.grid-col-4{grid-template-columns: 1fr 1fr 1fr 1fr;}
 .grid-auto-row{grid-auto-flow: row;}
 .col-span-2{ grid-column: span 2;}
+.col-span-4{ grid-column: span 4;}
 .overf-a{overflow: auto;}
 .overf-h{overflow: hidden;}
 .jc-sb{justify-content: space-between;}
@@ -935,6 +939,8 @@
 .col-c{display: flex;justify-content: center;flex-direction: column;}
 .col-b{display: flex;flex-direction: column;justify-content: space-between;}
 .col-a{display: flex;flex-direction: column;justify-content: space-around;}
+.flex-1-1{flex: 1 0 6rem ;}
+.flex-1-2{flex: 1 0 12rem ;}
 .w-full{width: 100%;}
 .img-cov{width: 100%; height: 100% ;object-fit: cover;}
 .h-full{height: 100%;}

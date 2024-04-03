@@ -1,25 +1,26 @@
 <?php
 
+use myspotifyV2\models\Playlist;
 use myspotifyV2\models\User;
+use myspotifyV2\Requests\Validator;
 
 session_start();
 require_once $_SERVER['DOCUMENT_ROOT'] . '/models/SessionManager.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/models/DatabaseConnection.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/models/Ticket.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/models/Playlist.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/models/User.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/requests/Validator.php';
 
-$db = new DatabaseConnection();
 $user = new User();
 $userdatas = SessionManager::getSession('userdatas');
-$ticket = new Ticket($db->get_pdo());
+// $ticket = new Ticket($db->get_pdo());
 
 
 // Login
 if(isset($_POST['bLogin'])){
 
     $validator = new Validator($_POST);
-    $validator->validate_fields(['loginInput', 'loginPassword']);
+    $validator->validate_fields();
 
     $errors = $validator->get_errors();
     $validatedRequest = $validator->get_request();
@@ -30,9 +31,7 @@ if(isset($_POST['bLogin'])){
             $is_User = $user->authUser($validatedRequest['loginInput'], $validatedRequest['loginPassword']);
         }catch(Exception $e){
             if($e->getMessage() === "get_auth_no_match"){
-
                 SessionManager::setSession('error',["logins" => "<p style='color:red'>Les identifiants n'existent pas.</p>"]);
-                
             }
             if($e->getMessage() === "get_auth_wrong_password"){
                 SessionManager::setSession('error',["login_password" => "<p style='color:red'>Le password est incorrect.</p>"]);
@@ -40,7 +39,10 @@ if(isset($_POST['bLogin'])){
             header('Location: /views/login.php');
             exit;  
         }
-        SessionManager::setSession('unread_tickets', $ticket->getUnreadTickets($is_User['id']));
+        $playlist = new Playlist();
+        SessionManager::setSession('playlists_datas',$playlist->getMyPlaylistRelations($is_User['id']));
+        SessionManager::setSession('public_playlists_datas',$playlist->showPublicPlaylists());
+        // SessionManager::setSession('unread_tickets', $ticket->getUnreadTickets($is_User['id']));
         SessionManager::setSession('userdatas',$is_User);
         header('Location: /views/home.php');
         exit;   
@@ -54,59 +56,64 @@ if(isset($_POST['bLogin'])){
 elseif (isset($_POST['bSignUp'])){
 
     $validator = new Validator($_POST);
-    $validator->validate_fields(['signUpUsername','signUpEmail','signUpPassword1','signUpPassword2','signUpBirth','signUpGender']);
+    $validator->validate_fields();
 
     $errors = $validator->get_errors();
     $validatedRequest = $validator->get_request();
 
-    try {
-        $responseSignUp = $user->searchUser($validatedRequest['signUpUsername'],$validatedRequest['signUpEmail'],null);
-    }catch(Exception $e){
-        if ($e->getMessage() === "email"){
-            SessionManager::setSession('error',["signUpEmail"=>"<p style='color:red'>L'email existe déjà</p>"]);
-        }
-        if ($e->getMessage() === "username"){
-            SessionManager::setSession('error',['signUpUsername' => "<p style='color:red'>Le username existe déjà</p>"]);
-        }
-        header('Location: /views/signup.php');
-        exit;
-    }
-    if ($responseSignUp){
-        try{
-            $datas = intval($user->createUser($validatedRequest));
+    if(empty($errors)){
+
+        try {
+            $responseSignUp = $user->searchUser($validatedRequest['signUpUsername'],$validatedRequest['signUpEmail'],null);
         }catch(Exception $e){
-            SessionManager::setSession('error',['model' => "<p style='color:red'>{$e->getMessage()}</p>"]);
+            if ($e->getMessage() === "email"){
+                SessionManager::setSession('error',["sign_up_email"=>"<p style='color:red'>L'email existe déjà</p>"]);
+
+            }elseif ($e->getMessage() === "username"){
+                SessionManager::setSession('error',['sign_up_username' => "<p style='color:red'>Le username existe déjà</p>"]);
+            }
             header('Location: /views/signup.php');
             exit;
         }
-        $recoverTokenTicket = $ticket->createTicket($datas,'RecoverToken');
-        $ticket->closeTicket($recoverTokenTicket,$user->getUserinfos($datas,null)['recover_token']);
-        $message['create_user'] = "<p class='text-cus-2'> Création réussie, vous pouvez vous connecter</p>" ;
-        SessionManager::setSession('success',$message);
-        header('Location: /views/login.php');
-        exit;
+        if ($responseSignUp){
+            try{
+                $datas = intval($user->createUser($validatedRequest));
+            }catch(Exception $e){
+                SessionManager::setSession('error',['model_user_creation' => "<p style='color:red'>{$e->getMessage()}</p>"]);
+                header('Location: /views/signup.php');
+                exit;
+            }
+            // $recoverTokenTicket = $ticket->createTicket($datas,'RecoverToken');
+            // $ticket->closeTicket($recoverTokenTicket,$user->getUserinfos($datas,null)['recover_token']);
+            $message['create_user'] = "<p class='text-cus-2'> Création réussie, vous pouvez vous connecter</p>" ;
+            SessionManager::setSession('success',$message);
+            header('Location: /views/login.php');
+            exit;
+        }
     }
-
+    SessionManager::setSession('error',$errors);
+    header('Location: /views/login.php');
+    exit;
 }
 
+// Update
 elseif (isset($_POST['bUserUpdate'])){
 
     $validator = new Validator($_POST);
-    $validator->validate_fields(['usernameUpdate', 'userEmailUpdate', 'userBirthUpdate','userGenderUpdate']);
+    $validator->validate_fields();
 
     $errors = $validator->get_errors();
     $validatedRequest = $validator->get_request();
-    
-
+    die(var_dump($_POST));
     if (empty($errors)) {
         try {
             $updated = $user->updateUser($userdatas,$validatedRequest,$_FILES);
         }catch(Exception $e){
             if ($e->getMessage() === "email"){
-                SessionManager::setSession('error',["updateEmail"=>"<p style='color:red'>L'email existe déjà</p>"]);
+                SessionManager::setSession('error',["update_email"=>"<p style='color:red'>L'email existe déjà</p>"]);
             }
             if ($e->getMessage() === "username"){
-                SessionManager::setSession('error',['updateUsername' => "<p style='color:red'>Le username existe déjà</p>"]);
+                SessionManager::setSession('error',['update_username' => "<p style='color:red'>Le username existe déjà</p>"]);
             }
             header('Location: /views/profile.php');
             exit;
@@ -119,12 +126,10 @@ elseif (isset($_POST['bUserUpdate'])){
             header('Location: /views/profile.php');
             exit;
         } 
-        // die('COUCOU'); 
     }
     SessionManager::setSession('error',$errors);
     header('Location: /views/profile.php');
     exit; 
-    
     
 }
 
@@ -132,27 +137,29 @@ elseif (isset($_POST['bForgotPassword'])){
 
 
     $validator = new Validator($_POST);
-    $validator->validate_fields(['forgotInput', 'forgotToken']);
+    $validator->validate_fields();
 
     $errors = $validator->get_errors();
     $validatedRequest = $validator->get_request();
 
-    $response = $user->resetPassword($validatedRequest['forgotInput'],$validatedRequest['forgotToken']);
-
-    if($response) {
-
-        SessionManager::setSession('user_recover_datas',$response);      
-        header('Location: /views/reset_password.php?token');
-        exit;
-
-    } 
     if(empty($errors)){
 
-        $errors['forgotInvalid'] = "<p style='color:red'>Les champs sont invalides</p>";
+        try{
+            $response = $user->resetPassword($validatedRequest['forgotInput'],$validatedRequest['forgotToken']);
+        }catch(Exception $e){
+            if ($e->getMessage() === 'reset_password'){
+                SessionManager::setSession('error',['reset_password' => "<p style='color:red'>Aucune correspondance.</p>"]);
+            }
+        }
 
-    }else{
+        if($response) {
 
-        SessionManager::setSession('error',$errors);
+            SessionManager::setSession('user_recover_datas',$response);      
+            header('Location: /views/reset_password.php?token');
+            exit;
+        }
+
+        SessionManager::setSession('error',['forgotInvalid'=>"<p style='color:red'>Aucune correspondance.</p>"]);
         header('Location: /views/forgot_password.php');
         exit;
     }
@@ -164,18 +171,19 @@ elseif (isset($_POST['bForgotPassword'])){
 elseif(isset($_POST['bResetPassword'])){
 
     $password = htmlspecialchars(trim($_POST['resetInput']));
+
     try{
         $user->initiatePassword($_SESSION['user_recover_datas'],$password);
     }catch(Exception $e){
 
-        if($e->getMessage() === 'resetPasswordFailed'){
-            SessionManager::setSession('error',['resetPassword' => "<p style='color:red'>Update failed.</p>"]);
+        if($e->getMessage() === 'reset_password_failed'){
+            SessionManager::setSession('error',['reset_password_failed' => "<p style='color:red'>Update failed.</p>"]);
+        }else {
+
+            SessionManager::setSession('error',['model' => "<p style='color:red'>{$e->getMessage()}</p>"]);
+            header('Location: /views/reset_password.php?token');
+            exit;
         }
-        SessionManager::setSession('error',['model' => "<p style='color:red'>{$e->getMessage()}</p>"]);
-        header('Location: /views/reset_password.php?token');
-        exit;
-
-
     }
 }
 

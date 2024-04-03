@@ -1,51 +1,98 @@
 <?php
 session_start();
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/models/DatabaseConnection.php';
+
+use myspotifyV2\models\Playlist;
+use myspotifyV2\Requests\Validator;
+
     require_once $_SERVER['DOCUMENT_ROOT'] . '/requests/Validator.php';
-    require $_SERVER['DOCUMENT_ROOT'] . "/models/User.php";
     require $_SERVER['DOCUMENT_ROOT'] . "/models/Playlist.php";
-    require $_SERVER['DOCUMENT_ROOT'] . "/models/Playlist_User_Relation.php";
+
     require $_SERVER['DOCUMENT_ROOT'] . "/models/SessionManager.php";
 
 
-    $client = new DatabaseConnection;
-    $db = $client->get_pdo();
     $userdatas = SessionManager::getSession('userdatas');
-    $playlist = new Playlist($db);
-    $playlistrelation = new PlaylistUserRelation($db);
+    $playlist = new Playlist();
 
-    
-if(isset($_GET['bCreatePlaylist'])){
+    // die(var_dump($_GET));
 
-    $response = $playlist->create_playlist($userdatas['id']);
-    $newRelationSubmit = $playlistrelation->make_subscribe_relation($userdatas['id'],$response);
-    $result = $playlist->open_playlist($response);
-    SessionManager::setSession('playlist_to_display',$result);
-    header("Location: ../views/home.php");
+if(isset($_GET['accueil'])){
+    SessionManager::unsetSession('playlist_to_display');
+    header('Location: /views/home.php');
     exit;
-
-}   
-
-if(isset($_POST['bDropPlaylist'])) {
-    $playlist->delete_playlist($_POST['playlist_id']);
-    if ($_POST['playlist_id'] == SessionManager::getSession('playlist_to_display')['id']){
-        SessionManager::unsetSession('playlist_to_display');
-    }                
 }
-if(isset($_POST['bUpdatePlaylist'])){
+elseif(isset($_GET['bCreatePlaylist'])){
 
-    unset($_POST['bUpdatePlaylist']);
-    $validator = new Validator($_POST);
-    $validator->validate_fields(["updatePlaylistPrivacy","updatePlaylistTitle","updatePlaylistDescription","updatePlaylstId"]);
+    $validator = new Validator($_GET);
+    $validator->validate_fields();
 
     $errors = $validator->get_errors();
     $validatedRequest = $validator->get_request();
+    if(empty($errors)){
 
-   
-    if(!$errors) {
+        try {
+            $created = $playlist->createPlaylist($userdatas['id']);
+        }catch(Exception $e){
+            SessionManager::setSession('error',['model_playlist_creation'=>"<p style='color:red'>{$e->getMessage()}</p>"]);
+        }
+
+        $opened = $playlist->openPlaylist($created,$userdatas['id']);
+        if($opened){
+            $relations = $playlist->getMyPlaylistRelations($userdatas['id']);
+        }
+        SessionManager::setSession('playlists_datas',$relations);
+        SessionManager::setSession('playlist_to_display',$opened);
+        header("Location: ../views/home.php");
+        exit;
+    }
+    
+}
+
+
+if(isset($_POST['bDropPlaylist'])) {
+
+    $validator = new Validator($_POST);
+    $validator->validate_fields();
+
+    $errors = $validator->get_errors();
+    $validatedRequest = $validator->get_request();
+    if(empty($errors)){
+        $playlist->deletePlaylist($validatedRequest['deletePlaylistId'],$userdatas['id']);
+        $playlists_datas = SessionManager::getSession('playlists_datas');
+        foreach($playlists_datas as $key => $playlist_data) {
+            if($playlist_data['id'] == $validatedRequest['deletePlaylistId']) {
+                unset($playlists_datas[$key]);
+                break;
+            }
+        }
         
+        SessionManager::setSession('playlists_datas',$playlists_datas);
+        if ($validatedRequest['deletePlaylistId'] == SessionManager::getSession('playlist_to_display')['id']){
+            SessionManager::unsetSession('playlist_to_display');
+        }  
+    }              
+}
+
+if(isset($_POST['bUpdatePlaylist'])){
+
+    $validator = new Validator($_POST);
+    $validator->validate_fields();
+
+    $errors = $validator->get_errors();
+    $validatedRequest = $validator->get_request();
+    
+    if(empty($errors)) {
+
         $updated = $playlist->updatePlaylist($validatedRequest,$_FILES);
-        SessionManager::setSession('playlist_to_display',$updated); 
+        SessionManager::setSession('playlist_to_display',$updated);
+        $playlists_datas = SessionManager::getSession('playlists_datas');
+        foreach($playlists_datas as $key => $playlist_data) {
+            if($playlist_data['id'] == $validatedRequest['updatePlaylstId']) {
+            die(var_dump($validatedRequest,$playlist_data['id'],$playlists_datas[$key],$_FILES));
+
+                // SessionManager::setSession('playlists_datas',$playlists_datas[$key]);
+                break;
+            }
+        } 
 
     }else{
 
@@ -59,10 +106,26 @@ if(isset($_POST['bUpdatePlaylist'])){
 
 }
 
-if(isset($_POST['bOpenPlaylist'])){
-    $playlistToDisplay = $playlist->open_playlist($_POST['playlist_id']);
-    SessionManager::setSession('playlist_to_display',$playlistToDisplay);
+if(isset($_GET['bOpenPlaylist'])){
+
+    $validator = new Validator($_GET);
+    $validator->validate_fields();
+
+    $errors = $validator->get_errors();
+    $validatedRequest = $validator->get_request();
+
+    if(empty($errors)){
+        
+        try{
+            $playlistToDisplay = $playlist->openPlaylist($_GET['bOpenPlaylist'],$userdatas['id']);
+        }catch(Exception $e){
+            header("Location: /views/home.php");
+            exit;
+        }
+        SessionManager::setSession('playlist_to_display',$playlistToDisplay);
+    }
 }
 
 
 header("Location: /views/home.php");
+exit;

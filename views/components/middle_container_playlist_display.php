@@ -18,12 +18,11 @@
            
     </div>
     <div class="hidden" id="updatePlaylistForm">
-        <form class="mb-8 ml-4  gap-x-4 items-center" method="post" action="/controllers/PlaylistController.php">
+        <form class="mb-8 ml-4  gap-x-4 items-center" method="post" action="/controllers/PlaylistController.php" enctype="multipart/form-data">
             <div class="w-30 h-30">
-                <img class="img-cov" src="<?= $playlisttodisplay['img']?>" alt="">
-                <label class="flex-col br-1-s br-cus-c-7 text-cus-7 rounded-xs c-p px-4 py-2 ta-c w-fit bg-cus-3 td-3 hovr-bx-shadow-cus-2" for="updatePlaylistPicture" onmouseup="remove_color(event)" onmousedown="add_color(event)">Modifier
-                    <input class="hidden" type="file" name="updatePlaylistPicture" id="updatePlaylistPicture">
-                </label>
+                <img class="img-cov" src="<?= $playlisttodisplay['img']?>" id="playlistUpdatePicture" alt="">
+                <input class="hidden" type="file" onchange="previewImagePlaylist()" name="updatePlaylistPicture" id="updatePlaylistPicture">
+                <label class="flex-col br-1-s br-cus-c-7 text-cus-7 rounded-xs c-p px-4 py-2 ta-c w-fit bg-cus-3 td-3 hovr-bx-shadow-cus-2" for="updatePlaylistPicture">Modifier</label>
             </div>
             <div>
                 <label class="flex-col" for="updatePlaylistPrivacy">Privacy

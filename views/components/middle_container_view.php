@@ -38,37 +38,36 @@
         </div>
 
         <div class="py-2 h-full overf-a body-grad-1 rounded-sm middle-scrollable-container">
-            <div class="playlist-display <?= isset($playlisttodisplay) && $playlisttodisplay ? '' : 'hidden'?> ">
+            <div class="playlist-display <?= isset($playlisttodisplay) && $playlisttodisplay ? '' : 'hidden'?>">
                 <?php include 'components/middle_container_playlist_display.php'?>
             </div>
             <div class="artist-display">
             </div>
             <div class="audio-display">
             </div>
-                <?php if (isset($playlistdatas)):?>
+            
                     <div class="global-feed px-4 <?= isset($playlisttodisplay) && $playlisttodisplay ? 'hidden' : ''?>">
-                        <div class="d-gd grid-col-2 pt-15">
+                        <div class="d-gd grid-col-2 gap-x-4 gap-y-4 pt-15">
                             <h2 class="col-span-2">Vue d'ensemble</h2>
-                            <?php   
-                                if ($playlistdatas):
-                                $length = count($playlistdatas) ?? 0;?>
-                                <?php for($i=0; $i < $length  &&  $i < 4 ; $i++):?>
-                
-                                <?php include 'components/middle_container_overview_playlists.php'?>
+                            <?php if(isset($playlistdatas)):
+                                    $length = count(array_values($playlistdatas));
+                                        for($i=0; $i < $length && $i < 4; $i++): ?>
+                                            <?php $playlistdata = $playlistdatas[$i]; ?>
+                                            <?php include 'components/middle_container_overview_playlists.php'?>
+                                    <?php endfor ?>
 
-                                <?php endfor ?>
-
-                                <?php else: ?>
+                            <?php else: ?>
                                     <p class="text-cus-2">Vous pouvez désormais créer une playlist !</p>
                             <?php endif?>
                         </div>
-                        <div class="d-gd grid-col-2 pt-15">
-                            <h2 class="col-span-2">Playlists publiques</h2>
-                            <?php $publicPlaylists = $playlist->show_public_playlist() ?>
-                            <?php for($i=0;  $i < count($publicPlaylists) && $i < 4 ; $i++):?>
+
+                        <div class="d-gd grid-col-4 gap-x-4 gap-y-4 pt-15">
+                            <h2 class="col-span-4">Playlists publiques</h2>
+                            <?php for($i=0;  $i < count($publicplaylists) && $i < 4 ; $i++):?>
                                 <?php include 'components/middle_container_public_playlists.php'?>
                             <?php endfor?>
                         </div>
+
                         <?php if(isset($tracksDatas)):?>
                             <div class="d-gd grid-col-2 pt-15"> 
                             <h2 class="col-span-2">Playlists Spotify</h2>
@@ -79,7 +78,6 @@
                             </div>
                         <?php endif?>
                     </div>
-                <?php endif?>
     <?php else:?>
             <h2 class="mx-auto w-fit m-auto">Veuillez vous connecter pour accéder au contenu :)</h2>
     <?php endif ?>

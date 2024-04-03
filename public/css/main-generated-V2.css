@@ -166,3 +166,30 @@
 .gap-y-3{/*12px*/row-gap: 0.75rem;}
 .increment::before{counter-increment: auto-increment-numbers;content: counter(auto-increment-numbers)')';margin-right: 5px;/*Optionnel: pourl'espaceentrelenuméroetletexte*/}
 .mb-6{/*24px*/margin-bottom: 1.5rem;}
+.fw-6{font-weight: 600;}
+.text-cus-5{color: var(--customTxtColor_5);}
+.p-4{/*16px*/padding: 1rem;}
+.mx-10{/*40px*/margin-inline: 2.5rem;}
+.my-15{/*60px*/margin-block: 3.75rem;}
+.mt-8{/*32px*/margin-top: 2rem;}
+.grid-col-4{grid-template-columns: 1fr 1fr 1fr 1fr;}
+.col-span-4{ grid-column: span 4;}
+.text-cus-3{color: var(--customTxtColor_3);}
+.text-cus-4{color: var(--customTxtColor_4);}
+.text-cus-8{color: var(--customTxtColor_8);}
+.text-cus-9{color: var(--customTxtColor_9);}
+.cov{object-fit: cover;}
+.min-h-vh-4{min-height: 40vh;}
+.min-h-2{min-height: 12.5rem;}
+.min-h-vh-2{min-height: 20vh;}
+.w-52{/*208px*/width: 13rem;}
+.h-52{/*208px*/height: 13rem;}
+.w-36{/*144px*/width: 9rem;}
+.h-36{/*144px*/height: 9rem;}
+.max-w-36{max-width: 9rem;/*144px*/}
+.flex-1-1{flex: 1 0 6rem ;}
+.grid-r-col-1{ grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));}
+.grid-r-col-1{ grid-template-columns: repeat(auto-fill, minmax(6rem, 1fr));}
+.grid-r-col-2{ grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));}
+.max-w-40{max-width: 10rem;/*160px*/}
+.max-w-32{max-width: 8rem;/*128px*/}

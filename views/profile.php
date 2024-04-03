@@ -1,16 +1,19 @@
 <?php include 'components/base_header.php' ?> 
-<?php if(isset($userdatas)):?>
+<?php if(isset($userdatas)):
+    
+    
+    ?>
 
     <!-- Form profile -->
-    <h1 class="login-card rounded-s br-cus-c-2 br-1-s px-12 py-2 bg-cus-6 mx-auto ta-c">Bonjour <?= $userdatas['username']?>!</h1>
+    <h1 class="login-card rounded-s br-cus-c-2 br-1-s px-12 py-2 text-cus-5 bg-cus-6 mx-auto ta-c">Bonjour <?= $userdatas['username']?>!</h1>
 
-    <form class="login-card rounded-s p-2 gap-y-2 br-cus-c-2 br-1-s px-12 py-8 bg-cus-6 border mx-auto " action="/controllers/AuthController.php" method="post" enctype="multipart/form-data">
+    <form class="login-card rounded-s p-2 gap-y-2 br-cus-c-2 br-1-s text-cus-5 px-12 py-8 bg-cus-6 border mx-auto " action="/controllers/AuthController.php" method="post" enctype="multipart/form-data">
         <div class="d-fx jc-sb">
             <div class="d-fx gap-x-3 ml-auto">
                 <div class="d-fx col-a">
                     <h2>Ma photo</h2>
                     <input class="hidden" type="file" name="userImgUpdate" id="userImgUpdate" onchange="previewImage()">
-                    <label onmouseup="remove_color(event)" onmousedown="add_color(event)" class="flex-col br-1-s br-cus-c-7 text-cus-7 rounded-xs c-p px-4 py-2 ta-c w-fit bg-cus-3 td-3 hovr-bx-shadow-cus-2" for="userImgUpdate">
+                    <label class="br-1-s br-cus-c-7 text-cus-1 rounded-xs c-p px-4 py-2 ta-c w-fit bg-cus-5 td-3 hovr-bx-shadow-cus-2" for="userImgUpdate">
                         Modifier
                     </label>
                 </div>         
@@ -23,21 +26,21 @@
         <?= SessionManager::getSession('error')['usernameUpdate'] ?? '' ?>
         <?= SessionManager::getSession('error')['userEmailUpdate'] ?? '' ?>
         <!-- Username -->
-        <label class="flex-col mb-5" for="usernameUpdate">Votre nom d'utilisateur
+        <label class="flex-col mb-5 fw-6" for="usernameUpdate">Votre nom d'utilisateur
             <input class="input" type="text" name="usernameUpdate"id="usernameUpdate" value="<?= $userdatas['username'] ?>">
-        <?= SessionManager::getSession('error')['updateUsername'] ?? '' ?>
+        <?= SessionManager::getSession('error')['update_username'] ?? '' ?>
         </label>
         <!-- Mail -->
-        <label class="flex-col mb-5" for="userEmailUpdate">Votre adresse mail
+        <label class="flex-col mb-5 fw-6" for="userEmailUpdate">Votre adresse mail
             <input class="input" type="email" name="userEmailUpdate" id="userEmailUpdate" value="<?= $userdatas['email']?>">
-        <?= SessionManager::getSession('error')['updateEmail'] ?? ''?>
+        <?= SessionManager::getSession('error')['update_email'] ?? ''?>
         </label>
         <!-- Date -->
-        <label class="flex-col mb-5"  for="userBirthUpdate">Votre date de naissance
+        <label class="flex-col mb-5 fw-6"  for="userBirthUpdate">Votre date de naissance
             <input class="input" type="date" name="userBirthUpdate" id="userBirthUpdate" value="<?= $userdatas['birth']?>">
         </label>
         <!-- gender -->
-        <label class="flex-col mb-5"  for="userGenderUpdate">Votre genre
+        <label class="flex-col mb-5 fw-6"  for="userGenderUpdate">Votre genre
             <select class="input" name="userGenderUpdate" id="userGenderUpdate" value="<?= $userdatas['gender']?>">
                 <option <?= $userdatas['gender'] === 'Male' ? 'selected' : '' ?> class="text-black px-2" value="Male">M</option>
                 <option <?= $userdatas['gender'] === 'Female' ? 'selected' : '' ?> class="text-black px-2" value="Female">F</option>
@@ -47,12 +50,12 @@
             </select>
         </label> 
         <div class="center-b">
-            <button class="flex-col br-1-s br-cus-c-7 text-cus-7 rounded-xs c-p px-4 py-2 ta-c w-fit bg-cus-3 td-3 hovr-bx-shadow-cus-2" type="submit" name="bUserUpdate">Confirmer</button>
-            <button class="flex-col br-1-s br-cus-c-7 text-cus-7 rounded-xs c-p px-4 py-2 ta-c w-fit bg-cus-3 td-3 hovr-bx-shadow-cus-2" type="submit" name="bPasswordUpdate">Changer Mot de passe</button>
-            <button class="flex-col br-1-s br-cus-c-7 text-cus-7 rounded-xs c-p px-4 py-2 ta-c w-fit bg-cus-3 td-3 hovr-bx-shadow-cus-2" type="submit" name="bUserDelete">Supprimer le compte</button>
+            <button class="br-1-s br-cus-c-7 text-cus-1 rounded-xs c-p px-4 py-2 ta-c w-fit bg-cus-5 td-3 hovr-bx-shadow-cus-2" type="submit" name="bUserUpdate">Confirmer</button>
+            <button class=" br-1-s br-cus-c-7 text-cus-7 rounded-xs c-p px-4 py-2 ta-c w-fit bg-cus-3 td-3 hovr-bx-shadow-cus-2" type="submit" name="bPasswordUpdate">Changer Mot de passe</button>
+            <button class=" br-1-s br-cus-c-7 text-cus-7 rounded-xs c-p px-4 py-2 ta-c w-fit bg-cus-10 td-3 hovr-bx-shadow-cus-2" type="submit" name="bUserDelete">Supprimer le compte</button>
         </div>
     </form>
-    <?php else: 
+    <?php else:
     header("Location: /views/home.php");
     exit;
 endif; 

@@ -1,14 +1,10 @@
 <?php
 
-use myspotifyV2\models\User;
+use myspotifyV2\models\Playlist;
 
     session_start();
     require_once $_SERVER['DOCUMENT_ROOT'] . '/models/SessionManager.php';
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/models/DatabaseConnection.php';
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/models/Playlist_User_Relation.php';
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/models/Playlist.php';
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/models/Ticket.php';
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/models/User.php';
+    // require_once $_SERVER['DOCUMENT_ROOT'] . '/models/Ticket.php';
 
     $jsfiles = glob($_SERVER['DOCUMENT_ROOT'].'/public/js/*.js');
     foreach($jsfiles as $jsfile):
@@ -17,24 +13,18 @@ use myspotifyV2\models\User;
         endif; 
     endforeach;
 
-
-
     // var_dump($_SESSION);
-    $client = new DatabaseConnection();
-    $db = $client->get_pdo();
-    $playlist = new Playlist($db);
-    $playlistrelations = new PlaylistUserRelation($db);
     
+
     $userdatas = SessionManager::getSession('userdatas') ?? null;
-    if (isset($userdatas)){
-        $relationSubmits = $playlistrelations->get_related_susbcribes($userdatas['id']);
-            $playlistdatas = $playlist->show_my_playlist($relationSubmits); 
-    }
+    $playlistdatas =  SessionManager::getSession('playlists_datas') ?? false; 
     $playlisttodisplay = SessionManager::getSession('playlist_to_display') ?? false;
+    // var_dump($playlisttodisplay,$playlistdatas);
+    $publicplaylists = SessionManager::getSession('public_playlists_datas') ?? false;
+
     $unreadtickets = SessionManager::getSession('unread_tickets') ?? false;
 
 
-    // var_dump($_SESSION);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,13 +50,15 @@ use myspotifyV2\models\User;
                 <?php if(isset($userdatas) && $userdatas['role'] === 9):?>
                 <li>
                     <a class=" hovr-white" href="/views/admin.php">Admin</a>   
-                    <?php $ticket = new Ticket($db);?>         
-                    <?php $user = new User();?>         
+                    <?php
+                    //  $ticket = new Ticket();
+                     ?>         
                      
                 </li>
                 <?php endif?>
                 <li>
-                    <a class=" hovr-white" href="/views/home.php">Accueil</a>    
+                    <!-- <a class=" hovr-white" href="/views/home.php">Accueil</a>     -->
+                    <a href='<?= isset($playlisttodisplay) && $playlisttodisplay ? "/controllers/PlaylistController.php?accueil" : ''?>'> Accueil</a>
                 </li>
                 <li>
                   <a class=" hovr-white" href="/views/contact.php">Contact</a>

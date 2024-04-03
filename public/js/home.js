@@ -29,6 +29,16 @@ let createPlaylistOptions = document.getElementById('Create_Playlist_Options')
     //     })
     // }
 
+    function previewImagePlaylist() {
+        let reader = new FileReader();
+        let fileTarget = document.getElementById('updatePlaylistPicture')
+        reader.onload = function(){
+            let output = document.getElementById('playlistUpdatePicture');
+            output.src = reader.result;
+            output.style.display = 'block';
+        };
+        reader.readAsDataURL(fileTarget.files[0]);
+    }
 // 2024 : Open playlist.
 
     function open_playlist(playlist_id){ 

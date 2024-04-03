@@ -1,10 +1,11 @@
 <?php
 namespace myspotifyV2\models;
+use myspotifyV2\dependencies\MyModel;
+
 
 require_once '../dependencies/MyModel.php';
 require_once '../config/myconfig.php';
 
-use myspotifyV2\dependencies\MyModel;
 
 class User extends MyModel {
 
@@ -44,7 +45,6 @@ class User extends MyModel {
             $this->db->commit();
 
             return $result;
-
         }         
     }
 
@@ -188,15 +188,18 @@ class User extends MyModel {
 
         if ($this->validate(['password' => $new_password],$this->rules)){
 
-            $result = $this->query("UPDATE $this->table SET `password` = :password WHERE (email =  :email)",
-            [
-                'email' => $user_info['email'],
-                'password'=> $new_password
-            ]);
+            $this->db->beginTransaction();
 
-            if($result === 0){
-                throw new \Exception("resetPasswordFailed");
-            }
+                $result = $this->query("UPDATE $this->table SET `password` = :password WHERE (email =  :email)",
+                [
+                    'email' => $user_info['email'],
+                    'password'=> password_hash($new_password,PASSWORD_DEFAULT)
+                ]);
+
+                if($result === 0){
+                    throw new \Exception("reset_password_failed");
+                }
+            $this->db->commit();
             return true;
         }
 

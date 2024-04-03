@@ -1,14 +1,12 @@
 <?php
 session_start();
-require_once $_SERVER['DOCUMENT_ROOT'] . '/models/DatabaseConnection.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/requests/Validator.php';
 require $_SERVER['DOCUMENT_ROOT'] . "/models/User.php";
 require $_SERVER['DOCUMENT_ROOT'] . "/models/SessionManager.php";
 require $_SERVER['DOCUMENT_ROOT'] . "/models/Ticket.php";
 
 
-$client = new DatabaseConnection;
-$db = $client->get_pdo();
+
 $userdatas = SessionManager::getSession('userdatas');
 $ticket = new Ticket($db);
 

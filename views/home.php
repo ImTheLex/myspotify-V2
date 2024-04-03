@@ -2,9 +2,8 @@
 
 <?php 
 // require_once $_SERVER['DOCUMENT_ROOT'] . "/config/spotify_access.php"
+
     
-    
-    // var_dump($_SESSION);
     ?>
 
     <!-- <div class="h-full"> -->

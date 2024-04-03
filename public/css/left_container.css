@@ -37,12 +37,12 @@
     height: calc(100% - 6rem);
 }
 
-.left-scrollable-container form {
+.form-left-side-container form {
     width: 70%;
     opacity: 0;
 }
 
-.left-scrollable-container form input {
+.form-left-side-container form input {
     border: none;
     width: 80%;
     opacity: 0;
@@ -50,7 +50,7 @@
     pointer-events: none;
 }
 
-.left-scrollable-container form input.searching {
+.form-left-side-container form input.searching {
     pointer-events: auto;
     animation: searchingInput 0.5s ease forwards 1s;
 }

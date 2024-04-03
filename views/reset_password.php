@@ -7,7 +7,7 @@
         <div class="max-w-80 mx-auto">
         <?php if (isset($_GET['token'])):?>
 
-            <h2 class="mx-auto w-fit">Nouveau mot de passe</h2>
+            <h2 class="mx-auto w-fit fw-6">Nouveau mot de passe</h2>
             <hr class="my-5">
     
             <form action="/controllers/AuthController.php"  method="post">

@@ -9,7 +9,7 @@ class DatabaseConnection {
     // A l'appel d'instanciation de DatabaseConnection, on execute ce code.
     public function __construct() {
 
-        $envFile = __DIR__ . '../../.env';
+        $envFile = $_SERVER["DOCUMENT_ROOT"] . '/.env';
 
         $envVariables = parse_ini_file($envFile);
 
