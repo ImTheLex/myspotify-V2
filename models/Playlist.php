@@ -5,9 +5,9 @@ use Exception;
 use myspotifyV2\dependencies\MyModel;
 use myspotifyV2\models\PlaylistUserRelation;
 
-require_once '../dependencies/MyModel.php';
-require_once 'PlaylistUserRelation.php';
-require_once '../config/myconfig.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/dependencies/MyModel.php';
+require_once  $_SERVER['DOCUMENT_ROOT'] . '/models/PlaylistUserRelation.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/config/myconfig.php';
 
 
 

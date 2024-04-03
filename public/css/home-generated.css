@@ -15,6 +15,7 @@
 .col-span-4{ grid-column: span 4;}
 .overf-a{overflow: auto;}
 .jc-fe{justify-content: flex-end;}
+.ji-c{justify-items: center;}
 .p-1{/*4px*/padding: 0.25rem;}
 .p-2{/*8px*/padding: 0.5rem;}
 .px-1{/*4px*/padding-inline: 0.25rem;}
@@ -60,6 +61,7 @@
 .w-10{/*40px*/width: 2.5rem;}
 .w-12{/*48px*/width: 3rem;}
 .w-30{/*120px*/width: 7.5rem;}
+.w-36{/*144px*/width: 9rem;}
 .h-8{/*32px*/height: 2rem;}
 .h-10{/*40px*/height: 2.5rem;}
 .h-12{/*48px*/height: 3rem;}
@@ -68,7 +70,6 @@
 .w-full{width: 100%;}
 .h-full{height: 100%;}
 .max-w-32{max-width: 8rem;/*128px*/}
-.max-w-36{max-width: 9rem;/*144px*/}
 .max-w-80{max-width: 20rem;/*320px*/}
 .p-rel{position: relative;}
 .p-abs{position: absolute;}
@@ -96,6 +97,7 @@
 .input{color: white; background: transparent; border-radius: 0.25rem; height: 2rem; padding-inline: 0.5rem; border: 1px solid var(--customColor_8)}
 .hidden{display: none;}
 .mx-auto{margin-inline: auto;}
+.block{display: block;}
 .profile-picture{width: 100%;height: 100%;object-fit: cover; border: 2px solid var(--green_1);}
 .-scale-1:hover{transform: scale(0.95);}
 .flex-col{display: flex;flex-direction: column;}

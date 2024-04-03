@@ -1,7 +1,8 @@
 <!------------------------------------------Partie Centrale---------------------------------------->
 <section class="col-b p-rel w-full h-full br-cus-c-2 br-1-s rounded-sm middle-container">
     <?php if(isset($userdatas)): ?>
-        <div class="py-2 px-6 p-abs d-fx jc-fe w-full top-middle-container">
+        <div class="py-2 px-6 p-abs d-fx <?= isset(SessionManager::getSession('error')["model_playlist_update"]) ? 'jc-sb':'jc-fe'?> w-full top-middle-container">
+        <?= SessionManager::getSession('error')["model_playlist_update"] ?? '';?>
             <?php if(isset($_GET['show-notif']) && !empty($unreadtickets)):?>
                     <div class="p-abs r-0 mr-20  w-fit bg-cus-5 rounded-s p-2 notification">
                         <ul class="flex-col gap-y-2">
@@ -49,7 +50,7 @@
                     <div class="global-feed px-4 <?= isset($playlisttodisplay) && $playlisttodisplay ? 'hidden' : ''?>">
                         <div class="d-gd grid-col-2 gap-x-4 gap-y-4 pt-15">
                             <h2 class="col-span-2">Vue d'ensemble</h2>
-                            <?php if(isset($playlistdatas)):
+                            <?php if(isset($playlistdatas) && !empty($playlistdatas)):
                                     $length = count(array_values($playlistdatas));
                                         for($i=0; $i < $length && $i < 4; $i++): ?>
                                             <?php $playlistdata = $playlistdatas[$i]; ?>
@@ -61,7 +62,7 @@
                             <?php endif?>
                         </div>
 
-                        <div class="d-gd grid-col-4 gap-x-4 gap-y-4 pt-15">
+                        <div class="d-gd grid-col-4 ji-c gap-x-4 gap-y-4 pt-15">
                             <h2 class="col-span-4">Playlists publiques</h2>
                             <?php for($i=0;  $i < count($publicplaylists) && $i < 4 ; $i++):?>
                                 <?php include 'components/middle_container_public_playlists.php'?>

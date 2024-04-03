@@ -1,5 +1,6 @@
-<?php
+<?php 
 
 
-header("Location: controllers/AuthController.php");
+
+header("Location: views/home.php");
 exit;

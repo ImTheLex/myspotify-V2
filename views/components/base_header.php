@@ -58,7 +58,7 @@ use myspotifyV2\models\Playlist;
                 <?php endif?>
                 <li>
                     <!-- <a class=" hovr-white" href="/views/home.php">Accueil</a>     -->
-                    <a href='<?= isset($playlisttodisplay) && $playlisttodisplay ? "/controllers/PlaylistController.php?accueil" : ''?>'> Accueil</a>
+                    <a href='<?= "/controllers/RoutingController.php?accueil"?>'> Accueil</a>
                 </li>
                 <li>
                   <a class=" hovr-white" href="/views/contact.php">Contact</a>

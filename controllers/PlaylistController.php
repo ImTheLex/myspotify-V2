@@ -5,9 +5,8 @@ use myspotifyV2\models\Playlist;
 use myspotifyV2\Requests\Validator;
 
     require_once $_SERVER['DOCUMENT_ROOT'] . '/requests/Validator.php';
-    require $_SERVER['DOCUMENT_ROOT'] . "/models/Playlist.php";
-
-    require $_SERVER['DOCUMENT_ROOT'] . "/models/SessionManager.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/models/Playlist.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/models/SessionManager.php";
 
 
     $userdatas = SessionManager::getSession('userdatas');
@@ -15,12 +14,7 @@ use myspotifyV2\Requests\Validator;
 
     // die(var_dump($_GET));
 
-if(isset($_GET['accueil'])){
-    SessionManager::unsetSession('playlist_to_display');
-    header('Location: /views/home.php');
-    exit;
-}
-elseif(isset($_GET['bCreatePlaylist'])){
+if(isset($_GET['bCreatePlaylist'])){
 
     $validator = new Validator($_GET);
     $validator->validate_fields();
@@ -57,15 +51,7 @@ if(isset($_POST['bDropPlaylist'])) {
     $validatedRequest = $validator->get_request();
     if(empty($errors)){
         $playlist->deletePlaylist($validatedRequest['deletePlaylistId'],$userdatas['id']);
-        $playlists_datas = SessionManager::getSession('playlists_datas');
-        foreach($playlists_datas as $key => $playlist_data) {
-            if($playlist_data['id'] == $validatedRequest['deletePlaylistId']) {
-                unset($playlists_datas[$key]);
-                break;
-            }
-        }
-        
-        SessionManager::setSession('playlists_datas',$playlists_datas);
+        SessionManager::setSession('playlists_datas',$playlist->getMyPlaylistRelations($userdatas['id']));
         if ($validatedRequest['deletePlaylistId'] == SessionManager::getSession('playlist_to_display')['id']){
             SessionManager::unsetSession('playlist_to_display');
         }  
@@ -82,17 +68,17 @@ if(isset($_POST['bUpdatePlaylist'])){
     
     if(empty($errors)) {
 
-        $updated = $playlist->updatePlaylist($validatedRequest,$_FILES);
-        SessionManager::setSession('playlist_to_display',$updated);
-        $playlists_datas = SessionManager::getSession('playlists_datas');
-        foreach($playlists_datas as $key => $playlist_data) {
-            if($playlist_data['id'] == $validatedRequest['updatePlaylstId']) {
-            die(var_dump($validatedRequest,$playlist_data['id'],$playlists_datas[$key],$_FILES));
+        try{
+        
+            $updated = $playlist->updatePlaylist($validatedRequest,$_FILES);
+        }catch(Exception $e){
+            
+            SessionManager::setSession('error',["model_playlist_update"=>"<p style='color:red'>{$e->getMessage()}</p>"]);
 
-                // SessionManager::setSession('playlists_datas',$playlists_datas[$key]);
-                break;
-            }
-        } 
+        }
+        SessionManager::setSession('playlist_to_display',$updated);
+        SessionManager::setSession('playlists_datas',$playlist->getMyPlaylistRelations($userdatas['id']));
+        
 
     }else{
 

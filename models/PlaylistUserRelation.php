@@ -2,7 +2,7 @@
 namespace myspotifyV2\models;
 use myspotifyV2\dependencies\MyModel;
 
-require_once '../dependencies/MyModel.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/dependencies/MyModel.php';
 
 class PlaylistUserRelation extends MyModel {
 

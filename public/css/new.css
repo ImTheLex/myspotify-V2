@@ -141,6 +141,9 @@ p, .p {
 .body-grad-3 {
     background: linear-gradient(to left, var(--customColor_3),var(--customColor_4));
 }
+.body-grad-4 {
+    background: linear-gradient(to right, var(--customColor_3),var(--customColor_4));
+}
 
 .ticket-grad-1 {
     background: linear-gradient(to right, var(--customColor_11),var(--customColor_4));

@@ -9,10 +9,10 @@
     <!-- <div class="h-full"> -->
 
         <main class="gap-x-4 mx-4 center-b">
-            <?php include './components/left_container_view.php'?>
+            <?php include 'components/left_container_view.php'?>
 
 
-            <?php include './components/middle_container_view.php'?>
+            <?php include 'components/middle_container_view.php'?>
         </main>
         
     <!-- </div> -->

@@ -193,3 +193,9 @@
 .grid-r-col-2{ grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));}
 .max-w-40{max-width: 10rem;/*160px*/}
 .max-w-32{max-width: 8rem;/*128px*/}
+.bg-cus-7{background-color: var(--customBackgroundColor_7);}
+.bg-cus-8{background-color: var(--customBackgroundColor_8);}
+.br-cus-c-8{border-color: var(--customColor_8);}
+.content-center{align-content: center;}
+.ai-c{align-items: center;}
+.ji-c{justify-items: center;}

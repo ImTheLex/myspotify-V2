@@ -11,7 +11,7 @@
                 <h2><?= $playlisttodisplay['title']?></h2>
                 <p><?= $playlisttodisplay['description']?></p>
             </div>
-            <?php if ($playlisttodisplay['user_id'] === $userdatas['id']):?>
+            <?php if (($playlisttodisplay['user_id'] === $userdatas['id']) ||  $userdatas['role'] === 9):?>
                 <button class="flex-col br-1-s br-cus-c-7 text-cus-7 rounded-xs c-p px-4 py-2 ta-c w-fit bg-cus-3 td-3 hovr-bx-shadow-cus-2" onclick="display_edit_playlist(event)">Editer</button>
             <?php endif?>
         </div>

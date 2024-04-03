@@ -3,8 +3,8 @@ namespace myspotifyV2\models;
 use myspotifyV2\dependencies\MyModel;
 
 
-require_once '../dependencies/MyModel.php';
-require_once '../config/myconfig.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/dependencies/MyModel.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/config/myconfig.php';
 
 
 class User extends MyModel {

@@ -104,7 +104,6 @@ elseif (isset($_POST['bUserUpdate'])){
 
     $errors = $validator->get_errors();
     $validatedRequest = $validator->get_request();
-    die(var_dump($_POST));
     if (empty($errors)) {
         try {
             $updated = $user->updateUser($userdatas,$validatedRequest,$_FILES);
