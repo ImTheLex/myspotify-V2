@@ -1,4 +1,5 @@
 <?php
+
 class DatabaseConnection {
     // On défini comme private les infos de notre db..
     private $pdo;
