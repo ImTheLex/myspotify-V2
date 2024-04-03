@@ -105,7 +105,7 @@ class MyModel{
     }
 
     /**
-     * Executes a query in a short form
+     * Executes a query in a short form will directly return a result in case the request is Insert or Update.
      * @param string $sql The sql takes the whole query.
      * @param array $params The params takes the parametters.
     */

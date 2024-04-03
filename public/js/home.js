@@ -15,6 +15,8 @@ let createPlaylistOptions = document.getElementById('Create_Playlist_Options')
 
 
 // 2024 : Création playlist.
+// Ended up thinking this is irrelevant to request asynchronously to then endup refreshing the page.
+// But oh well, will look for that later. Guess I was tired that day.
 
     // function create_playlist (){   
     //     let formData = new FormData();

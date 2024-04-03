@@ -131,7 +131,7 @@ elseif (isset($_POST['bUserUpdate'])){
     exit; 
     
 }
-
+// Forgot password
 elseif (isset($_POST['bForgotPassword'])){
 
 
@@ -166,7 +166,7 @@ elseif (isset($_POST['bForgotPassword'])){
     header('Location: /views/forgot_password.php');
     exit;
 }
-
+// Reset Password
 elseif(isset($_POST['bResetPassword'])){
 
     $password = htmlspecialchars(trim($_POST['resetInput']));
@@ -186,6 +186,7 @@ elseif(isset($_POST['bResetPassword'])){
     }
 }
 
+// Admin crud
 // elseif(isset($_POST['bAdminCrud']) && $userdatas['role'] == 9){
 
 //     $validator = new Validator($_POST);
