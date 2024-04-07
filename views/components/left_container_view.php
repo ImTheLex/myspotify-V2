@@ -62,7 +62,6 @@
                         <?php
                             
                             
-
                             if(isset($playlistdatas) && $playlistdatas):
                             foreach($playlistdatas as $playlistitem){
                                 require 'playlist.php';

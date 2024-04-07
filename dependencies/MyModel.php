@@ -118,7 +118,7 @@ class MyModel{
         elseif (strpos(strtoupper($sql), 'INSERT') === 0) {
             return $this->db->lastInsertId();
         }
-        elseif (strpos(strtoupper($sql), 'UPDATE') === 0) {
+        elseif (strpos(strtoupper($sql), 'UPDATE') === 0 || strpos(strtoupper($sql), 'DELETE') === 0) {
             $result = $request->rowCount() > 0 ? true : 0;
             return $result;    
         }

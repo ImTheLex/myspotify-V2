@@ -3,7 +3,6 @@
     
     
     ?>
-
     <!-- Form profile -->
     <h1 class="login-card rounded-s br-cus-c-2 br-1-s px-12 py-2 text-cus-5 bg-cus-6 mx-auto ta-c">Bonjour <?= $userdatas['username']?>!</h1>
 
@@ -54,6 +53,7 @@
             <button class=" br-1-s br-cus-c-7 text-cus-7 rounded-xs c-p px-4 py-2 ta-c w-fit bg-cus-3 td-3 hovr-bx-shadow-cus-2" type="submit" name="bPasswordUpdate">Changer Mot de passe</button>
             <button class=" br-1-s br-cus-c-7 text-cus-7 rounded-xs c-p px-4 py-2 ta-c w-fit bg-cus-10 td-3 hovr-bx-shadow-cus-2" type="submit" name="bUserDelete">Supprimer le compte</button>
         </div>
+        <input type="hidden" value="<?= $userdatas['id']?>" name="user_id">
     </form>
     <?php else:
     header("Location: /views/home.php");

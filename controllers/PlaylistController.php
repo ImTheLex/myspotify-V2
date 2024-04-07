@@ -69,7 +69,7 @@ if(isset($userdatas)){
         $validatedRequest = $validator->get_request();
 
         if(isset($_POST['bDropPlaylist'])) {
-            
+
             if(empty($errors)){
                 $playlist->deletePlaylist($validatedRequest['deletePlaylistId'],$userdatas['id']);
                 SessionManager::setSession('playlists_datas',$playlist->getMyPlaylistRelations($userdatas['id']));

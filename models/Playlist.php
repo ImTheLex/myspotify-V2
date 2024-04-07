@@ -113,10 +113,13 @@ class Playlist extends MyModel {
     
     public function deletePlaylist($playlist_id) {
 
+        
         $result = $this->query("DELETE FROM $this->table WHERE id = :id",
         [
             'id'=> $playlist_id
         ]);
+        
+        unlink(glob($_SERVER['DOCUMENT_ROOT']. DIRECTORY_SEPARATOR .'public' . DIRECTORY_SEPARATOR . 'ressources' . DIRECTORY_SEPARATOR . 'playlists_image' . DIRECTORY_SEPARATOR . $playlist_id . '*')[0] ?? '');
         return $result;
     
     }
