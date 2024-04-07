@@ -15,7 +15,6 @@ use myspotifyV2\models\Playlist;
 
     // var_dump($_SESSION);
     
-
     $userdatas = SessionManager::getSession('userdatas') ?? null;
     $playlistdatas =  SessionManager::getSession('playlists_datas') ?? false; 
     $playlisttodisplay = SessionManager::getSession('playlist_to_display') ?? false;
@@ -47,6 +46,11 @@ use myspotifyV2\models\Playlist;
                
             </div>
             <ul class="gap-x-8 items-center ">  
+                <li>
+                    <form action="/generate_css.php" method="POST">
+                        <button type="submit" name="rGenerateCss">OK</button>
+                    </form>
+                </li>
                 <?php if(isset($userdatas) && $userdatas['role'] === 9):?>
                 <li>
                     <a class=" hovr-white" href="/views/admin.php">Admin</a>   

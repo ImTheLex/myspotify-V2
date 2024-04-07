@@ -25,8 +25,6 @@
 .items-center{display: flex;align-items: center;}
 .col-b{display: flex;flex-direction: column;justify-content: space-between;}
 .logo-spotify{width: 8rem;}
-.br-t-2-s{border-top-width: 2px;border-top-style: solid;}
-.br-b-2-s{border-bottom-width: 2px;border-bottom-style: solid;}
 .login-card{width: 50%;min-width: 17rem;}
 .fs-1{/*12px*/font-size: 0.75rem;}
 .ta-c{text-align: center;}
@@ -69,8 +67,17 @@
 .br-none{border: none;}
 .br-1-s{border-width: 1px;border-style: solid;}
 .br-2-s{border-width: 2px;border-style: solid;}
-.br-b-1-s{border-bottom-width: 1px;border-bottom-style: solid;}
+.br-t-2-s{border-top-width: 2px;border-top-style: solid;}
+.br-cus-c-1{border-color: var(--customColor_1);}
+.br-cus-c-2{border-color: var(--customColor_2);}
+.br-cus-c-5{border-color: var(--customColor_5);}
+.br-cus-c-7{border-color: var(--customColor_7);}
+.br-cus-c-8{border-color: var(--customColor_8);}
+.br-b-1-s{border-bottom-width: 1px; border-bottom-style: solid;}
+.br-b-2-s{border-bottom-width: 2px; border-bottom-style: solid;}
+.br-spacing-1{border-spacing: 0.25rem;}
 .truncate{overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+
 .gap-x-1{/*4px*/column-gap: 0.25rem;}
 .gap-x-2{/*8px*/column-gap: 0.5rem;}
 .gap-x-4{/*16px*/column-gap: 1rem;}
@@ -89,9 +96,6 @@
 .p-rel{position: relative;}
 .p-abs{position: absolute;}
 .zi-2{z-index: 2;}
-.br-cus-c-1{border-color: var(--customColor_1);}
-.br-cus-c-2{border-color: var(--customColor_2);}
-.br-cus-c-5{border-color: var(--customColor_5);}
 .border-ridge{border: 1px ridge grey;}
 .hovr-cus-2:hover{color: var(--hoveredTextColor_2);}
 .hovr-cus-7:hover{color: var(--hoveredTextColor_7);}
@@ -111,8 +115,7 @@
 .hidden{display: none;}
 .-scale-1:hover{transform: scale(0.95);}
 .col-c{display: flex;justify-content: center;flex-direction: column;}
-.img-cov{width: 100%; height: 100% ;object-fit: cover;}
-.br-cus-c-7{border-color: var(--customColor_7);}
+.img-cov{width: 100%; height: 100% ;object-fit: cover; max-height: 100%; max-width: 100%;}
 .overf-h{overflow: hidden;}
 .px-12{/*48px*/padding-inline: 3rem;}
 .py-8{/*32px*/padding-block: 2rem;}
@@ -136,7 +139,6 @@
 .px-8{/*32px*/padding-inline: 2rem;}
 .my-5{/*20px*/margin-block: 1.25rem;}
 .rounded-2xl{/*36px*/border-radius: 2.25rem;}
-.br-spacing-1{border-spacing: 0.25rem;}
 .w-3{/*12px*/width: 0.75rem;}
 .h-3{/*12px*/height: 0.75rem;}
 .bg-cus-2{background-color: var(--customBackgroundColor_2);}
@@ -156,8 +158,6 @@
 .t-0{top: 0;}
 .r-0{right: 0;}
 .mr-20{margin-right: 5rem;}
- 
-
 .h-fit{height: fit-content;}
 .jc-fe{justify-content: flex-end;}
 .w-6{/*24px*/width: 1.5rem;}
@@ -195,7 +195,52 @@
 .max-w-32{max-width: 8rem;/*128px*/}
 .bg-cus-7{background-color: var(--customBackgroundColor_7);}
 .bg-cus-8{background-color: var(--customBackgroundColor_8);}
-.br-cus-c-8{border-color: var(--customColor_8);}
 .content-center{align-content: center;}
 .ai-c{align-items: center;}
 .ji-c{justify-items: center;}
+.img-cov{width: 100%; height: 100% ;object-fit: cover;}
+
+@media (min-width: 768px) { .bg-cus-5 { background-color: var(--customBackgroundColor_5);}}
+@media screen and (max-width: 1000px) {
+    .d-gd.grid-col-4{
+        grid-template-columns: repeat(2,1fr);
+    }
+    .col-span-4 {
+        grid-column: span 2;
+    }
+    .public-playlist {
+        width: 100%;
+    }
+    .public-playlist .ta-c {
+        text-align: left;
+
+    }
+    .public-playlist>a {
+        display: flex;
+        align-items: center;
+        column-gap: 0.75rem;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+
+    }
+    .public-playlist .mb-5{
+        margin: 0;
+    }
+    .public-playlist .h-36.w-36 {
+
+        width: 3rem;
+        height: 3rem;
+    }
+}
+@media screen and (max-width: 780px) {
+
+    .d-gd.grid-col-2,.d-gd.grid-col-4 {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .col-span-2,.col-span-4  {
+        grid-column: span 1;
+    }
+}
+@media screen and (max-width: 900px) { .m-lm\:bg-cus-5 { background-color: var(--customBackgroundColor_5);} }
+
+@media screen and (max-width: 900px) { .m-lm\:fw-w { flex-wrap: wrap;} }

@@ -1,7 +1,7 @@
 <?php
 
 
-    class CreateTablePlaylistsUsersRelations {
+    class CreateTablePlaylistUserRelations {
 
         private $db;
 

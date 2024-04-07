@@ -5,7 +5,7 @@
             </div>
             <?php  else: ?>
 
-                <?= include './components/bottom_container_view.php' ?>
+                <?php include 'bottom_container_view.php' ?>
 
             <?php endif;
             if(!empty(SessionManager::getSession('error'))):

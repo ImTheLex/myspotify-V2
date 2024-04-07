@@ -1,5 +1,5 @@
 <!--------------------------------------Partie Gauche-------------------------------------------->
-        <section class="col-b rounded-s h-full left-container">
+        <section class="col-b rounded-s h-full left-container m-lm:bg-cus-5">
             <div class="col-c rounded-s p-2 gap-y-2 br-cus-c-2 br-1-s  bg-cus-6 border top-left-container">
                 <div class="icon-accueil">
                     <a onclick="toggle_playlists_display()" class="  gap-x-2 px-1 items-center" href="#" aria-label="Lien vers la page home">
@@ -38,11 +38,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class=" gap-x-6 py-2 px-1 br-b-1-s items-center left-container-filter">
+                    <div class=" gap-x-6 py-2 px-1 br-b-1-s gap-y-4 m-lm:fw-w center  left-container-filter">
                         <button type="button" class="bg-cus-3 h4 text-cus-7 br-1-s br-cus-c-7 rounded-sm p-1 c-p">Playlists</button>
                         <button type="button" class=" bg-cus-3 h4 text-cus-7 br-1-s br-cus-c-7 rounded-sm p-1 c-p">Artistes</button>
                     </div>      
-                    <div class=" overf-a left-scrollable-container">
+                    <div class="overf-a left-scrollable-container">
                         <div class="p-rel px-2 gap-x-2 py-1 center-b form-left-side-container">
                             <div class=" p-abs zi-2 h-8 w-8 center c-p rounded-full" id="Search_Icon_2">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512">
@@ -64,7 +64,7 @@
                             
                             if(isset($playlistdatas) && $playlistdatas):
                             foreach($playlistdatas as $playlistitem){
-                                require 'playlist.php';
+                                include 'playlist.php';
                             }                  
                             endif;
 

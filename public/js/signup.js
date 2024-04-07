@@ -101,7 +101,7 @@ if (document.querySelector('section[data-id="signup"]')){
     }
 
     function updateButtonStatus(button, isEnabled) {
-        console.log(button)
+        // console.log(button)
         if (isEnabled) {
             button.classList.replace('c-na','c-p');
             button.disabled = false;
@@ -132,7 +132,7 @@ if (document.querySelector('section[data-id="signup"]')){
         now.getFullYear();
         let date = new Date(inputDate)
 
-        console.log(now.getFullYear(),date.getFullYear());
+        // console.log(now.getFullYear(),date.getFullYear());
         let dateError = document.getElementById('signupDateNaissanceError')
 
         if ((date.getFullYear() < now.getFullYear()) && date.getFullYear() > 1900){

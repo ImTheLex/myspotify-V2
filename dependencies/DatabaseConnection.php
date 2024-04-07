@@ -9,9 +9,16 @@ class DatabaseConnection {
     // A l'appel d'instanciation de DatabaseConnection, on execute ce code.
     public function __construct() {
 
-        $envFile = $_SERVER["DOCUMENT_ROOT"] . '/.env';
+        // Si la connexion echoue, tenter avec $server['documentroot']. J'effectue une connexion à la meme instance pdo via myartisan mais si le serveur "n'existe pas $server echouera. D'ou le _dir_. Maintenant je reste sceptique au regard de la synthaxe ci dessous.
 
-        $envVariables = parse_ini_file($envFile);
+        // $envFile = $_SERVER['DOCUMENT_ROOT'] .'/.env';
+        $envFile2 =  dirname(__DIR__) . '../.env';        
+
+        $envVariables = parse_ini_file($envFile2);
+
+        if(!$envVariables){
+            // $envVariables = parse_ini_file($envFile2);
+        }
 
         $dsn = 'mysql:host=' . $envVariables['DB_HOST']. ';dbname=' . $envVariables['DB_NAME'];
         $options = [
@@ -26,7 +33,9 @@ class DatabaseConnection {
         }
     
         try {
+
             $this->pdo = new \PDO($dsn, $envVariables['DB_USER'], $envVariables['DB_PASS'], $options);
+
         } catch (\PDOException $e) {
             throw new \PDOException($e->getMessage(), (int)$e->getCode());
         }

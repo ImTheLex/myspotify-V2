@@ -21,6 +21,7 @@ class User extends MyModel {
     /**
      * oldName:insertInto
      * Based on given parameters will create a new entry in users
+     * If user is successfully created, will return the user_id
      */
     public function createUser(array $datas){
        

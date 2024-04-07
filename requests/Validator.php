@@ -6,17 +6,14 @@ class Validator {
 
     private $request;
     private $errors = [];
-
+    
     public function __construct($request) {
         $this->request = $request;
     }
 
 
     /**
-     * Will take as parameters an array of input fields.
-     * If one of the given fields doesn't match with the request, or if it does but is empty string.
-     * Then it will push an error with the field name as key.
-     * Else if will increase the given request key with a new filtered and trimed value.
+     * Will take as parameters an array of input fields. If one of the given fields is empty string.Then it will push an error with the field name as key. Else if will overwrite the given request key with a new filtered and trimed value.
      */
     public function validate_fields() {
 

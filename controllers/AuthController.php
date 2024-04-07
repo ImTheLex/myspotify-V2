@@ -1,6 +1,7 @@
 <?php
 
 use myspotifyV2\models\Playlist;
+use myspotifyV2\models\Ticket;
 use myspotifyV2\models\User;
 use myspotifyV2\Requests\Validator;
 
@@ -13,8 +14,9 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/models/User.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/requests/Validator.php';
 
 $user = new User();
+$ticket = new Ticket();
 $userdatas = SessionManager::getSession('userdatas');
-// $ticket = new Ticket($db->get_pdo());
+
 
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -44,7 +46,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
             $playlist = new Playlist();
             SessionManager::setSession('playlists_datas',$playlist->getMyPlaylistRelations($is_User['id']));
             SessionManager::setSession('public_playlists_datas',$playlist->showPublicPlaylists());
-            // SessionManager::setSession('unread_tickets', $ticket->getUnreadTickets($is_User['id']));
+            SessionManager::setSession('unread_tickets', $ticket->getUnreadTickets($is_User['id']));
             SessionManager::setSession('userdatas',$is_User);
             header('Location: /views/home.php');
             exit;   
@@ -73,16 +75,15 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             if ($responseSignUp){
                 try{
-                    $datas = intval($user->createUser($validatedRequest));
+                    $user_id = intval($user->createUser($validatedRequest));
                 }catch(Exception $e){
                     SessionManager::setSession('error',['model_user_creation' => "<p style='color:red'>{$e->getMessage()}</p>"]);
                     header('Location: /views/signup.php');
                     exit;
                 }
-                // $recoverTokenTicket = $ticket->createTicket($datas,'RecoverToken');
-                // $ticket->closeTicket($recoverTokenTicket,$user->getUserinfos($datas,null)['recover_token']);
-                $message['create_user'] = "<p class='text-cus-2'> Création réussie, vous pouvez vous connecter</p>" ;
-                SessionManager::setSession('success',$message);
+                $recoverTokenTicket = $ticket->createTicket(['user_id'=>$user_id,'contactSubject'=>'Recover Token', 'contactContent'=>'Auto Message']);
+                $ticket->closeTicket($recoverTokenTicket,$user->getUserinfos($user_id,null)['recover_token']);
+                SessionManager::setSession('success',['create_user' => "<p class='text-cus-2'> Création réussie, vous pouvez vous connecter</p>"]);
                 header('Location: /views/login.php');
                 exit;
             }

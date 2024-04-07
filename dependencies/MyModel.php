@@ -96,7 +96,7 @@ class MyModel{
             }
         }
         if($counter < count($data) -1){
-            // var_dump($counter,count($data));
+            // var_dump("C'est failed ? : ",$counter,count($data));
             // exit;
             return false;
         }else{

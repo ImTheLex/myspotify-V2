@@ -1,29 +1,11 @@
 <!------------------------------------------Partie Centrale---------------------------------------->
 <section class="col-b p-rel w-full h-full br-cus-c-2 br-1-s rounded-sm middle-container">
     <?php if(isset($userdatas)): ?>
+        <?php if(isset($_GET['show-notif']) && !empty($unreadtickets)):?>
+                <?php include 'components/notifications.php'?>
+            <?php endif ?>
         <div class="py-2 px-6 p-abs d-fx <?= isset(SessionManager::getSession('error')["model_playlist_update"]) ? 'jc-sb':'jc-fe'?> w-full top-middle-container">
-        <?= SessionManager::getSession('error')["model_playlist_update"] ?? '';?>
-            <?php if(isset($_GET['show-notif']) && !empty($unreadtickets)):?>
-                    <div class="p-abs r-0 mr-20  w-fit bg-cus-5 rounded-s p-2 notification">
-                        <ul class="flex-col gap-y-2">
-                            <?php foreach($unreadtickets as $unreadticket):?>
-                                <li class="bg-cus-6 gap-x-3 p-2 center-b">
-                                    <div>
-                                        <h5 class="">Sujet:</h5>
-                                        <p class="text-cus-2"><?=$unreadticket['content']?></p>
-                                        <h5 class="">Réponse:</h5>
-                                        <p class="text-cus-2"><?= $unreadticket['response']?></p>
-                                    </div>
-                                    <a href="/controllers/TicketController.php?bIsReadTicket=<?=$unreadticket['id']?>" class="center bg-cus-10 br-2-s br-cus-c-5 rounded-xs">
-                                        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="12" viewBox="0 0 384 512">
-                                            <path opacity="1" fill="currentColor" d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/>
-                                        </svg>
-                                    </a>
-                                </li>
-                            <?php endforeach?>
-                        </ul>
-                    </div>
-                <?php endif ?>
+            <?= SessionManager::getSession('error')["model_playlist_update"] ?? '';?>
             <div class="items-center gap-x-1 top-middle-right-container">
                 <p>
                     <a href="<?= empty($unreadtickets) ? '#' : '?show-notif'?>" class="bg-cus-1 h-8 w-8 center rounded-full p-rel">
@@ -39,46 +21,48 @@
         </div>
 
         <div class="py-2 h-full overf-a body-grad-1 rounded-sm middle-scrollable-container">
-            <div class="playlist-display <?= isset($playlisttodisplay) && $playlisttodisplay ? '' : 'hidden'?>">
-                <?php include 'components/middle_container_playlist_display.php'?>
-            </div>
+            <?php if(isset($playlisttodisplay) && $playlisttodisplay):?>
+                <div class="playlist-display">
+                    <?php include 'components/middle_container_playlist_display.php'?>
+                </div>
+            <?php endif?>
             <div class="artist-display">
             </div>
             <div class="audio-display">
             </div>
             
-                    <div class="global-feed px-4 <?= isset($playlisttodisplay) && $playlisttodisplay ? 'hidden' : ''?>">
-                        <div class="d-gd grid-col-2 gap-x-4 gap-y-4 pt-15">
-                            <h2 class="col-span-2">Vue d'ensemble</h2>
-                            <?php if(isset($playlistdatas) && !empty($playlistdatas)):
-                                    $length = count(array_values($playlistdatas));
-                                        for($i=0; $i < $length && $i < 4; $i++): ?>
-                                            <?php $playlistdata = $playlistdatas[$i]; ?>
-                                            <?php include 'components/middle_container_overview_playlists.php'?>
-                                    <?php endfor ?>
+                <div class="global-feed px-4 <?= isset($playlisttodisplay) && $playlisttodisplay ? 'hidden' : ''?>">
+                    <div class="d-gd grid-col-2 gap-x-4 gap-y-4 pt-15">
+                        <h2 class="col-span-2">Vue d'ensemble</h2>
+                        <?php if(isset($playlistdatas) && !empty($playlistdatas)):
+                                $length = count(array_values($playlistdatas));
+                                    for($i=0; $i < $length && $i < 4; $i++): ?>
+                                        <?php $playlistdata = $playlistdatas[$i]; ?>
+                                        <?php include 'components/middle_container_overview_playlists.php'?>
+                                <?php endfor ?>
 
-                            <?php else: ?>
-                                    <p class="text-cus-2">Vous pouvez désormais créer une playlist !</p>
-                            <?php endif?>
-                        </div>
-
-                        <div class="d-gd grid-col-4 ji-c gap-x-4 gap-y-4 pt-15">
-                            <h2 class="col-span-4">Playlists publiques</h2>
-                            <?php for($i=0;  $i < count($publicplaylists) && $i < 4 ; $i++):?>
-                                <?php include 'components/middle_container_public_playlists.php'?>
-                            <?php endfor?>
-                        </div>
-
-                        <?php if(isset($tracksDatas)):?>
-                            <div class="d-gd grid-col-2 pt-15"> 
-                            <h2 class="col-span-2">Playlists Spotify</h2>
-
-                            <?php for($i=0;  $i < 4 ; $i++):?>
-                                <?php include 'components/middle_container_spotify_artists.php'?>
-                            <?php endfor?>
-                            </div>
+                        <?php else: ?>
+                                <p class="text-cus-2">Vous pouvez désormais créer une playlist !</p>
                         <?php endif?>
                     </div>
+
+                    <div class="d-gd grid-col-4 ji-c gap-x-4 gap-y-4 pt-15">
+                        <h2 class="col-span-4">Playlists publiques</h2>
+                        <?php for($i=0;  $i < count($publicplaylists) && $i < 4 ; $i++):?>
+                            <?php include 'components/middle_container_public_playlists.php'?>
+                        <?php endfor?>
+                    </div>
+
+                    <?php if(isset($tracksDatas)):?>
+                        <div class="d-gd grid-col-2 pt-15"> 
+                        <h2 class="col-span-2">Playlists Spotify</h2>
+
+                        <?php for($i=0;  $i < 4 ; $i++):?>
+                            <?php include 'components/middle_container_spotify_artists.php'?>
+                        <?php endfor?>
+                        </div>
+                    <?php endif?>
+                </div>
     <?php else:?>
             <h2 class="mx-auto w-fit m-auto">Veuillez vous connecter pour accéder au contenu :)</h2>
     <?php endif ?>

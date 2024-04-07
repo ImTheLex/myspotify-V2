@@ -16,6 +16,7 @@
 
             $sql = "CREATE TABLE IF NOT EXISTS tickets (
                     id INT AUTO_INCREMENT PRIMARY KEY,
+                    `subject` VARCHAR(150) NOT NULL,
                     `content`TEXT NOT NULL,
                     response TEXT,
                     `state` TINYINT DEFAULT 1 NOT NULL,

@@ -95,7 +95,7 @@ color:var(--customColor_7)
 }
 
 main {
-    height: calc(100% - 15rem);
+    height: calc(100% - 14.45rem);
 }
 
 h1, .h1 {
@@ -129,10 +129,27 @@ p, .p {
 .p-a{
     font-size: 0.875rem;
 }
+.global-feed h2{
+    width: 100%;
+}
+.flat-playlist-link{
+    display: flex;
+    align-items: center;
+    column-gap: 0.75rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+.br-l-4-s{border-left: 4px; border-left-style: solid;}
+.br-cus-c-10{border-color: var(--customColor_10);}
+.mt-12{/*48px*/margin-top: 3rem;}
+
+
+
+
 
 .body-grad-1 {
-    background: linear-gradient(to top, var(--customColor_4),var(--customColor_3));
-    
+    background: linear-gradient(to top, var(--customColor_4),var(--customColor_3)); 
 }
     
 .body-grad-2 {
@@ -154,9 +171,4 @@ p, .p {
 .ticket-grad-3 {
     background: linear-gradient(to right, var(--customColor_10),var(--customColor_4));
 }
-
-
-
-
-
 
