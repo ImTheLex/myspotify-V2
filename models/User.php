@@ -10,6 +10,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/config/myconfig.php';
 class User extends MyModel {
 
     protected $rules = ([
+        'id'=>'require|int',
         'username'=>'required|min:3|max:40',
         'email'=>'required|min:10|max:40',
         'password'=>'required|min:5|password',
@@ -161,6 +162,10 @@ class User extends MyModel {
                     $fileName = $userdatas['id'] . '-profile-picture';
                     $uploadDir = ".." . MY_RELATIVE_PATH_TO_USER_IMAGE;
                     $uploadFile = $uploadDir . $fileName . '.'.$extension;
+
+                    if (!is_dir($uploadDir)) {
+                        mkdir($uploadDir, 0777, true);
+                    }
             
                     array_map('unlink', glob($uploadDir . $fileName . '.*'));
                     move_uploaded_file($_FILES['userImgUpdate']['tmp_name'], $uploadFile);
@@ -221,6 +226,48 @@ class User extends MyModel {
             throw new \Exception("reset_password");
         }
         return $result;  
+    }
+
+    public function deleteUser($user_id){
+
+        if($this->validate(['id' => $user_id],$this->rules())){
+
+            $result = $this->query("SELECT `id` FROM playlists WHERE `user_id` = :id",
+            [
+                'id' => $user_id
+            ])->fetchAll(\PDO::FETCH_ASSOC);
+
+
+            if($result){
+
+                $ids = array_map(function($row) { return $row['id']; }, $result);
+                $placeholders = implode(',', array_fill(0, count($result), '?'));
+                $result = $this->query("DELETE FROM playlists WHERE id IN ($placeholders)",$ids);
+
+                if($result){
+
+                    $pictures = [];
+                    foreach ($ids as $id) {
+                        $pictures = array_merge($pictures, glob($_SERVER['DOCUMENT_ROOT']. DIRECTORY_SEPARATOR .'public' . DIRECTORY_SEPARATOR . 'ressources' . DIRECTORY_SEPARATOR . 'playlists_image' . DIRECTORY_SEPARATOR . $id . '*'));
+                    }
+                    foreach($pictures as $picture){
+                        unlink($picture);
+                    }
+                }
+            }
+              
+            $result = $this->query("DELETE FROM $this->table WHERE id = :id",
+            [
+                'id' => $user_id
+            ]);
+            if($result){
+                
+                unlink(glob($_SERVER['DOCUMENT_ROOT']. DIRECTORY_SEPARATOR .'public' . DIRECTORY_SEPARATOR . 'ressources' . DIRECTORY_SEPARATOR . 'users_image' . DIRECTORY_SEPARATOR . $user_id . '*')[0] ?? '');
+              
+                return $result;
+
+            }
+        }
     }
 
 }   

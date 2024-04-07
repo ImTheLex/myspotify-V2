@@ -1,6 +1,6 @@
 <?php include 'components/base_header.php';?> 
 
-<?php if(!isset($userdata)):?>
+<?php if(!isset($userdatas)):?>
 
 <section class="col-b gap-y-5" data-id="login">
 

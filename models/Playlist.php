@@ -113,10 +113,13 @@ class Playlist extends MyModel {
     
     public function deletePlaylist($playlist_id) {
 
+        
         $result = $this->query("DELETE FROM $this->table WHERE id = :id",
         [
             'id'=> $playlist_id
         ]);
+        
+        unlink(glob($_SERVER['DOCUMENT_ROOT']. DIRECTORY_SEPARATOR .'public' . DIRECTORY_SEPARATOR . 'ressources' . DIRECTORY_SEPARATOR . 'playlists_image' . DIRECTORY_SEPARATOR . $playlist_id . '*')[0] ?? '');
         return $result;
     
     }
@@ -131,6 +134,10 @@ class Playlist extends MyModel {
                 $uploadDir = ".." . MY_RELATIVE_PATH_TO_PLAYLIST_IMAGE;
                 $uploadFile = $uploadDir . $fileName . '.'.$extension;
         
+                if (!is_dir($uploadDir)) {
+                    mkdir($uploadDir, 0777, true);
+                }
+                
                 array_map('unlink', glob($uploadDir . $fileName . '.*'));
                 move_uploaded_file($_FILES['updatePlaylistPicture']['tmp_name'], $uploadFile);
         

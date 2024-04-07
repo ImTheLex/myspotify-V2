@@ -1,7 +1,7 @@
 <?php
 
 class DatabaseConnection {
-    // On défini comme private les infos de notre db.
+    // On défini comme private les infos de notre db..
     private $pdo;
 
     // A l'appel d'instanciation de DatabaseConnection, on execute ce code.
