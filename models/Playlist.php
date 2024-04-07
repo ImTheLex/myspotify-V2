@@ -134,6 +134,10 @@ class Playlist extends MyModel {
                 $uploadDir = ".." . MY_RELATIVE_PATH_TO_PLAYLIST_IMAGE;
                 $uploadFile = $uploadDir . $fileName . '.'.$extension;
         
+                if (!is_dir($uploadDir)) {
+                    mkdir($uploadDir, 0777, true);
+                }
+                
                 array_map('unlink', glob($uploadDir . $fileName . '.*'));
                 move_uploaded_file($_FILES['updatePlaylistPicture']['tmp_name'], $uploadFile);
         
