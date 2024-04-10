@@ -1,6 +1,6 @@
    <!-- --------------------------------------------------------------------Footer-------------------------------- -->
-            <div class=" bg-cus-1 mx-4 mb-5 rounded-s br-2-s px-4 py-3 center-b footer-container">
-                <div class="pl-2  pie-2 br-1-s py-2 bg-cus-6 rounded-s center-b max-w-80 w-full left-footer-container">
+            <div class=" bg-cus-1 mx-4 mb-5 rounded-2 br-a-2-s px-4 py-3 center-b footer-container">
+                <div class="pl-2  pr-2 br-a-1-s py-2 bg-cus-6 rounded-2 center-b max-w-80 w-full left-footer-container">
                     <div class="center gap-x-2">
                         <div class="w-12 h-12">
                             <img src="/public/ressources/Spotify_Images/Spotify_Image_2.jpeg" alt="artist image" loading="lazy" class="ml-1 img-cov">

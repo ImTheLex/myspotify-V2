@@ -2,10 +2,10 @@
 .ta-c{text-align: center;}
 .text-black{color: black;}
 .c-p{cursor: pointer;}
-.d-fx{display: flex;}
+.flex{display: flex;}
 .center-b{display: flex;align-items: center;justify-content: space-between;}
 .overf-h{overflow: hidden;}
-.jc-sb{justify-content: space-between;}
+.justify-content-b{justify-content: space-between;}
 .p-2{/*8px*/padding: 0.5rem;}
 .px-2{/*8px*/padding-inline: 0.5rem;}
 .px-4{/*16px*/padding-inline: 1rem;}
@@ -17,11 +17,10 @@
 .pb-2{/*8px*/padding-bottom: 0.5rem;}
 .mt-auto{margin-top: auto;}
 .mb-5{/*20px*/margin-bottom: 1.25rem;}
-.rounded-xs{/*4px*/border-radius: 0.25rem;}
+.rounded-1{/*4px*/border-radius: 0.25rem;}
 .rounded-s{/*8px*/border-radius: 0.5rem;}
-.rounded-sm{/*12px*/border-radius: 0.75rem;}
-.rounded-full{border-radius: 999999px;}
-.br-1-s{border-width: 1px;border-style: solid;}
+.rounded-3{/*12px*/border-radius: 0.75rem;}
+.rounded-100{border-radius: 999999px;}
 .gap-x-3{/*12px*/column-gap: 0.75rem;}
 .gap-x-8{/*32px*/column-gap: 2rem;}
 .gap-y-2{/*8px*/row-gap: 0.5rem;}
@@ -34,9 +33,14 @@
 .max-h-28 { max-height: 7rem; }
 .max-w-28{max-width: 7rem;/*112px*/}
 .br-cus-c-2{border-color: var(--customColor_2);}
+.br-cus-c-7{border-color: var(--customColor_7);}
+.br-1-s{border-width: 1px;border-style: solid;}
+.br-b-2-s{border-bottom-width: 2px; border-bottom-style: solid;}
+.br-t-2-s{border-top-width: 2px; border-top-style: solid;}
 .border-ridge{border: 1px ridge grey;}
-.hovr-white:hover{color: white;}
+.hovr-text-white:hover{color: white;}
 .text-cus-1{color: var(--customTxtColor_1);}
+.text-cus-2{color: var(--customTxtColor_2);}
 .text-cus-5{color: var(--customTxtColor_5);}
 .text-cus-7{color: var(--customTxtColor_7);}
 .bg-cus-1{background-color: var(--customBackgroundColor_1);}
@@ -56,8 +60,5 @@
 .col-a{display: flex;flex-direction: column;justify-content: space-around;}
 .logo-spotify{width: 8rem;}
 .ml-auto{margin-left: auto;}
-.br-t-2-s{border-top-width: 2px;border-top-style: solid;}
-.br-b-2-s{border-bottom-width: 2px;border-bottom-style: solid;}
-.br-cus-c-7{border-color: var(--customColor_7);}
 .hovr-bx-shadow-cus-2:hover{box-shadow: 0px 0px 10px 1px var(--customBackgroundColor_2);}
 .login-card{width: 50%;min-width: 17rem;}

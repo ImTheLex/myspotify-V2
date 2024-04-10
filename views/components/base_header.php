@@ -31,8 +31,10 @@ use myspotifyV2\models\Playlist;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Ce site est une reproduction non certifiée du site de streaming audio Spotify">
-    <!-- <link rel="stylesheet" href="/public/new.css"> -->
-    <link rel="stylesheet" href="/public/css/main-generated-V2.css">
+    <link rel="stylesheet" href="/public/css/left_container.css">
+    <link rel="stylesheet" href="/public/css/main-generated-V3.css">
+    <link rel="stylesheet" href="/public/css/new.css">
+
     <?= isset($js)  && $js ? "<script src='/public/js/$js'; defer></script>" : "" ?>
     <!-- <script src='/public/js/Spotify.js' type="module" defer></script> -->
     <script src='/public/js/generate_css_php.js' type="module" defer></script>
@@ -45,15 +47,10 @@ use myspotifyV2\models\Playlist;
             <div class="logo-spotify">
                
             </div>
-            <ul class="gap-x-8 items-center ">  
-                <li>
-                    <form action="/generate_css.php" method="POST">
-                        <button type="submit" name="rGenerateCss">OK</button>
-                    </form>
-                </li>
+            <ul class="gap-y-8 flex justify-content-c align-items-c">  
                 <?php if(isset($userdatas) && $userdatas['role'] === 9):?>
                 <li>
-                    <a class=" hovr-white" href="/views/admin.php">Admin</a>   
+                    <a class=" hovr-text-white" href="/views/admin.php">Admin</a>   
                     <?php
                     //  $ticket = new Ticket();
                      ?>         
@@ -61,26 +58,25 @@ use myspotifyV2\models\Playlist;
                 </li>
                 <?php endif?>
                 <li>
-                    <!-- <a class=" hovr-white" href="/views/home.php">Accueil</a>     -->
-                    <a href='<?= "/controllers/RoutingController.php?accueil"?>'> Accueil</a>
+                    <!-- <a class=" hovr-text-white" href="/views/home.php">Accueil</a>     -->
+                    <a class=" hovr-text-white" href='<?= "/controllers/RoutingController.php?accueil"?>'> Accueil</a>
                 </li>
                 <li>
-                  <a class=" hovr-white" href="/views/contact.php">Contact</a>
+                  <a class=" hovr-text-white" href="/views/contact.php">Contact</a>
                </li>
                 <li>
                     <?php if(isset($userdatas)):?>
-                        <a class=" hovr-white" href="logout.php">Se déconnecter</a> 
+                        <a class=" hovr-text-white" href="logout.php">Se déconnecter</a> 
                 </li>
                 <li>
-                     <a class=" gap-x-3 items-center" href="/views/profile.php">
+                     <a class=" gap-y-3 flex align-items-c" href="/views/profile.php">
                            <div class="w-10 h-10">
-                              <img class=" rounded-full profile-picture" src=" <?=  DIRECTORY_SEPARATOR . $userdatas['profile_picture'] ?>" alt="Image de profile">
+                              <img class=" rounded-100 profile-picture" src=" <?=  DIRECTORY_SEPARATOR . $userdatas['profile_picture'] ?>" alt="Image de profile">
                            </div>
-                           <p class="hovr-white">Profile</p>
+                           <p class="hovr-text-white">Profile</p>
                      </a>
-
                     <?php else: ?>
-                        <a class=" hovr-white" href="/views/login.php">Se connecter</a>
+                        <a class=" hovr-text-white" href="/views/login.php">Se connecter</a>
                     <?php endif ?>
                 </li>
             </ul>

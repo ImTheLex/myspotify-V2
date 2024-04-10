@@ -1,7 +1,7 @@
 <footer class="flex-col" >     
        <?php if($_SERVER['SCRIPT_NAME'] !== "/views/home.php"):?>   
             <div class="bg-cus-1 mt-auto br-t-2-s pb-2 pt-4 px-4">
-                <a class="mx-auto w-fit block hovr-white" href="/views/terms_of_services.php">Terms Of Service</a>
+                <a class="mx-auto w-fit block hovr-text-white" href="/views/terms_of_services.php">Terms Of Service</a>
             </div>
             <?php  else: ?>
 

@@ -114,8 +114,8 @@ function call_drop_playlist(event,playlistId) {
 
     // Gère le display et responsive du left container
         
-    let leftContainer = document.querySelector('.left-container')
-    let observerLeftContainer = new ResizeObserver(entries => {
+    // let leftContainer = document.querySelector('.left-container')
+    // let observerLeftContainer = new ResizeObserver(entries => {
         
         // for(let entry of entries){
         //     if (entry.target.clientWidth < 370){
@@ -126,46 +126,46 @@ function call_drop_playlist(event,playlistId) {
         //     }
         // }
 
-        for (let entry of entries) {
-            let removedElements = leftContainer.querySelectorAll('.h2, h2 , h3 , h4 , p, .form-left-side-container, .biblio-icons')
-            let allOptimizableElements = leftContainer.querySelectorAll('.left-scrollable-container .artist , .left-scrollable-container .new-playlist , a , .bottom-left-top-container , .left-scrollable-container>div>div');
+    //     for (let entry of entries) {
+    //         let removedElements = leftContainer.querySelectorAll('.h2, h2 , h3 , h4 , p, .form-left-side-container, .biblio-icons')
+    //         let allOptimizableElements = leftContainer.querySelectorAll('.left-scrollable-container .artist , .left-scrollable-container .new-playlist , a , .bottom-left-top-container , .left-scrollable-container>div>div');
 
-            if(entry.target.clientWidth < 210) {
+    //         if(entry.target.clientWidth < 210) {
 
                 
 
-                removedElements.forEach(item => {
-                    item.style.display = "none";
+    //             removedElements.forEach(item => {
+    //                 item.style.display = "none";
                 
-                    allOptimizableElements.forEach(el => {
-                        if (el !== item) {
-                            el.style.justifyContent="center"
-                            el.style.columnGap="0px"
-                        }
-                    });
-                })
+    //                 allOptimizableElements.forEach(el => {
+    //                     if (el !== item) {
+    //                         el.style.justifyContent="center"
+    //                         el.style.columnGap="0px"
+    //                     }
+    //                 });
+    //             })
             
 
             
-            } else {
+    //         } else {
 
                 
-                removedElements.forEach(item => {
-                    item.style.display =""
+    //             removedElements.forEach(item => {
+    //                 item.style.display =""
 
-                    allOptimizableElements.forEach(el => {
-                        if (el !== item) {
-                            el.style.justifyContent=""
-                            el.style.columnGap=""
+    //                 allOptimizableElements.forEach(el => {
+    //                     if (el !== item) {
+    //                         el.style.justifyContent=""
+    //                         el.style.columnGap=""
 
-                        }
-                    });
-                })
-            }
-        }
-    })
+    //                     }
+    //                 });
+    //             })
+    //         }
+    //     }
+    // })
 
-    observerLeftContainer.observe(leftContainer)
+    // observerLeftContainer.observe(leftContainer)
 
     // Gère le l'animation du bouton search de left-container par application de classe
         let leftSearchBox = document.querySelectorAll('.form-left-side-container form , .form-left-side-container form input')

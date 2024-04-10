@@ -23,48 +23,63 @@
 --customColor_10: #DA3E3E;
 --customColor_11: #F2B848;
 
---customTxtColor_1: var(--customColor_1);
---customTxtColor_2: var(--customColor_2);
---customTxtColor_3: var(--customColor_3);
---customTxtColor_4: var(--customColor_4);
---customTxtColor_5: var(--customColor_5);
---customTxtColor_6: var(--customColor_6);
---customTxtColor_7: var(--customColor_7);
---customTxtColor_8: var(--customColor_8);
---customTxtColor_9: var(--customColor_9);
---customTxtColor_10: var(--customColor_10);
---customTxtColor_11: var(--customColor_11);
+--text_cus_color_1: var(--customColor_1);
+--text_cus_color_2: var(--customColor_2);
+--text_cus_color_3: var(--customColor_3);
+--text_cus_color_4: var(--customColor_4);
+--text_cus_color_5: var(--customColor_5);
+--text_cus_color_6: var(--customColor_6);
+--text_cus_color_7: var(--customColor_7);
+--text_cus_color_8: var(--customColor_8);
+--text_cus_color_9: var(--customColor_9);
+--text_cus_color_10: var(--customColor_10);
+--text_cus_color_11: var(--customColor_11);
 
---customBackgroundColor_1 : var(--customColor_1);
---customBackgroundColor_2 : var(--customColor_2);
---customBackgroundColor_3 : var(--customColor_3);
---customBackgroundColor_4 : var(--customColor_4);
---customBackgroundColor_5 : var(--customColor_5);
---customBackgroundColor_6 : var(--customColor_6);
---customBackgroundColor_7 : var(--customColor_7);
---customBackgroundColor_8 : var(--customColor_8);
---customBackgroundColor_9 : var(--customColor_9);
---customBackgroundColor_10 : var(--customColor_10);
---customBackgroundColor_11 : var(--customColor_11);
+--background_cus_1: var(--customColor_1);
+--background_cus_2 : var(--customColor_2);
+--background_cus_3 : var(--customColor_3);
+--background_cus_4 : var(--customColor_4);
+--background_cus_5 : var(--customColor_5);
+--background_cus_6 : var(--customColor_6);
+--background_cus_7 : var(--customColor_7);
+--background_cus_8 : var(--customColor_8);
+--background_cus_9 : var(--customColor_9);
+--background_cus_10 : var(--customColor_10);
+--background_cus_11 : var(--customColor_11);
 
---hoveredTextColor_1: var(--customColor_1);
---hoveredTextColor_2: var(--customColor_2);
---hoveredTextColor_3: var(--customColor_3);
---hoveredTextColor_7: var(--customColor_7);
---hoveredTextColor_8: var(--customColor_8);
---hoveredTextColor_9: var(--customColor_9);
+--hover_text_cus_1: var(--customColor_1);
+--hover_text_cus_2: var(--customColor_2);
+--hover_text_cus_3: var(--customColor_3);
+--hover_text_cus_4: var(--customColor_4);
+--hover_text_cus_5: var(--customColor_5);
+--hover_text_cus_6: var(--customColor_6);
+--hover_text_cus_7: var(--customColor_7);
+--hover_text_cus_8: var(--customColor_8);
+--hover_text_cus_9: var(--customColor_9);
 
---hoveredBackgroundColor_1:var(--customColor_1);
---hoveredBackgroundColor_2:var(--customColor_2);
---hoveredBackgroundColor_3:var(--customColor_3);
---hoveredBackgroundColor_4:var(--customColor_4);
---hoveredBackgroundColor_5:var(--customColor_5);
---hoveredBackgroundColor_6:var(--customColor_6);
---hoveredBackgroundColor_7:var(--customColor_7);
---hoveredBackgroundColor_8:var(--customColor_8);
---hoveredBackgroundColor_9:var(--customColor_9);
---hoveredBackgroundColor_10:var(--customColor_10);
---hoveredBackgroundColor_11:var(--customColor_11);
+--border_cus_1: var(--customColor_1);
+--border_cus_2 : var(--customColor_2);
+--border_cus_3 : var(--customColor_3);
+--border_cus_4 : var(--customColor_4);
+--border_cus_5 : var(--customColor_5);
+--border_cus_6 : var(--customColor_6);
+--border_cus_7 : var(--customColor_7);
+--border_cus_8 : var(--customColor_8);
+--border_cus_9 : var(--customColor_9);
+--border_cus_10 : var(--customColor_10);
+--border_cus_11 : var(--customColor_11);
+
+--hover_bg_cus_1:var(--customColor_1);
+--hover_bg_cus_2:var(--customColor_2);
+--hover_bg_cus_3:var(--customColor_3);
+--hover_bg_cus_4:var(--customColor_4);
+--hover_bg_cus_5:var(--customColor_5);
+--hover_bg_cus_6:var(--customColor_6);
+--hover_bg_cus_7:var(--customColor_7);
+--hover_bg_cus_8:var(--customColor_8);
+--hover_bg_cus_9:var(--customColor_9);
+--hover_bg_cus_10:var(--customColor_10);
+--hover_bg_cus_11:var(--customColor_11);
 
 }
 
@@ -132,6 +147,20 @@ p, .p {
 .global-feed h2{
     width: 100%;
 }
+.input{color: white; background: transparent; border-radius: 0.25rem; height: 2rem; padding-inline: 0.5rem; border: 1px solid var(--customColor_8)}
+
+.input-height-l{color: white; background: transparent; border-radius: 0.25rem; padding-inline: 0.5rem; border: 1px solid var(--customColor_8)}
+
+.increment::before{counter-increment: auto-increment-numbers;content: counter(auto-increment-numbers)')';margin-right: 5px;}
+.login-card{width: 50%;min-width: 17rem;}
+
+.profile-picture{width: 100%;height: 100%;object-fit: cover; border: 2px solid var(--green_1);}
+.img-cov{width: 100%; height: 100% ;object-fit: cover;}
+.logo-spotify{width: 8rem;}
+.border-ridge{border: 1px ridge grey;}
+.hovr-bx-shadow-cus-2:hover{box-shadow: 0px 0px 10px 1px var(--customBackgroundColor_2);}
+
+
 .flat-playlist-link{
     display: flex;
     align-items: center;
@@ -145,8 +174,20 @@ p, .p {
 .mt-12{/*48px*/margin-top: 3rem;}
 
 
+.btn-1 {
+    border: 1px solid var(--customBackgroundColor_5);
+    color: var(--customBackgroundColor_7);
+    background-color: var(--customBackgroundColor_6);
+    border-radius: 0.25rem;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+}
 
-
+.btn-1:hover {
+    color: var(--customBackgroundColor_6);
+    background-color: var(--customBackgroundColor_7);
+}
 
 .body-grad-1 {
     background: linear-gradient(to top, var(--customColor_4),var(--customColor_3)); 

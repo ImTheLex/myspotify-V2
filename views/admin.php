@@ -2,17 +2,19 @@
 
 <?php if(isset($userdatas) && $userdatas['role'] === 9):?>
 
-<div class="d-fx mx-4 gap-x-4 h-full">
+<div class="flex mx-4 gap-x-4 h-full">
     <!-- Section inbox -->
-    <section class="w-2/5  col-b"  data-id="inbox">
-        <div class="flex-col h-full gap-y-5 inbox">
-            <h1 class="ta-c rounded-s py-4 px-12 bg-cus-4 br-1-s br-cus-c-2">Inbox</h1>
-            <div class="ta-e flex-col gap-y-2 h-full rounded-s py-4 px-12 bg-cus-4 br-1-s br-cus-c-2">
-                <?php $ticketdatas = $ticket->getAllTickets();
+    <section class="w-2/5 col-b"  data-id="inbox">
+        <div class="flex-col h-full gap-x-5 inbox">
+            <h1 class="ta-c rounded-2 py-4 px-12 bg-cus-4 br-a-1-s br-cus-c-2">Inbox</h1>
+            <div class="ta-e flex-col gap-x-2 h-full rounded-2 py-4 px-12 bg-cus-4 br-a-1-s br-cus-c-2">
+                <?php if(isset($ticketdata)):
+                    $ticketdatas = $ticket->getAllTickets();
                     foreach($ticketdatas as $k => $ticketdata):
                 ?>
                     <?php include 'components/ticket.php'?>
                 <?php endforeach?>
+                <?php endif?>
             </div>
         </div>
     </section>
@@ -21,12 +23,12 @@
     <section class=" w-4/5 col-b" data-id="admin">
         <!-- If inbox-view -->
         <div class="flex-col h-full gap-y-5 inbox-view">
-            <h2 class="h1 ta-c w-full rounded-s py-4 px-12 bg-cus-4 br-1-s br-cus-c-2">Inbox-view</h2>
-            <div class=" rounded-s h-full w-full py-4 px-12 body-grad-2 br-1-s br-cus-c-2">
+            <h2 class="h1 ta-c w-full rounded-2 py-4 px-12 bg-cus-4 br-a-1-s br-cus-c-2">Inbox-view</h2>
+            <div class=" rounded-2 h-full w-full py-4 px-12 body-grad-2 br-a-1-s br-cus-c-2">
                     <?php if(isset($_GET['ticket'])):?>
                         <?php $tickettodisplay = $ticket->getTicket($_GET['ticket'])?>
                         <form action="/controllers/TicketController.php" method="post">
-                            <div class="d-gd grid-col-2 mb-5">
+                            <div class="grid grid-col-2 mb-5">
                                 <p> Auteur:</p> 
                                 <p class="text-cus-2"><?= $user->getUsername($tickettodisplay['user_id'])?>
                                 </p>
@@ -80,15 +82,15 @@
                     <?php endif?>
 
                     <?php if($_SERVER['REQUEST_URI'] !== "/views/admin.php"):?>
-                    <div class="d-fx jc-sb">
-                        <button   class=" br-1-s br-cus-c-7 text-cus-1 rounded-xs <?= (int)$tickettodisplay['state'] === 3 ? 'hidden c-na' : 'c-p'?>  px-4 py-2 w-fit bg-cus-5 td-3 hovr-bx-shadow-cus-2" name="<?= $_SERVER['REQUEST_URI'] === '/views/admin.php?admin-create-user' ?  'bAdminCrud' : 'bRespondTicket'?>" type="submit" 
+                    <div class="flex justify-content-b">
+                        <button   class=" br-a-1-s br-cus-c-7 text-cus-1 rounded-1 <?= (int)$tickettodisplay['state'] === 3 ? 'hidden c-na' : 'c-p'?>  px-4 py-2 w-fit bg-cus-5 td-3 hovr-bx-shadow-cus-2" name="<?= $_SERVER['REQUEST_URI'] === '/views/admin.php?admin-create-user' ?  'bAdminCrud' : 'bRespondTicket'?>" type="submit" 
                     >
                             <?= $_SERVER['REQUEST_URI'] === '/views/admin.php?admin-create-user' ?  'Créer utilisateur' : 'Répondre'?>
                         </button>
-                        <a href="<?= $_SERVER['SCRIPT_NAME']?>" class="br-1-s br-cus-c-7 text-cus-1 rounded-xs c-p px-4 py-2 w-fit bg-cus-5 td-3 hovr-bx-shadow-cus-2">Retour</a>
+                        <a href="<?= $_SERVER['SCRIPT_NAME']?>" class="br-a-1-s br-cus-c-7 text-cus-1 rounded-1 c-p px-4 py-2 w-fit bg-cus-5 td-3 hovr-bx-shadow-cus-2">Retour</a>
                     </div>
                     <?php else: ?> 
-                        <a class="center br-1-s br-cus-c-7 text-cus-1 rounded-xs c-p px-4 py-2 w-fit bg-cus-5 td-3 hovr-bx-shadow-cus-2" href="<?='?admin-create-user'?>">Creer un utilisateur</a>
+                        <a class="center br-a-1-s br-cus-c-7 text-cus-1 rounded-1 c-p px-4 py-2 w-fit bg-cus-5 td-3 hovr-bx-shadow-cus-2" href="<?='?admin-create-user'?>">Creer un utilisateur</a>
                  <?php endif?>
               </form>
             </div>

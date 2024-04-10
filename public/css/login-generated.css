@@ -1,6 +1,8 @@
 .fs-1{/*12px*/font-size: 0.75rem;}
 .ta-c{text-align: center;}
 .c-p{cursor: pointer;}
+.hidden{display: none;}
+.block{display: block;}
 .center-b{display: flex;align-items: center;justify-content: space-between;}
 .px-1{/*4px*/padding-inline: 0.25rem;}
 .px-4{/*16px*/padding-inline: 1rem;}
@@ -16,12 +18,8 @@
 .mt-auto{margin-top: auto;}
 .mb-5{/*20px*/margin-bottom: 1.25rem;}
 .rounded-s{/*8px*/border-radius: 0.5rem;}
-.rounded-2xl{/*36px*/border-radius: 2.25rem;}
-.rounded-full{border-radius: 999999px;}
-.br-spacing-1{border-spacing: 0.25rem;}
-.br-none{border: none;}
-.br-1-s{border-width: 1px;border-style: solid;}
-.br-b-1-s{border-bottom-width: 1px;border-bottom-style: solid;}
+.rounded-9{/*36px*/border-radius: 2.25rem;}
+.rounded-100{border-radius: 999999px;}
 .gap-x-4{/*16px*/column-gap: 1rem;}
 .gap-x-8{/*32px*/column-gap: 2rem;}
 .gap-y-5{/*20px*/row-gap: 1.25rem;}
@@ -31,8 +29,14 @@
 .h-3{/*12px*/height: 0.75rem;}
 .w-full{width: 100%;}
 .max-w-80{max-width: 20rem;/*320px*/}
+.br-cus-c-1{border-color: var(--customColor_1);}
 .br-cus-c-2{border-color: var(--customColor_2);}
-.hovr-white:hover{color: white;}
+.br-none{border: none;}
+.br-1-s{border-width: 1px;border-style: solid;}
+.br-b-1-s{border-bottom-width: 1px; border-bottom-style: solid;}
+.br-b-2-s{border-bottom-width: 2px; border-bottom-style: solid;}
+.br-t-2-s{border-top-width: 2px; border-top-style: solid;}
+.hovr-text-white:hover{color: white;}
 .bg-cus-1{background-color: var(--customBackgroundColor_1);}
 .bg-cus-2{background-color: var(--customBackgroundColor_2);}
 .bg-cus-4{background-color: var(--customBackgroundColor_4);}
@@ -40,16 +44,12 @@
 .bg-white{background-color: white;}
 .bg-black{background-color: black;}
 .input{color: white; background: transparent; border-radius: 0.25rem; height: 2rem; padding-inline: 0.5rem; border: 1px solid var(--customColor_8)}
-.hidden{display: none;}
 .mx-auto{margin-inline: auto;}
-.block{display: block;}
-.scale-1:hover{transform: scale(1.05);}
+.hovr-scale-11:hover{transform: scale(1.05);}
 .flex-col{display: flex;flex-direction: column;}
 .items-center{display: flex;align-items: center;}
 .col-b{display: flex;flex-direction: column;justify-content: space-between;}
 .logo-spotify{width: 8rem;}
 .ml-auto{margin-left: auto;}
 .mr-auto{margin-right: auto;}
-.br-t-2-s{border-top-width: 2px;border-top-style: solid;}
-.br-b-2-s{border-bottom-width: 2px;border-bottom-style: solid;}
 .login-card{width: 50%;min-width: 17rem;}

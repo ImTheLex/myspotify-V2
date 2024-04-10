@@ -3,7 +3,7 @@
 
 <section data-id="signup">
 
-    <div class="mx-auto  rounded-s py-8 px-12 br-1-s br-cus-c-2 body-grad-2 login-card">
+    <div class="mx-auto  rounded-2 py-8 px-12 br-a-1-s br-cus-2 body-grad-2 login-card">
             <div class="max-w-80 mx-auto">
                 <h1 class="mx-auto w-fit">S'inscrire</h1>
                 <hr class="my-5">
@@ -24,7 +24,7 @@
                         En cliquant sur ce bouton vous consentez à avoir pris connaissance du message-ci dessus.
                     </li>
                     <hr class="my-5">
-                    <button class="bConsentSignupRisk c-p mb-5 bg-cus-2 scale-1 td-3 mx-auto px-8 py-2 items-center br-none block rounded-2xl" type="button" name="bConsentSignupRisk" id="bConsentSignUpRisk" onclick="consentSignUpRisk()">Je confirme avoir pris connaissance  de ce message.</button>
+                    <button class="bConsentSignupRisk c-p mb-5 bg-cus-2 hovr-scale-11 td-3 mx-auto px-8 py-2 flex justify-content-c align-items-cbr-none block rounded-9" type="button" name="bConsentSignupRisk" id="bConsentSignUpRisk" onclick="consentSignUpRisk()">Je confirme avoir pris connaissance  de ce message.</button>
                     <?=SessionManager::getSession('error')['model'] ?? '' ?>
                 </ul>                
                 <!-- Form Signup -->
@@ -39,9 +39,9 @@
                         <?php include 'components/signup_step_3.php' ?>
                     </div>
                 <div class="hidden" id="pursueSignUpDiv">
-                    <button class="bSignUp mb-5 mx-auto c-na px-8 py-2 items-center br-none block rounded-2xl" type="button" name="bSignUp" id="bSignUp" onclick="pursueSignUp()" disabled>Poursuivre (1/3)</button>
+                    <button class="bSignUp mb-5 mx-auto c-na px-8 py-2 flex justify-content-c align-items-cbr-none block rounded-9" type="button" name="bSignUp" id="bSignUp" onclick="pursueSignUp()" disabled>Poursuivre (1/3)</button>
                     <hr hr class="my-5">
-                    <a class="w-fit mx-auto  hovr-white block" href="login.php">As-tu un compte ? <span class="br-b-1-s">Connecte toi!</span></a>
+                    <a class="w-fit mx-auto  hovr-text-white block" href="login.php">As-tu un compte ? <span class="br-b-1-s">Connecte toi!</span></a>
                 </div>
 
             </form>

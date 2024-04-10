@@ -1,7 +1,7 @@
 
 <?php require 'components/base_header.php' ?>
 
-    <section class="overf-a my-15 mx-10 br-2-s br-cus-c-2 p-4 rounded-s body-grad-2 h-full terms-of-services">
+    <section class="overf-a my-15 mx-10 br-a-2-s br-cus-2 p-4 rounded-2 body-grad-2 h-full terms-of-services">
         
         <h1 class="w-fit mb-5 br-b-2-s mx-auto text-cus-5">Conditions d'utilisation</h1>
 
