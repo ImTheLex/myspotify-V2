@@ -52,7 +52,11 @@ class MyModel{
         foreach($data as $inputName => $value) {
             foreach($rules as $field => $ruleset){
             // var_dump($counter,$inputName,$field,strpos(strtolower($inputName), strtolower($field)));
-                if (strpos(strtolower($inputName), strtolower($field)) !== false) {
+                if (preg_match('/^b[A-Z]/',$inputName)) {
+                    $counter ++;
+                    continue;
+                }
+                elseif (strpos(strtolower($inputName), strtolower($field)) !== false) {
                     $counter ++;
                     $rulesexploded = explode('|', $ruleset);
                     foreach($rulesexploded as $rule) {
@@ -95,7 +99,8 @@ class MyModel{
                 }
             }
         }
-        if($counter < count($data) -1){
+        // If counter is below count data by 1 then it means one of the given parameters to verify has failed.
+        if($counter < count($data)){
             // var_dump("C'est failed ? : ",$counter,count($data));
             // exit;
             return false;
@@ -109,9 +114,10 @@ class MyModel{
      * @param string $sql The sql takes the whole query.
      * @param array $params The params takes the parametters.
     */
-    public function query($sql, $params = []) {
+    public function query($sql, $params = []) { 
+
         $request = $this->db->prepare($sql);
-        $request->execute($params);
+        $request->execute($params);        
         if(strpos(strtoupper($sql),'SELECT') === 0) {
             return $request;
         }

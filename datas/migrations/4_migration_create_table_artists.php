@@ -17,8 +17,6 @@
             $sql = "CREATE TABLE IF NOT EXISTS artists (
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     `name` VARCHAR(100) NOT NULL UNIQUE,
-                    email VARCHAR(150) NOT NULL UNIQUE,
-                    `password` VARCHAR(255) NOT NULL,
                     profile_picture VARCHAR(255),
                     `description` TEXT,
                     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

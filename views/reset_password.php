@@ -1,25 +1,24 @@
 <?php include 'components/base_header.php' ?> 
-<?php if(!isset($userdatas)):?>
+<?php if(!$userdatas):?>
 
 <section data-id="forgot-password">
 
-    <div class="  mx-auto rounded-2 py-8 px-12 body-grad-2 br-a-1-s br-cus-2 login-card">
-        <div class="max-w-80 mx-auto">
+    <div class="col-b gap-x-2 mx-auto w-1/2 make-container:login-container login-container min-w-80 ">
         <?php if (isset($_GET['token'])):?>
 
-            <h2 class="mx-auto w-fit fw-6">Nouveau mot de passe</h2>
-            <hr class="my-5">
-    
-            <form action="/controllers/AuthController.php"  method="post">
-                <label class="flex-col mb-5" for="resetInput" aria-label="Entrez nom d'utilisateur">Introduisez un nouveau mot de passe
+            <h1 class="ta-c text-white rounded-2 py-4 px-12 bg-cus-4 br-a-1-s br-cus-2 ">Nouveau mot de passe</h1>        
+            <form action="/controllers/AuthController.php" class="rounded-2 py-4 px-12 body-grad-2 br-a-1-s br-cus-2 "  method="post">
+                <label class="flex-col mb-5 fw-6 text-white" for="resetInput" aria-label="Entrez nom d'utilisateur">Introduisez un nouveau mot de passe
                     <input class="input" type="text" name="resetInput" id="resetInput">
                 <?= $_SESSION['errors'][0] ?? '' ?>
                 <?= SessionManager::getSession('error')['model'] ?? ''?>
+
                 </label>
-                <button class="bLogin hovr-scale-11 td-3 c-p bg-cus-2 mb-5 mx-auto px-8 py-2 flex justify-content-c align-items-cbr-none block rounded-9" type="submit" name="bResetPassword">Confirmer la réinitialisation du mot de passe</button>
+
+                <button class="btn-signup" type="submit" name="bResetPassword">Confirmer la réinitialisation du mot de passe</button>
             </form>
             <?php else:?>
-            <h3 class="mx-auto w-fit mb-5">Vous vous êtes perdu ?</h3>
+            <h2 class="mx-auto w-fit mb-5">Vous vous êtes perdu ?</h2>
             <p>On peut vous offrir un café si le coeur vous en dit ? :)</p>
 
             <?php endif ?>

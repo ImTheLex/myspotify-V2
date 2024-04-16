@@ -31,16 +31,14 @@ class User extends MyModel {
                 $images = glob(MY_PLAYLIST_DEFAULT_IMAGES . '/*.jpeg');
                 $imageSource = $images[rand(0,4)];
                 $uniqueId = uniqid('-',true);
-                $keys = array_keys($datas);
-            
-                $token = $datas[$keys[0]] . $uniqueId;
+                $token = $datas['signUpUsername'] . $uniqueId;
                 $result = $this->query("INSERT INTO $this->table (username, email, `password`, birth, gender, recover_token, profile_picture) VALUES (:username, :email, :password, :birth, :gender, :recover_token, :profile_picture )",
                     [
-                        "username"=>$datas[$keys[0]],
-                        "email"=>$datas[$keys[1]],
-                        "password"=> password_hash($datas[$keys[2]],PASSWORD_DEFAULT),
-                        "birth"=>$datas[$keys[4]],
-                        "gender"=>$datas[$keys[5]],
+                        "username"=>$datas['signUpUsername'],
+                        "email"=>$datas['signUpEmail'],
+                        "password"=> password_hash($datas['signUpPassword1'],PASSWORD_DEFAULT),
+                        "birth"=>$datas['signUpBirth'],
+                        "gender"=>$datas['signUpGender'],
                         "recover_token"=>$token,
                         "profile_picture"=>$imageSource
                     ]);
@@ -52,7 +50,7 @@ class User extends MyModel {
 
     /**
      * old: signup/doesExistuser
-     * Based on a post request for sign up, will filter datas
+     * Based on a post request for sign up, will filter analyze username/email and id if given.
      * Returns true if the user doesn't exist.
      * @return true
      */
@@ -87,6 +85,7 @@ class User extends MyModel {
     /**
      * old:getAuth
      * Based on given username and password, will search first for the given username, then will compare the password.
+     * If success, authenticates the user.
      */
     public function authUser(string $userInfos, string $password){
 
@@ -213,6 +212,8 @@ class User extends MyModel {
 
     /**
      * Based on an email, or a username, and an recover_token, will grant a new initiatePassword.
+     * It could be dangerous as it doesn't verify if the requester is the owner of the account.
+     * It only relies on "yes i have a token and I know that address"
      */
     public function resetPassword(string $userInfo,string $recover_token){
 
@@ -229,6 +230,10 @@ class User extends MyModel {
         return $result;  
     }
 
+    /**
+     * Deletes the given user and all of its datas.
+     * It's a one shot, no warning.
+     */
     public function deleteUser($user_id){
 
         if($this->validate(['id' => $user_id],$this->rules())){
@@ -269,6 +274,17 @@ class User extends MyModel {
 
             }
         }
+    }
+
+    public function setNewUserRole($user_id,$role) {
+
+        $result = $this->query("UPDATE $this->table SET `role` = :role WHERE (`id` = :id)",
+        [
+            'role' => $role,
+            'id' => $user_id,
+        ]);
+        return $result; 
+
     }
 
 }   

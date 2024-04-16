@@ -4,13 +4,6 @@
 
 /* If you use these classes you might overwrite the home made classes. If you are not successfull doing that, try to use header.homemadeclass then you shall be able to overwrite. */
 
-.left-container {
-    max-width: 80%;
-    min-width: 5rem;
-    width: 30%;
-    row-gap: 10px;
-}
-
 .left-container.large {
     width: 100%;
     max-width: 100%;
@@ -19,23 +12,7 @@
 
     width: 5rem;
 }
-.bottom-left-container {
-    height: calc(100% - 110px);
-}
 
-#Create_Playlist_Options {
-    position: fixed;
-    z-index: 3;
-}
-
-#Create_Playlist_Options li {
-    transition: background 0.2s ease;
-
-}
-
-/* .left-scrollable-container {
-    height: calc(100% - 6rem);
-} */
 
 .form-left-side-container form {
     width: 70%;
@@ -55,10 +32,10 @@
     animation: searchingInput 0.5s ease forwards 1s;
 }
 /* J'avais eu un soucis avec une image qui s'adaptait pas juste avec height/width je pense qu'il ny a plus. */
-.left-scrollable-container div img {
+/* .left-scrollable-container div img {
     min-width: 50px;
     width: 50px;
     /* min-height: 50px; */
-    height: 50px;
+    /* height: 50px;
     object-fit: cover;
-}
+}  */

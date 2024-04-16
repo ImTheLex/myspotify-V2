@@ -41,6 +41,17 @@ let createPlaylistOptions = document.getElementById('Create_Playlist_Options')
         };
         reader.readAsDataURL(fileTarget.files[0]);
     }
+
+    function previewImageArtist() {
+        let reader = new FileReader();
+        let fileTarget = document.getElementById('updateArtistPicture')
+        reader.onload = function(){
+            let output = document.getElementById('artistImg');
+            output.src = reader.result;
+            output.style.display = 'block';
+        };
+        reader.readAsDataURL(fileTarget.files[0]);
+    }
 // 2024 : Open playlist.
 
     function open_playlist(playlist_id){ 

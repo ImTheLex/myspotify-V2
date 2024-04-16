@@ -9,7 +9,6 @@ class Ticket extends MyModel {
         'id'=>'required|int',
         'subject'=>'required|min:3|max:30',
         'content'=>'required|min:5|max:150',
-        'content'=>'required|min:5|max:150'
     ]);
     // die(var_dump($datas));
 
@@ -20,13 +19,12 @@ class Ticket extends MyModel {
 
         if($this->validate($datas,$this->rules())){
             if($this->checkExistingTicket($datas['user_id'])){
-                $keys = array_keys($datas);
                 $this->db->beginTransaction();
                     $result = $this->query("INSERT INTO $this->table (user_id,subject,content) VALUES (:user_id,:subject,:content)",
                     [
-                        'user_id' => $datas[$keys[0]],
-                        'subject' => $datas[$keys[1]],
-                        'content' => $datas[$keys[2]]
+                        'user_id' => $datas['user_id'],
+                        'subject' => $datas['contactSubject'],
+                        'content' => $datas['contactContent']
                     ]);
                 $this->db->commit();
                 return $result;
@@ -66,6 +64,33 @@ class Ticket extends MyModel {
         return true;
     }
 
+    public function getAllTickets(){
+        $result = $this->query("SELECT `state`, id, subject FROM $this->table WHERE `state` < 3")->fetchAll();
+        return $result;
+    }
+
+    public function getTicket(int $ticket_id){
+        $result = $this->query("SELECT * FROM $this->table WHERE id = :id",
+        [
+            "id" => $ticket_id
+        ])->fetch();
+        return $result;
+    }
+
+    /**
+     * Based on ticket id, will update the state of the current ticket
+     */
+    public function updateTicketState(int $ticket_id){
+        $result = $this->query("UPDATE $this->table SET `state` = 2 WHERE id = :id",
+        [
+            "id" => $ticket_id,
+        ]);
+        if ($result === 0) {
+            throw new \Exception("ticket_state_update_failed");
+        }
+        return true;
+    }
+
     public function getUnreadTickets(int $user_id){
         $result = $this->query("SELECT * FROM tickets WHERE `state` = 3 AND is_read = 0 AND user_id = :user_id",
         [
@@ -75,5 +100,24 @@ class Ticket extends MyModel {
             return false;
         }
         return $result;
+    }
+
+    /**
+     * Set is read for the given ticket id.
+     */
+    public function setReadTicket(int $ticket_id){
+        if($this->validate(['id'=>$ticket_id],$this->rules())){
+
+            $result = $this->query("UPDATE tickets SET is_read = 1 WHERE id = :id",
+            [
+                'id' => $ticket_id,
+            ]);
+            if ($result === 0) {
+                throw new \Exception("ticket_is_read_update_failed");
+            }
+            return true;
+
+        }
+        
     }
 }

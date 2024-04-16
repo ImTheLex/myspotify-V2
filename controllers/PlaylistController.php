@@ -14,7 +14,7 @@ use myspotifyV2\Requests\Validator;
 
     // die(var_dump($_GET));
 
-if(isset($userdatas)){
+if($userdatas){
 
     if($_SERVER['REQUEST_METHOD'] === 'GET'){
 

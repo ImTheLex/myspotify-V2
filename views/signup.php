@@ -1,56 +1,70 @@
-<?php include 'components/base_header.php' ?> 
-<?php if(!isset($userdatas) || $userdatas["role"] === 9):?>
+<?php include 'components/base_header.php'; 
+    // var_dump($_SESSION,$_POST,$_SERVER);
+    $signupStep1Datas = SessionManager::getSession('signupDatasStep1') ?? ''; 
+    $signupStep2Datas = SessionManager::getSession('signupDatasStep2') ?? '';
+
+?> 
+<?php if(!$userdatas || $userdatas["role"] === 9):?>
 
 <section data-id="signup">
 
-    <div class="mx-auto  rounded-2 py-8 px-12 br-a-1-s br-cus-2 body-grad-2 login-card">
-            <div class="max-w-80 mx-auto">
-                <h1 class="mx-auto w-fit">S'inscrire</h1>
-                <hr class="my-5">
-                <ul style="counter-reset: auto-increment-numbers;" class="flex-col gap-y-3" id="consentSignUpRisk">
-                    <li class="increment" >
-                        Il est important de mentionner que ce site ne fait <b class="br-b-1-s">pas partie du groupe spotify.</b>
-                    </li>
-                    <li class="increment">
-                        Il ne relève que de la création d’un fan.
-                    </li> 
-                    <li class="increment">
-                        Il est donc préférable de renseigner des identifiants <b class="br-b-1-s">“bidon” afin d’éviter tout risque.</b>
-                    </li>
-                    <li class="increment">
-                        Merci de votre lecture, et passez un bon moment !
-                    </li>
-                    <li class="increment">
-                        En cliquant sur ce bouton vous consentez à avoir pris connaissance du message-ci dessus.
-                    </li>
-                    <hr class="my-5">
-                    <button class="bConsentSignupRisk c-p mb-5 bg-cus-2 hovr-scale-11 td-3 mx-auto px-8 py-2 flex justify-content-c align-items-cbr-none block rounded-9" type="button" name="bConsentSignupRisk" id="bConsentSignUpRisk" onclick="consentSignUpRisk()">Je confirme avoir pris connaissance  de ce message.</button>
-                    <?=SessionManager::getSession('error')['model'] ?? '' ?>
-                </ul>                
+    <div class="col-b gap-x-2 mx-auto w-1/2 make-container:login-container login-container min-w-80 ">
+
+        <h1 class="ta-c text-white rounded-2 py-4 px-12 bg-cus-4 br-a-1-s br-cus-2 ">S'inscrire</h1>
+        <div class="rounded-2 p-2 br-cus-2 br-a-1-s text-cus-5 px-12 py-8 body-grad-2 <?= $_SERVER['REQUEST_URI'] === '/views/signup.php' ? 'ta-c' : ''?>">          
+
+        <?php if($_SERVER['REQUEST_URI'] === '/views/signup.php'):?>
+            <p class="max-w-80 mx-auto mb-2">Il est important de mentionner que ce site ne fait <b class="br-b-1-s">pas partie du groupe spotify.</b></p>
+            <p class="max-w-80 mx-auto mb-2">Il ne relève que de la création d’un fan.</p>
+            <p class="max-w-80 mx-auto mb-2">Il est donc préférable de renseigner des identifiants <b class="br-b-1-s">“bidon” afin d’éviter tout risque.</b></p>
+            <p class="max-w-80 mx-auto mb-2">Merci de votre lecture, et passez un bon moment !</p>
+            <p class="max-w-80 mx-auto mb-2">En cliquant sur ce bouton vous consentez à avoir pris connaissance du message-ci dessus.</p>
+
+            <hr class="my-5">
+            <a href="signup.php?signupStep1" class="btn-signup ">Je confirme avoir pris connaissance  de ce message.</a>
+            <?=SessionManager::getSession('error')['model'] ?? '' ?>
+
+        <?php else: ?>                
                 <!-- Form Signup -->
                 <form action="/controllers/AuthController.php"  method="post">
-                    <div class="hidden" id="signUpStep1">
-                        <?php include 'components/signup_step_1.php' ?>
-                    </div>
-                    <div class="hidden" id="signUpStep2">
+
+                    <?php if(!$signupStep1Datas):?>
+
+                    <?php include 'components/signup_step_1.php' ?>
+                    <button class="btn-signup" type="submit" name="bSignUpStep1">Poursuivre (1/3)</button>
+
+                    <?php elseif(!$signupStep2Datas):?>
+
                         <?php include 'components/signup_step_2.php' ?>
-                    </div>
-                    <div class="hidden" id="signUpStep3">
+                        <button class="btn-signup" type="submit" name="bSignUpStep2"  >Poursuivre (2/3)</button>
+
+                    <?php elseif($signupStep2Datas):?>
+
                         <?php include 'components/signup_step_3.php' ?>
-                    </div>
-                <div class="hidden" id="pursueSignUpDiv">
-                    <button class="bSignUp mb-5 mx-auto c-na px-8 py-2 flex justify-content-c align-items-cbr-none block rounded-9" type="button" name="bSignUp" id="bSignUp" onclick="pursueSignUp()" disabled>Poursuivre (1/3)</button>
-                    <hr hr class="my-5">
-                    <a class="w-fit mx-auto  hovr-text-white block" href="login.php">As-tu un compte ? <span class="br-b-1-s">Connecte toi!</span></a>
-                </div>
+                        <button class="btn-signup" type="submit" name="bSignUp">Terminer</button>
+
+                    <?php endif ?>
 
             </form>
+            <hr class="my-5">
+            <div class="mx-auto w-fit">
+                    <p class="w-fit text-cus-7 max-cont-350:block inline-block" >Déjà un compte ?</p>
+                    <a href="login.php" class=" hovr-text-white  text-cus-7 br-b-1-s max-cont-350:block">Connecte toi !</a>
+                </div>
+            <?php endif?>
+                
+            
+            </div>
         </div>
     </div>
 </section>
 
      
-<?php else: 
+<?php 
+            // SessionManager::unsetSession('signupDatasStep1');
+            // SessionManager::unsetSession('signupDatasStep2');
+
+else: 
     header("Location: /views/home.php");
     exit;
 endif; 

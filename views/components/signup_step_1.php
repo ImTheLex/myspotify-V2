@@ -1,14 +1,14 @@
-<?php if(!isset($userdatas)):?>
+<?php if(!$userdatas):?>
 <!-- Username -->
 <label class="flex-col mb-5" for="signUpUsername">Choisissez un nom d'utilisateur
-    <input class="input" type="text" name="signUpUsername" id="signUpUsername" onchange="validateForm()" required>
+    <input class="input" type="text" name="signUpUsername" id="signUpUsername" value="<?= SessionManager::getSession('signUpUsername') ?? ''?>" onchange="validateForm()" required autofocus>
     <p style="color: red;" id="signUpUsernameError" class="hidden">Username invalide</p>
     <?= SessionManager::getSession('error')['sign_up_username'] ?? ""?> 
 </label>
 
 <!-- Mail -->
 <label class="flex-col mb-5" for="signUpEmail">Entrez une adresse mail valide
-    <input class="input"  type="email" name="signUpEmail" id="signUpEmail" required title="Attention, le formulaire ne correspond pas aux attentes." onchange="validateForm()">
+    <input class="input"  type="email" name="signUpEmail" id="signUpEmail" value="<?= SessionManager::getSession('signUpEmail') ?? ''?>" required onchange="validateForm()">
     <p style="color: red;" id="signupEmailError" class="hidden">Email invalide</p> 
     <?= SessionManager::getSession('error')['sign_up_email'] ?? ""?> 
 </label>

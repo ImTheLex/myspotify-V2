@@ -1,5 +1,6 @@
 <?php
 
+use myspotifyV2\models\Artist;
 use myspotifyV2\models\Playlist;
 use myspotifyV2\models\Ticket;
 use myspotifyV2\models\User;
@@ -9,13 +10,17 @@ session_start();
 require_once $_SERVER['DOCUMENT_ROOT'] . '/models/SessionManager.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config/myfunctions.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/models/Ticket.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/models/Artist.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/models/Playlist.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/models/User.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/requests/Validator.php';
 
 $user = new User();
 $ticket = new Ticket();
+$playlist = new Playlist();
+$artist = new Artist();
 $userdatas = SessionManager::getSession('userdatas');
+
 
 
 
@@ -43,8 +48,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                 header('Location: /views/login.php');
                 exit;  
             }
-            $playlist = new Playlist();
+
+            $is_User['role'] >= 2 ? SessionManager::setSession('my_artist_id',$artist->getMyArtistId($is_User['id'])) : '';
+            $is_User['role'] === 9 ? SessionManager::setSession("tickets_datas",$ticket->getAllTickets()) : '';
             SessionManager::setSession('playlists_datas',$playlist->getMyPlaylistRelations($is_User['id']));
+            SessionManager::setSession('our_artists_datas',$artist->showArtists());
             SessionManager::setSession('public_playlists_datas',$playlist->showPublicPlaylists());
             SessionManager::setSession('unread_tickets', $ticket->getUnreadTickets($is_User['id']));
             SessionManager::setSession('userdatas',$is_User);
@@ -55,11 +63,32 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: /views/login.php');
         exit;
     }
-        
+    
+    // Signup Step 1
+    elseif (isset($_POST['bSignUpStep1'])){
+        if(empty($errors)){
+            SessionManager::setSession('signupDatasStep1',$validatedRequest);
+            header("Location: /views/signup.php?signupStep2");
+            exit;
+        }
+    }
+    // Signup Step 2
+    elseif (isset($_POST['bSignUpStep2'])){
+        if(empty($errors)){
+
+            SessionManager::setSession('signupDatasStep2',$validatedRequest);
+            header("Location: /views/signup.php?signupStep3");
+            exit;
+        }      
+    }
     // Signup
     elseif (isset($_POST['bSignUp'])){
     
         if(empty($errors)){
+            // var_dump($_SESSION,$validatedRequest);
+            // die;
+            $validatedRequest = array_merge(SessionManager::getSession('signupDatasStep1'),SessionManager::getSession('signupDatasStep2'));
+            SessionManager::unsetSession('signupDatasStep2');SessionManager::unsetSession('signupDatasStep1');
     
             try {
                 $responseSignUp = $user->searchUser($validatedRequest['signUpUsername'],$validatedRequest['signUpEmail'],null);
@@ -70,7 +99,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }elseif ($e->getMessage() === "username"){
                     SessionManager::setSession('error',['sign_up_username' => "<p style='color:red'>Le username existe déjà</p>"]);
                 }
-                header('Location: /views/signup.php');
+                header('Location: /views/signup.php?signupStep1');
                 exit;
             }
             if ($responseSignUp){
@@ -110,9 +139,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                 exit;
             } 
             if($updated){
-                $user = $user->getUserInfos($_POST['usernameUpdate'],null);
+                $userinfo = $user->getUserInfos($_POST['usernameUpdate'],null);
                 $message['update_user'] = "<p class='text-cus-2'> Mise à jour des informations réussie.</p>" ;
-                SessionManager::setSession('userdatas',$user);
+                SessionManager::setSession('userdatas',$userinfo);
                 SessionManager::setSession('success',$message);
                 header('Location: /views/profile.php');
                 exit;

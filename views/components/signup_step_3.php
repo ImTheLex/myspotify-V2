@@ -1,12 +1,19 @@
-<?php if(!isset($userdatas)):?>
+<?php if(!$userdatas):?>
 
 <!-- Résumé -->
 <h2 class="mx-auto mb-3">Resumé</h2>
-<div class="grid mb-3 gap-y-2 grid-col-2">
+<div class="grid mb-3 gap-x-2 grid-col-2">
     <p id="userNameResume">Votre nom d'utilisateur: </p>
-    <p id="emailResume">Votre email: </p>  
+    <?= $signupStep1Datas  ?  '<p class="text-cus-2"> ' . $signupStep1Datas['signUpUsername'] . '</p>': '<p style="color:red;" Erreur"</p>'?>
+    <p id="emailResume">Votre email: </p> 
+    <?= $signupStep1Datas  ?  '<p class="text-cus-2"> ' . $signupStep1Datas['signUpEmail'] . '</p>': '<p style="color:red;" Erreur"</p>'?> 
+    <p><?= SessionManager::getSession('signUpEmail') ?? '<p style="color:red;" Erreur"</p>'?></p>
     <p id="dateResume">Votre date de naissance: </p>
+    <?= $signupStep2Datas  ?  '<p class="text-cus-2"> ' . $signupStep2Datas['signUpBirth'] . '</p>': '<p style="color:red;" Erreur"</p>'?> 
+    <p><?= SessionManager::getSession('signUpBirth')?? '<p style="color:red;" Erreur"</p>' ?></p>
     <p id="sexResume">Votre genre: </p>
+    <?= isset($signupStep2Datas)  ?  '<p class="text-cus-2"> ' . $signupStep2Datas['signUpGender'] . '</p>': '<p style="color:red;" Erreur"</p>'?> 
+    <p><?= SessionManager::getSession('signUpBirth')  ?? '<p style="color:red;" Erreur"</p>'?></p>
 </div>
 <?php else: 
     header("Location: /views/home.php");
