@@ -1,5 +1,6 @@
 <?php
     session_start();
+    ob_start();
     require_once $_SERVER['DOCUMENT_ROOT'] . '/models/SessionManager.php';
 
     $jsfiles = glob($_SERVER['DOCUMENT_ROOT'].'/public/js/*.js');
@@ -17,19 +18,21 @@
     }
     $userdatas = SessionManager::getSession('userdatas') ?? false;
     $myartist =  SessionManager::getSession('my_artist_id') ?? false;
+    $mytracks =  SessionManager::getSession('my_tracks') ?? false;
+    $artisttodisplaytracks = SessionManager::getSession('artist_tracks') ?? false;
     $playlistdatas =  SessionManager::getSession('playlists_datas') ?? false; 
     $playlisttodisplay = SessionManager::getSession('playlist_to_display') ?? false;
     $ourartists = SessionManager::getSession('our_artists_datas') ?? false;
     $artisttodisplay = SessionManager::getSession('artist_to_display') ?? false;
     $publicplaylists = SessionManager::getSession('public_playlists_datas') ?? false;
-    
     $unreadtickets = SessionManager::getSession('unread_tickets') ?? false;
+
     if($userdatas && $userdatas['role'] === 9){
         $ticketsdatas = SessionManager::getSession('tickets_datas') ?? false;
         $tickettodisplay = SessionManager::getSession('ticket_to_display') ?? false;
     }   
-    // var_dump($_SESSION);
-
+        // var_dump($_SESSION);
+ob_flush();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,7 +44,7 @@
     <link rel="stylesheet" href="/public/css/new.css">
     <link rel="stylesheet" href="/public/css/main-generated-V3.css">
 
-    <?= isset($js)  && $js ? "<script src='/public/js/$js'; defer></script>" : "" ?>
+    <?= isset($js)  && $js ? "<script src='/public/js/$js';type='module'  defer></script>" : "" ?>
     <!-- <script src='/public/js/Spotify.js' type="module" defer></script> -->
     <script src='/public/js/generate_css_php.js' type="module" defer></script>
 

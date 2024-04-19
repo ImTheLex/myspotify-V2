@@ -49,7 +49,7 @@
                         <option <?= $userdatas['gender'] === 'No-comment' ? 'selected' : '' ?> class="text-black px-2" value="No-comment">Ne se prononce pas</option>
                     </select>
                 </label> 
-                <a class="mb-1 block" href="<?= '/controllers/ArtistController.php?bCreateArtist'?>">Créer un compte artiste</a>
+                <a class="mb-1 block" href="<?= $myartist ? '/controllers/ArtistController.php?bDropArtist' : '/controllers/ArtistController.php?bCreateArtist'?>"><?= $myartist ? 'Supprimer mon compte artiste' : 'Créer un compte artiste' ?></a>
                 <div class="max-cont-520:flex-col gap-x-1 min-cont-520:center-b">
                     <button class="br-a-1-s br-cus-c-7 text-cus-1 rounded-1 c-p px-4 py-2 ta-c min-cont-520:w-fit bg-cus-5 td-3 hovr-bg-black hovr-text-white" type="submit" name="bUserUpdate">Confirmer</button>
                     <button class=" br-a-1-s br-cus-c-7 text-cus-7 rounded-1 c-p px-4 py-2 ta-c min-cont-520:w-fit bg-cus-3 td-3" type="submit" name="bPasswordUpdate">Changer Mot de passe</button>

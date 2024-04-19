@@ -28,6 +28,7 @@ class CreateTableUsers {
             )";
 
         $request = $this->db->prepare($sql);
-        $request->execute();
+        $result = $request->execute();
+        return $result;
     }
 }

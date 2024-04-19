@@ -3,6 +3,7 @@
 use myspotifyV2\models\Artist;
 use myspotifyV2\models\Playlist;
 use myspotifyV2\models\Ticket;
+use myspotifyV2\models\Track;
 use myspotifyV2\models\User;
 use myspotifyV2\Requests\Validator;
 
@@ -10,12 +11,14 @@ session_start();
 require_once $_SERVER['DOCUMENT_ROOT'] . '/models/SessionManager.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config/myfunctions.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/models/Ticket.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/models/Track.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/models/Artist.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/models/Playlist.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/models/User.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/requests/Validator.php';
 
 $user = new User();
+$track = new Track();
 $ticket = new Ticket();
 $playlist = new Playlist();
 $artist = new Artist();
@@ -48,9 +51,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                 header('Location: /views/login.php');
                 exit;  
             }
-
-            $is_User['role'] >= 2 ? SessionManager::setSession('my_artist_id',$artist->getMyArtistId($is_User['id'])) : '';
-            $is_User['role'] === 9 ? SessionManager::setSession("tickets_datas",$ticket->getAllTickets()) : '';
+            $is_User['role'] >= 2 ? SessionManager::setSession('my_artist_id',$artist->getMyArtistId($is_User['id'])) : false;
+            $myartistid = SessionManager::getSession('my_artist_id');
+            $is_User['role'] >= 2 ? SessionManager::setSession('my_tracks',$track->getTracks($myartistid)) : false;
+            $is_User['role'] === 9 ? SessionManager::setSession("tickets_datas",$ticket->getAllTickets()) : false;
             SessionManager::setSession('playlists_datas',$playlist->getMyPlaylistRelations($is_User['id']));
             SessionManager::setSession('our_artists_datas',$artist->showArtists());
             SessionManager::setSession('public_playlists_datas',$playlist->showPublicPlaylists());

@@ -3,12 +3,14 @@ session_start();
 
 use myspotifyV2\models\Artist;
 use myspotifyV2\models\Playlist;
+use myspotifyV2\models\Track;
 use myspotifyV2\models\User;
 use myspotifyV2\Requests\Validator;
 
     require_once $_SERVER['DOCUMENT_ROOT'] . '/requests/Validator.php';
     require_once $_SERVER['DOCUMENT_ROOT'] . "/models/Playlist.php";
     require_once $_SERVER['DOCUMENT_ROOT'] . "/models/Artist.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/models/Track.php";
     require_once $_SERVER['DOCUMENT_ROOT'] . "/models/User.php";
     require_once $_SERVER['DOCUMENT_ROOT'] . "/config/myfunctions.php";
     require_once $_SERVER['DOCUMENT_ROOT'] . "/models/SessionManager.php";
@@ -16,7 +18,9 @@ use myspotifyV2\Requests\Validator;
 
 
     $userdatas = SessionManager::getSession('userdatas');
+    $myartistid = SessionManager::getSession('my_artist_id');
     $playlist = new Playlist();
+    $track = new Track();
     $artist = new Artist;
     $user = new User();
 
@@ -37,7 +41,7 @@ if($userdatas){
             
             if(empty($errors)){
 
-                if($userdatas['role'] < 2){
+                if(!$myartistid){
 
                     try {
                         $createArtist = $artist->createArtist($userdatas['id'],$userdatas['username']);
@@ -45,8 +49,8 @@ if($userdatas){
                         echo $e->getMessage();
                         header("Location: /views/home.php");
                         exit;
-                    }
-                        $user->setNewUserRole($userdatas['id'],2);
+                    }   
+                        $userdatas['role'] < 2 ? $user->setNewUserRole($userdatas['id'],2) : false;
                         $userdatas = $user->getUserInfos($userdatas['id'],null);
                         SessionManager::setSession('userdatas',$userdatas);
                         SessionManager::setSession('my_artist_id',$artist->getMyArtistId($userdatas['id']));
@@ -67,22 +71,27 @@ if($userdatas){
                     header("Location: /views/home.php");
                     exit;
                 }
+                SessionManager::setSession('artist_tracks',$track->getTracks($validatedRequest['bOpenArtist']));
                 SessionManager::setSession('artist_to_display',$artisttodisplay);
             }      
         }
-        // elseif(isset($_GET['bOpenPlaylist'])){
+        elseif(isset($_GET['bDropArtist'])){
 
-        //     if(empty($errors)){
-                
-        //         try{
-        //             $playlistToDisplay = $playlist->openPlaylist($_GET['bOpenPlaylist'],$userdatas['id']);
-        //         }catch(Exception $e){
-        //             header("Location: /views/home.php");
-        //             exit;
-        //         }
-        //         SessionManager::setSession('playlist_to_display',$playlistToDisplay);
-        //     }
-        // }
+            if(empty($errors)){
+                if($myartistid) {
+
+                    try{
+                        $artistDeletion = $artist->dropMyArtist($myartistid);
+
+                    }catch(Exception $e){
+                        header("Location: /views/home.php");
+                        exit;
+                    }
+                    SessionManager::unsetSession('my_artist_id');
+                    SessionManager::unsetSession('artist_to_display');
+                }
+            }
+        }
     }
 
     if($_SERVER['REQUEST_METHOD'] === 'POST'){

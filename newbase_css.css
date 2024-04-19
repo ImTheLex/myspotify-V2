@@ -10,11 +10,10 @@
 .flex { display: flex; }
 .justify-content-c { justify-content: center  ; }
 .align-items-c { align-items: center  ; }
-@container (max-width: 1100px) { .max-cont-1100\:hidden { display: none; } }
+@container (max-width: 1000px) { .max-cont-1000\:hidden { display: none; } }
 .hovr-text-white:hover { color: white; }
 .center { display: flex; justify-content: center; align-items: center; }
 .gap-y-2 { column-gap: 0.5rem; }
-@container (max-width: 1000px) { .max-cont-1000\:hidden { display: none; } }
 @container (max-width: 900px) { .max-cont-900\:hidden { display: none; } }
 @container (max-width: 800px) { .max-cont-800\:hidden { display: none; } }
 @container (max-width: 750px) { .max-cont-750\:hidden { display: none; } }
@@ -90,11 +89,10 @@
 .zi-10 { z-index: 10; }
 .justify-content-fe { justify-content: flex-end  ; }
 .gap-x-1 { row-gap: 0.25rem; }
-.h-vh-3 { height: 30vh; }
-.flex-col { display: flex; flex-direction: column; }
-.px-12 { padding-inline: 3rem; }
+.pt-16 { padding-top: 4rem; }
 .mb-5 { margin-bottom: 1.25rem; }
-.pt-15 { padding-top: 3.75rem; }
+.h-30 { height: 7.5rem; }
+.w-30 { width: 7.5rem; }
 .bg-cus-9 { background-color: var(--background_cus_9); }
 .px-8 { padding-inline: 2rem; }
 .br-y-2-s { border-block-width : 2px; border-block-style: solid ;}
@@ -111,6 +109,7 @@
 .ta-c { text-align: center; }
 .grid { display: grid; }
 .grid-col-2 { grid-template-columns: repeat(2, 1fr); }
+.pt-15 { padding-top: 3.75rem; }
 @container (max-width: 500px) { .max-cont-500\:grid-col-1 { grid-template-columns: repeat(1, 1fr); } }
 .grid-col-span-2 { grid-column: span 2; }
 @container (max-width: 500px) { .max-cont-500\:grid-col-span-1 { grid-column: span 1; } }
@@ -132,6 +131,7 @@
 @container (max-width: 500px) { .max-cont-500\:ta-s { text-align: start; } }
 .mx-auto { margin-inline: auto }
 .max-w-32 { max-width: 8rem; }
+.flex-col { display: flex; flex-direction: column; }
 @media screen and (min-width: 500px) { .min-media-500\:hidden { display: none; } }
 .ml-1 { margin-left: 0.25rem; }
 .br-t-1-s { border-top-width : 1px; border-top-style: solid ;}

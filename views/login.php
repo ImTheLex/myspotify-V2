@@ -21,7 +21,6 @@
             <label class="flex-col mb-5 fw-6 text-white" for="loginPassword" aria-label="Entrez mot de passe">Entrez votre mot de passe
                 <input class="input"  type="password" name="loginPassword">
                 <?= SessionManager::getSession('error')['loginPassword'] ?? '' ?>
-                <?= SessionManager::getSession('error')['login_password'] ?? '' ?>
             </label>
             <div class="gap-y-4 mb-5 flex align-items-c">
                 <div class="w-10">

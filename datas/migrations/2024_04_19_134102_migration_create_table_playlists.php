@@ -1,7 +1,7 @@
 <?php
 
 
-    class CreateTableArtists {
+    class CreateTablePlaylists {
 
         private $db;
 
@@ -14,19 +14,21 @@
 
         public function up(){
 
-            $sql = "CREATE TABLE IF NOT EXISTS artists (
+            $sql = "CREATE TABLE IF NOT EXISTS playlists (
                     id INT AUTO_INCREMENT PRIMARY KEY,
-                    `name` VARCHAR(100) NOT NULL UNIQUE,
-                    profile_picture VARCHAR(255),
-                    `description` TEXT,
+                    title VARCHAR(100) DEFAULT 'Ma Playlist N°',
+                    img VARCHAR(255),
+                    `description` VARCHAR(150) DEFAULT 'Une description de playlist',
+                    privacy BOOLEAN DEFAULT 0,
                     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-                    user_id INT NOT NULL UNIQUE,
+                    user_id INT NOT NULL,
                     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE
                 )";
 
             $request = $this->db->prepare($sql);
-            $request->execute();
+            $result = $request->execute();
+            return $result;
             
         }
     }

@@ -121,4 +121,12 @@ class Artist extends MyModel {
         ])->fetch(\PDO::FETCH_ASSOC);
         return $result['id'];
     }
+
+    public function dropMyArtist($artist_id) {
+        $result = $this->query("DELETE FROM $this->table WHERE id = :id",
+        [
+            'id' => $artist_id,
+        ]);
+        return $result;
+    }
 }

@@ -51,14 +51,6 @@
                 <?php include 'components/middle_container_public_playlists.php'?>
                 <?php endfor?>
             </div>
-            <?php if(isset($tracksDatas)):?>
-            <div class="grid grid-col-2 pt-15"> 
-                <h2 class="grid-col-span-2">Playlists Spotify</h2>
-                <?php for($i=0;  $i < 4 ; $i++):?>
-                <?php include 'components/middle_container_spotify_artists.php'?>
-                <?php endfor?>
-            </div>
-            <?php endif?>
             <div class="grid grid-col-4 gap-x-4 gap-y-4 pt-15 max-cont-750:grid-col-2 justify-items-c max-cont-500:grid-col-1">
                 <h2 class="grid-col-span-4 max-cont-750:grid-col-span-2 max-cont-500:grid-col-span-1">Nos artistes</h2>
                 <?php for($i=0;  $i < count($ourartists) && $i < 4 ; $i++):?>

@@ -76,6 +76,12 @@ class MyModel{
                         if(preg_match('/max:(\d+)/',$rule,$matches) && strlen($value) > $matches[1]) {
                             throw new \Exception("Field $field must be no more than {$matches[1]} characters long");
                         }
+                        if($rule === 'audio'){
+
+                            if(!preg_match('/\.(mp3|wav|ogg|flac|m4a|aac|wma|mpa)/',$value)){
+                                throw new \Exception("Field $field must contain a valid audio file (e.g., .mp3, .wav, .ogg,...)");
+                            }
+                        }
                         if($rule === 'birthdate'){
                             $date = \DateTime::createFromFormat('Y-m-d',$value);
                             if(!$date){
