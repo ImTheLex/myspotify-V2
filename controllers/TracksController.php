@@ -35,21 +35,8 @@ if($userdatas){
 
         $errors = $validator->get_errors();
         $validatedRequest = $validator->get_request();
-
-        // if(isset($_GET['bOpenArtist'])){
-
-        //     if(empty($errors)){
-
-        //         try {
-        //             $artisttodisplay = $artist->openArtist($validatedRequest['bOpenArtist']);
-
-        //         }catch(Exception $e){
-        //             header("Location: /views/home.php");
-        //             exit;
-        //         }
-        //         SessionManager::setSession('artist_to_display',$artisttodisplay);
-        //     }      
-        // // }
+  
+        // }
         // elseif(isset($_GET['bDropArtist'])){
 
         //     if(empty($errors)){
@@ -99,6 +86,19 @@ if($userdatas){
             header('Location: /views/home.php?create_track');
             exit; 
         }
+        elseif(isset($_POST['bCreateTrackRelation'])){
+            if(empty($errors)){
+
+                try {
+                    $trackRelation = $track->createTrackRelation($validatedRequest['trackRelationId'],$validatedRequest['playlistRelationId']);
+
+                }catch(Exception $e){
+                    header("Location: /views/home.php");
+                    exit;
+                }
+                SessionManager::setSession('artist_to_display',$artisttodisplay);
+            }  
+        }  
     }
 }
 

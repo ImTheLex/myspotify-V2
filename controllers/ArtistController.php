@@ -37,8 +37,7 @@ if($userdatas){
         $validatedRequest = $validator->get_request();
 
         if(isset($_GET['bCreateArtist'])){
-
-            
+        
             if(empty($errors)){
 
                 if(!$myartistid){
@@ -50,11 +49,10 @@ if($userdatas){
                         header("Location: /views/home.php");
                         exit;
                     }   
-                        $userdatas['role'] < 2 ? $user->setNewUserRole($userdatas['id'],2) : false;
-                        $userdatas = $user->getUserInfos($userdatas['id'],null);
-                        SessionManager::setSession('userdatas',$userdatas);
-                        SessionManager::setSession('my_artist_id',$artist->getMyArtistId($userdatas['id']));
-
+                    $userdatas['role'] < 2 ? $user->setNewUserRole($userdatas['id'],2) : false;
+                    $userdatas = $user->getUserInfos($userdatas['id'],null);
+                    SessionManager::setSession('userdatas',$userdatas);
+                    SessionManager::setSession('my_artist_id',$artist->getMyArtistId($userdatas['id']));
                 }
 
             }      
@@ -66,11 +64,11 @@ if($userdatas){
 
                 try {
                     $artisttodisplay = $artist->openArtist($validatedRequest['bOpenArtist']);
-
                 }catch(Exception $e){
                     header("Location: /views/home.php");
                     exit;
                 }
+                SessionManager::unsetSession('playlist_to_display');
                 SessionManager::setSession('artist_tracks',$track->getTracks($validatedRequest['bOpenArtist']));
                 SessionManager::setSession('artist_to_display',$artisttodisplay);
             }      

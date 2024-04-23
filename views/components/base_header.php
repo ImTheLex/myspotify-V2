@@ -22,15 +22,11 @@
     $artisttodisplaytracks = SessionManager::getSession('artist_tracks') ?? false;
     $playlistdatas =  SessionManager::getSession('playlists_datas') ?? false; 
     $playlisttodisplay = SessionManager::getSession('playlist_to_display') ?? false;
+    $playlisttodisplaytracks = SessionManager::getSession('playlist_tracks') ?? false;
     $ourartists = SessionManager::getSession('our_artists_datas') ?? false;
     $artisttodisplay = SessionManager::getSession('artist_to_display') ?? false;
     $publicplaylists = SessionManager::getSession('public_playlists_datas') ?? false;
-    $unreadtickets = SessionManager::getSession('unread_tickets') ?? false;
-
-    if($userdatas && $userdatas['role'] === 9){
-        $ticketsdatas = SessionManager::getSession('tickets_datas') ?? false;
-        $tickettodisplay = SessionManager::getSession('ticket_to_display') ?? false;
-    }   
+    $unreadtickets = SessionManager::getSession('unread_tickets') ?? false;  
         // var_dump($_SESSION);
 ob_flush();
 ?>

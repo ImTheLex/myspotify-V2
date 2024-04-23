@@ -2,15 +2,18 @@
 session_start();
 
 use myspotifyV2\models\Playlist;
+use myspotifyV2\models\Track;
 use myspotifyV2\Requests\Validator;
 
     require_once $_SERVER['DOCUMENT_ROOT'] . '/requests/Validator.php';
     require_once $_SERVER['DOCUMENT_ROOT'] . "/models/Playlist.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/models/Track.php";
     require_once $_SERVER['DOCUMENT_ROOT'] . "/models/SessionManager.php";
 
 
     $userdatas = SessionManager::getSession('userdatas');
     $playlist = new Playlist();
+    $track = new Track();
 
     // die(var_dump($_GET));
 
@@ -55,6 +58,8 @@ if($userdatas){
                     header("Location: /views/home.php");
                     exit;
                 }
+                SessionManager::unsetSession('artist_to_display');
+                SessionManager::setSession('playlist_tracks',$track->getPlaylistTracks($validatedRequest['bOpenPlaylist']));
                 SessionManager::setSession('playlist_to_display',$playlistToDisplay);
             }
         }

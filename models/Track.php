@@ -2,15 +2,27 @@
 namespace myspotifyV2\models;
 
 use myspotifyV2\dependencies\MyModel;
+use myspotifyV2\models\PlaylistTrackRelation;
+
 
 require_once '../dependencies/MyModel.php';
+require_once '../models/PlaylistTrackRelation.php';
 class Track extends MyModel {
 
+    private $relations;
     protected $rules = ([
         'title'=>'required|min:3|max:100',
         'link'=>'required|min:6|max:190|audio',
         'category'=>'required|int'
     ]);
+    
+
+
+    public function __construct() {
+        parent::__construct();
+        $relations = new PlaylistTrackRelation;
+        $this->relations = $relations;
+    }
 
     public function createTrack(array $trackDatas, $artist_id){
 
@@ -33,6 +45,11 @@ class Track extends MyModel {
         
     }
 
+    public function createTrackRelation($trackId,$playlistId){
+
+        $relation = $this->relations->createPlaylistTrackRelation($trackId,$playlistId);
+        return $relation;
+    }
     public function getTracks($artist_id){
 
         $result = $this->query("SELECT * FROM  $this->table WHERE artist_id = :artist_id",
@@ -42,6 +59,37 @@ class Track extends MyModel {
 
         return $result;
     }
+
+    public function getPlaylistTrack($playlistId){
+
+        $result = $this->query("SELECT * FROM  $this->table WHERE id = :artist_id",);
+
+    }
+
+
+   
+    public function getPlaylistTracks($playlistId){
+           
+        $tracks_ids_results = $this->relations->getPlaylistTracksRelations($playlistId);
+        if(!empty($tracks_ids_results)){
+
+
+            $placeholders = implode(',', array_fill(0, count($tracks_ids_results), '?'));
+            $query = "SELECT * FROM $this->table WHERE id IN ($placeholders)";
+            $stmt = $this->db->prepare($query);
+
+            foreach ($tracks_ids_results as $k => $id){
+                $stmt->bindValue(($k+1), $id['track_id']);
+            }
+            $stmt->execute();
+            $result = $stmt->fetchAll();
+            return $result;
+
+        }
+        return false;
+    
+    }  
+
 
     public function setDuration(string $audio_link, string $duration){
         

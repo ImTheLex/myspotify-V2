@@ -186,8 +186,7 @@ p, .p {
 }
 
 .br-l-4-s{border-left: 4px; border-left-style: solid;}
-.br-cus-c-10{border-color: var(--customColor_10);}
-.mt-12{/*48px*/margin-top: 3rem;}
+/* .br-cus-c-10{border-color: var(--customColor_10);} */
 
 
 .btn-1 {
@@ -221,10 +220,16 @@ p, .p {
     color: white;
     background-color: darkgreen;
 }
-
+.tracks-table tr:hover .play-button.hidden{
+    display: block;
+}
+.tracks-table tr:hover .orderNumber{
+    display: none;
+}
 .tos {
     height: 70vh
 }
+
 .body-grad-1 {
     background: linear-gradient(to top, var(--customColor_4),var(--customColor_3)); 
 }

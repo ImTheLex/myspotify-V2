@@ -1,5 +1,9 @@
 <?php require 'components/base_header.php' ?>
-
+<?php if($userdatas && $userdatas['role'] === 9){
+        $ticketsdatas = SessionManager::getSession('tickets_datas') ?? false;
+        $tickettodisplay = SessionManager::getSession('ticket_to_display') ?? false;
+    } 
+?>
 <?php if($userdatas && $userdatas['role'] === 9):?>
 
 
@@ -45,13 +49,16 @@
                 <?php elseif(isset($_GET['admin-create-user'])):?>
                 <form action="/controllers/AuthController.php" method="post">
                     <label class="flex-col mb-5" for="newAdminUserUsername">Pseudo
-                        <input id="newAdminUserUsername" name="newAdminUserUsername" class="input" type="text">
+                        <input id="newAdminUserUsername" name="createUsername" class="input" type="text">
                     </label>
                     <label class="flex-col mb-5" for="newAdminUserEmail">Email
-                        <input class="input" id="newAdminUserEmail"  name="newAdminUserEmail" type="text">
+                        <input class="input" id="newAdminUserEmail"  name="createUserEmail" type="text">
                     </label>
                     <label class="flex-col mb-5" for="newAdminUserPassword">Mot de passe
-                        <input class="input" id="newAdminUserPassword"  name="newAdminUserPassword" type="text">
+                        <input class="input" id="newAdminUserPassword"  name="createUserPassword" type="text">
+                    </label>
+                    <label class="flex-col mb-5" for="newAdminUserPassword1">Mot de passe
+                        <input class="input" id="newAdminUserPassword1"  name="createUserPassword1" type="text">
                     </label>
                     <!-- gender -->
                     <label class="flex-col mb-5"  for="newAdminUserGender">Genre
@@ -80,13 +87,13 @@
                 <?php if($_SERVER['REQUEST_URI'] !== "/views/admin.php"):?>
                     <div class="flex justify-content-b">
                         <button  
-                            class="br-a-1-s br-cus-c-7 text-cus-1 rounded-1 px-4 py-2 ta-c min-cont-520:w-fit bg-cus-5 td-3 hovr-bg-black hovr-text-white <?= (int)$tickettodisplay['state'] === 3 ? 'hidden c-na' : 'c-p' ?>" name="<?= $_SERVER['REQUEST_URI'] === '/views/admin.php?admin-create-user' ?  'bAdminCrud' : 'bRespondTicket'?>" type="submit">
+                            class="br-a-1-s br-cus-c-7 text-cus-1 rounded-1 px-4 py-2 ta-c min-cont-520:w-fit bg-cus-5 td-3 hovr-bg-black hovr-text-white <?= isset($tickettodisplay['state']) && (int)$tickettodisplay['state'] === 3 ? 'hidden c-na' : 'c-p' ?>" name="<?= $_SERVER['REQUEST_URI'] === '/views/admin.php?admin-create-user' ?  'bAdminCrud' : 'bRespondTicket'?>" type="submit">
                             <?= $_SERVER['REQUEST_URI'] === '/views/admin.php?admin-create-user' ?  'Créer utilisateur' : 'Répondre'?>
                         </button>
                         <a href="<?= $_SERVER['SCRIPT_NAME'] ?>" class="br-a-1-s br-cus-c-7 text-cus-1 rounded-1 px-4 py-2 ta-c min-cont-520:w-fit bg-cus-5 td-3 hovr-bg-black hovr-text-white">Retour</a>
                     </div>
                 <?php else: ?> 
-                    <a class="center br-a-1-s br-cus-c-7 text-cus-1 rounded-1 c-p px-4 py-2 w-fit bg-cus-5 td-3 hovr-bx-shadow-cus-2" href="<?='?admin-create-user'?>">Creer un utilisateur</a>
+                    <a class="btn-1 center" href="<?='?admin-create-user'?>">Creer un utilisateur</a>
                 <?php endif?>
                 </form>
             </div>

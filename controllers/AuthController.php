@@ -95,7 +95,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
             SessionManager::unsetSession('signupDatasStep2');SessionManager::unsetSession('signupDatasStep1');
     
             try {
-                $responseSignUp = $user->searchUser($validatedRequest['signUpUsername'],$validatedRequest['signUpEmail'],null);
+                $responseSignUp = $user->searchUser($validatedRequest['createUsername'],$validatedRequest['createUserEmail'],null);
             }catch(Exception $e){
                 if ($e->getMessage() === "email"){
                     SessionManager::setSession('error',["sign_up_email"=>"<p style='color:red'>L'email existe déjà</p>"]);
@@ -115,6 +115,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                     exit;
                 }
                 $recoverTokenTicket = $ticket->createTicket(['user_id'=>$user_id,'contactSubject'=>'Recover Token', 'contactContent'=>'Auto Message']);
+                if($validatedRequest['signUpArtist'] === "oui"){
+                    $artistCreated = $artist->createArtist($user_id,$validatedRequest['createUsername']);
+                    if($artistCreated){
+                        $user->setNewUserRole($user_id,2);
+                    }
+                }
                 $ticket->closeTicket($recoverTokenTicket,$user->getUserinfos($user_id,null)['recover_token']);
                 SessionManager::setSession('success',['create_user' => "<p class='text-cus-2'> Création réussie, vous pouvez vous connecter</p>"]);
                 header('Location: /views/login.php');
@@ -219,22 +225,45 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         }
     }
+
+    // Admin crud
+    elseif(isset($_POST['bAdminCrud']) && $userdatas['role'] == 9){
+
+        try {
+            $responseSignUp = $user->searchUser($validatedRequest['createUsername'],$validatedRequest['createUserEmail'],null);
+        }catch(Exception $e){
+            if ($e->getMessage() === "email"){
+                SessionManager::setSession('error',["sign_up_email"=>"<p style='color:red'>L'email existe déjà</p>"]);
+
+            }elseif ($e->getMessage() === "username"){
+                SessionManager::setSession('error',['sign_up_username' => "<p style='color:red'>Le username existe déjà</p>"]);
+            }
+            header('Location: /views/admin.php?admin-create-user');
+            exit;
+        }
+        if($responseSignUp){
+            try{
+                $user_id = intval($user->createUser($validatedRequest));
+            }catch(Exception $e){
+                SessionManager::setSession('error',['model_user_creation' => "<p style='color:red'>{$e->getMessage()}</p>"]);
+                header('Location: /views/signup.php');
+                exit;
+            }
+            $recoverTokenTicket = $ticket->createTicket(['user_id'=>$user_id,'contactSubject'=>'Recover Token', 'contactContent'=>'Auto Message']);
+            if($validatedRequest['newAdminUserRole'] === 2){
+                $artistCreated = $artist->createArtist($user_id,$validatedRequest['createUsername']);
+            }
+            $ticket->closeTicket($recoverTokenTicket,$user->getUserinfos($user_id,null)['recover_token']);
+            SessionManager::setSession('success',['create_admin_user' => "<p class='text-cus-2'> Création réussie.</p>"]);
+            header('Location: /views/login.php');
+            exit;
+
+        }
+    }
     
 
 
 }
-// Login
-
-// Admin crud
-// elseif(isset($_POST['bAdminCrud']) && $userdatas['role'] == 9){
-
-//     $validator = new Validator($_POST);
-//     $validator->validate_fields(['newAdminUserUsername','newAdminUserEmail','newAdminUserPassword','newAdminUserGender','newAdminUserBirth','newAdminUserRole']);
-
-//     $errors = $validator->get_errors();
-//     $validatedRequest = $validator->get_request();
-//     $user->createAdminUser($validatedRequest);
-// }
 
 
 

@@ -22,17 +22,64 @@ function previewImageArtist() {
     reader.readAsDataURL(fileTarget.files[0]);
 }
 
+function resetAudioButtons(){
+
+    document.querySelectorAll('.pause-button').forEach(button => {
+        button.style.display = ""
+    })
+    document.querySelectorAll('.play-button').forEach(button => {
+        button.style.display = ""
+    })
+    document.querySelectorAll('.tracks-table tr .reading .orderNumber').forEach(p => {
+        p.style.display = ""
+    })
+    document.querySelectorAll('.tracks-table tr .reading').forEach(td => {
+        td.classList.remove('reading')
+    })
+}
+
+/**
+ * A bit complicated but will be triggered when relevant button is clicked, then will manage the buttons displays regarding to "play" status.
+ * In this case the event is more important as its easier to locate the good url to play.
+ * @param {*} event 
+ */
 function playAudio(event) {
-    let audio = event.currentTarget.parentNode.querySelector('audio');
+    let audio = document.getElementById('audio');
+    let source = audio.querySelector('source');
+    if(source.getAttribute('src') === "" || source.getAttribute('src') !== event.currentTarget.value){
+        source.src = event.currentTarget.value;
+        audio.load()
+    }
+    resetAudioButtons();
+    event.currentTarget.style.display = "none"
+    event.currentTarget.parentNode.parentNode.classList.add('reading')
+    event.currentTarget.parentNode.querySelector('.orderNumber').style.display="none"
+    event.currentTarget.parentNode.querySelector('.pause-button').style.display="block"
     audio.play();
 }
+/**
+ * A bit complicated but will be triggered when relevant button is clicked, then will manage the buttons displays regarding to "pause" status.
+ * @param {*} event 
+ */
 function pauseAudio(event) {
-    let audio = event.currentTarget.parentNode.querySelector('audio');
+    let audio = document.getElementById('audio');
+    event.currentTarget.style.display = "none"
+    event.currentTarget.parentNode.parentNode.classList.remove('reading')
+    event.currentTarget.parentNode.querySelector('.orderNumber').style.display=""
+    event.currentTarget.parentNode.querySelector('.play-button').style.display=""
     audio.pause();
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+
+    // In this block if we can find .tracks-table, then it probably means that we are visualizing either a playlist or an artist. So we look forward for the "audio" tag to attach a "ended" listener.
+    if(document.querySelector('.tracks-table')){
+        let audio = document.getElementById('audio')
     
+        audio.addEventListener('ended', function(){
+            resetAudioButtons();
+        })
+    }
     
     if(document.getElementById('createTrackLink')){
 

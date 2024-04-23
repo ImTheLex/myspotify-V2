@@ -31,12 +31,12 @@ class User extends MyModel {
                 $images = glob(MY_PLAYLIST_DEFAULT_IMAGES . '/*.jpeg');
                 $imageSource = $images[rand(0,4)];
                 $uniqueId = uniqid('-',true);
-                $token = $datas['signUpUsername'] . $uniqueId;
+                $token = $datas['createUsername'] . $uniqueId;
                 $result = $this->query("INSERT INTO $this->table (username, email, `password`, birth, gender, recover_token, profile_picture) VALUES (:username, :email, :password, :birth, :gender, :recover_token, :profile_picture )",
                     [
-                        "username"=>$datas['signUpUsername'],
-                        "email"=>$datas['signUpEmail'],
-                        "password"=> password_hash($datas['signUpPassword1'],PASSWORD_DEFAULT),
+                        "username"=>$datas['createUsername'],
+                        "email"=>$datas['createUserEmail'],
+                        "password"=> password_hash($datas['createUserPassword'],PASSWORD_DEFAULT),
                         "birth"=>$datas['signUpBirth'],
                         "gender"=>$datas['signUpGender'],
                         "recover_token"=>$token,
@@ -286,6 +286,14 @@ class User extends MyModel {
         return $result; 
 
     }
+
+    // public function createAdminUser($datas){
+
+    //     if($this->validate($datas,$this->rules())){
+
+    //         $result = $this->query("INSERT INTO $this->table (username, password, gender, birth, role")
+    //     }
+    // }
 
 }   
 

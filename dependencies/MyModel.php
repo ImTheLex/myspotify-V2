@@ -11,7 +11,7 @@ class MyModel{
     protected $rules = [];
 
 
-    // This construct takes a db connection and then store it in the protected variable. So all the "childrens" may access it.
+    // This construct takes a db connection and then stores it in the protected variable. So all the "childrens" may access it.
     // This goes the same way for the table kinda "ORM Eloquent like from laravel"
     // We consider a model should be linked by a table with the same name but on lowerCase and eventually separated by underscores on every capital letter.
     public function __construct() {
@@ -116,7 +116,7 @@ class MyModel{
     }
 
     /**
-     * Executes a query in a short form will directly return a result in case the request is Insert or Update.
+     * Executes a query in a short form will directly return a result in case the request is Insert, Delete or Update.
      * @param string $sql The sql takes the whole query.
      * @param array $params The params takes the parametters.
     */

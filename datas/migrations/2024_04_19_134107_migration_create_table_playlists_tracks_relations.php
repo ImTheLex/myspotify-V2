@@ -14,7 +14,7 @@
 
         public function up(){
 
-            $sql = "CREATE TABLE IF NOT EXISTS playlists_tracks_relations (
+            $sql = "CREATE TABLE IF NOT EXISTS playlist_track_relations (
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     track_id INT NOT NULL,
                     playlist_id INT NOT NULL,

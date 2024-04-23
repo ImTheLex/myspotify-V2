@@ -50,7 +50,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     elseif(isset($_POST['bRespondTicket'])){
         if(empty($errors)){
             $ticket->closeTicket($validatedRequest['ticketId'],$validatedRequest['ticketResponse']);
-            header("Location: ../views/admin.php?ticket={$_POST['ticketId']}");
+            SessionManager::unsetSession("ticket_to_display");
+            SessionManager::setSession("tickets_datas",$ticket->getAllTickets());
+            header("Location: ../views/admin.php");
             exit;   
         }
     }
@@ -73,10 +75,8 @@ elseif($_SERVER['REQUEST_METHOD'] === 'GET'){
             $getTicket['contactUsername'] = $user->getUsername($getTicket['user_id']);
             if ($getTicket['state'] === 1) {
                 $ticket->updateTicketState($getTicket['id']);
-                SessionManager::setSession('ticket_to_display',$getTicket);
-                header("Location: ../views/admin.php?ticket");
-                exit; 
             }
+            SessionManager::setSession("tickets_datas",$ticket->getAllTickets());
             SessionManager::setSession('ticket_to_display',$getTicket);
             header("Location: ../views/admin.php?ticket");
             exit; 
@@ -85,14 +85,12 @@ elseif($_SERVER['REQUEST_METHOD'] === 'GET'){
     }
     elseif(isset($_GET["bIsReadTicket"])){
 
-        
-    
-         if(!$errors){
-            $ticket->setReadTicket($validatedRequest['bIsReadTicket']);
-            SessionManager::setSession('unread_tickets', $ticket->getUnreadTickets($userdatas['id']));
-            header("Location: ../views/home.php");
-            exit; 
-         }     
+        if(!$errors){
+        $ticket->setReadTicket($validatedRequest['bIsReadTicket']);
+        SessionManager::setSession('unread_tickets', $ticket->getUnreadTickets($userdatas['id']));
+        header("Location: ../views/home.php");
+        exit; 
+        }     
     }
     
 

@@ -30,6 +30,9 @@
         </div>
     <?php endif ?>
         <div class="audio-display">
+        <audio id="audio">
+            <source src="" type="audio/mpeg">
+        </audio>
         </div>      
         <div class="global-feed px-4 <?= $playlisttodisplay || $artisttodisplay ? 'hidden' : ''?>">
             <div class="grid grid-col-2 gap-x-4 gap-y-4 pt-15 max-cont-500:grid-col-1">

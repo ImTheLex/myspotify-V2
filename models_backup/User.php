@@ -154,9 +154,9 @@ class User {
             }
         }
 
-        $email = (string)$data['signUpEmail'];
-        $password = password_hash($data['signUpPassword1'],PASSWORD_DEFAULT);
-        $userName = (string)$data['signUpUsername'];
+        $email = (string)$data['createUserEmail'];
+        $password = password_hash($data['createUserPassword'],PASSWORD_DEFAULT);
+        $userName = (string)$data['createUsername'];
         $date = date('Y-m-d',strtotime($data['signUpBirth']));
         $gender = (string)$data['signUpGender'];
 
@@ -255,13 +255,13 @@ public function updateUser(array $userdatas,array $datas,?array $files) {
     public function createAdminUser(array $datas){
 
         $uniqueId = uniqid('-',true);
-        $token = $datas["newAdminUserUsername"] . $uniqueId;
+        $token = $datas["createUsername"] . $uniqueId;
         $hashedPassword = password_hash($datas['newAdminUserPassword'],PASSWORD_DEFAULT);
 
         $sql = $this->db->prepare("INSERT INTO users (username, email, `password`, birth, `role`, gender, recover_token) 
         VALUES (:username, :email, :password, :birth, :role, :gender, :recover_token )");
-        $sql->bindValue(':username', $datas['newAdminUserUsername']);
-        $sql->bindValue(':email', $datas['newAdminUserEmail']);
+        $sql->bindValue(':username', $datas['createUsername']);
+        $sql->bindValue(':email', $datas['createUserEmail']);
         $sql->bindValue(':password', $hashedPassword);
         $sql->bindValue(':birth', $datas['newAdminUserBirth']);
         $sql->bindValue(':role', $datas['newAdminUserRole']);

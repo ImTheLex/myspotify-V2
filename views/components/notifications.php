@@ -1,5 +1,5 @@
-    <div class="p-abs mt-12 w-full bg-cus-8 rounded-2 p-2 notification">
-        <ul class="flex-col gap-y-2">
+    <div class="p-abs mt-12 w-full bg-cus-8 rounded-2 p-2 notification zi-10">
+        <ul class="flex-col gap-x-2">
             <?php foreach($unreadtickets as $unreadticket):?>
                 <li class="br-l-4-s br-cus-c-10 bg-cus-6 gap-x-3 p-2 rounded-2 center-b">
                     <div>

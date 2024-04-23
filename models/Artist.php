@@ -35,10 +35,11 @@ class Artist extends MyModel {
                 $counter = $result->fetchColumn();
                 $counter = $counter === 0 ? '' : "-$counter";
 
-                $result = $this->query("INSERT INTO $this->table (`user_id`, name, profile_picture) VALUES (:user_id, :name, :profile_picture)",
+                $result = $this->query("INSERT INTO $this->table (`user_id`, name, description, profile_picture) VALUES (:user_id, :name, :description, :profile_picture)",
                 [
                     'user_id' => $user_id,
                     'name' => $username . $counter,
+                    'description' => "Une description random",
                     'profile_picture' => $imageSource,
                 ]);
 
