@@ -159,6 +159,9 @@ p, .p {
 .p-a{
     font-size: 0.875rem;
 }
+section {
+    height: 70vh;
+}
 .global-feed h2{
     width: 100%;
 }

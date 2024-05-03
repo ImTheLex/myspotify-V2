@@ -263,9 +263,9 @@ public function updateUser(array $userdatas,array $datas,?array $files) {
         $sql->bindValue(':username', $datas['createUsername']);
         $sql->bindValue(':email', $datas['createUserEmail']);
         $sql->bindValue(':password', $hashedPassword);
-        $sql->bindValue(':birth', $datas['newAdminUserBirth']);
+        $sql->bindValue(':birth', $datas['createUserBirth']);
         $sql->bindValue(':role', $datas['newAdminUserRole']);
-        $sql->bindValue(':gender', $datas['newAdminUserGender']);
+        $sql->bindValue(':gender', $datas['createUserGender']);
         $sql->bindValue(':recover_token', $token);
         $sql->execute();
 

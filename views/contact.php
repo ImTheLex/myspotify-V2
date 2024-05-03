@@ -2,10 +2,10 @@
 
 <?php if($userdatas):?>
 <section  data-id="contact">
-    <div class="gap-y-4 mx-4 h-full center-b">
+    <div class="gap-y-4 mx-4 center-b">
         <div class="flex-col w-4/12 gap-x-5 min-w-80 inbox">
-            <h1 class="ta-c rounded-2 py-4 px-12 bg-cus-4 br-a-1-s br-cus-c-2">Contact</h1>
-            <div class="rounded-2 py-4 px-12 bg-cus-4 br-a-1-s br-cus-c-2">
+            <h1 class="ta-c rounded-2 py-2 px-12 bg-cus-4 br-a-1-s br-cus-c-2">Contact</h1>
+            <div class="rounded-2 py-4 px-12 bg-cus-4 br-a-1-s br-cus-c-2 h-vh-6 overf-a">
                 <form action="/controllers/TicketController.php" method="post">
                     <label class="flex-col mb-5 fw-6 text-white" for="contactUsername">Votre nom d'utilisateur
                     <?= SessionManager::getSession('success')['create_ticket'] ?? ''?>
@@ -22,9 +22,9 @@
                 </form>
             </div>
         </div>    
-        <div class="w-6/12 h-full flex-col min-w-80 gap-x-5 ta-c make-container:faq-container faq-container" id="faq">
-            <h2 class="h1 ta-c  w-full  rounded-2 py-4 px-12 bg-cus-4 br-a-1-s br-cus-c-2">FAQ</h2>
-            <div class="grid grid-col-2 gap-y-12 gap-x-12 h-full">
+        <div class="w-6/12 flex-col min-w-80 gap-x-5 ta-c make-container:faq-container faq-container" id="faq">
+            <h2 class="h1 ta-c w-full rounded-2 py-2 px-12 bg-cus-4 br-a-1-s br-cus-c-2">FAQ</h2>
+            <div class="grid grid-col-2 gap-y-12 gap-x-12 h-vh-6">
                 <a  class="body-grad-2 td-2 p-4 br-cus-2 br-a-1-s rounded-2 h4 center max-cont-450:fs-4 hovr-bg-cus-7 hovr-text-black" href="">Comment devenir artiste ?</a>
                 <a class="body-grad-2 td-2 p-4 br-cus-2 br-a-1-s rounded-2 h4 center max-cont-450:fs-4 hovr-bg-cus-7 hovr-text-black"  href="">J'ai perdu un mot de passe ?</a>
                 <a class="body-grad-2 td-2 p-4 br-cus-2 br-a-1-s rounded-2 h4 center max-cont-450:fs-4 hovr-bg-cus-7 hovr-text-black" href="">Puis-je avoir plusieurs comptes artiste ?</a>

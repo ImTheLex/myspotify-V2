@@ -75,15 +75,16 @@ function up($db, $tracksDatas){
 
             if($artistInsertId){
 
-                $sql ="SELECT audio_link FROM tracks WHERE `artist_id` = :artist_id";
+                $sql ="SELECT audio_link FROM tracks WHERE `artist_id` = :artist_id AND audio_link = :audio_link";
                 $request = $db->prepare($sql);
                 $request->bindValue(':artist_id', $artistInsertId['id']);
+                $request->bindValue(':audio_link',$audioLink);
                 $request->execute();
                 $audioId = $request->fetch(PDO::FETCH_ASSOC);
 
                 // $sql->bindParam(':profile_picture', json_encode($track->album->images)); // Assuming images is a JSON string
-            
-                if($audioId !== $audioLink && $audioLink !== null){
+                
+                if($audioId['audio_link'] !== $audioLink && $audioLink !== null){
                     // A rajouter Image !
                     $sql = $db->prepare("INSERT INTO tracks (title, artist_id, duration, audio_link, category_id) VALUES (:title, :artist_id, :duration, :audio_link, :category_id)");
 

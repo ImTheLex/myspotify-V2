@@ -9,11 +9,11 @@
     <?= $signupStep1Datas  ?  '<p class="text-cus-2"> ' . $signupStep1Datas['createUserEmail'] . '</p>': '<p style="color:red;" Erreur"</p>'?> 
     <p><?= SessionManager::getSession('createUserEmail') ?? '<p style="color:red;" Erreur"</p>'?></p>
     <p id="dateResume">Votre date de naissance: </p>
-    <?= $signupStep2Datas  ?  '<p class="text-cus-2"> ' . $signupStep2Datas['signUpBirth'] . '</p>': '<p style="color:red;" Erreur"</p>'?> 
-    <p><?= SessionManager::getSession('signUpBirth')?? '<p style="color:red;" Erreur"</p>' ?></p>
+    <?= $signupStep2Datas  ?  '<p class="text-cus-2"> ' . $signupStep2Datas['createUserBirth'] . '</p>': '<p style="color:red;" Erreur"</p>'?> 
+    <p><?= SessionManager::getSession('createUserBirth')?? '<p style="color:red;" Erreur"</p>' ?></p>
     <p id="sexResume">Votre genre: </p>
-    <?= isset($signupStep2Datas)  ?  '<p class="text-cus-2"> ' . $signupStep2Datas['signUpGender'] . '</p>': '<p style="color:red;" Erreur"</p>'?> 
-    <p><?= SessionManager::getSession('signUpBirth')  ?? '<p style="color:red;" Erreur"</p>'?></p>
+    <?= isset($signupStep2Datas)  ?  '<p class="text-cus-2"> ' . $signupStep2Datas['createUserGender'] . '</p>': '<p style="color:red;" Erreur"</p>'?> 
+    <p><?= SessionManager::getSession('createUserBirth')  ?? '<p style="color:red;" Erreur"</p>'?></p>
 </div>
 <?php else: 
     header("Location: /views/home.php");

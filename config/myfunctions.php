@@ -21,12 +21,13 @@ function dd() {
             // Colorer en rouge les valeurs
             $arg = preg_replace_callback('/=> (.*)/', function ($matches) {
                 // var_dump($matches);
-
-                return '=> <span style="color: red;">' . $matches[1] . '</span>';
+                $type = gettype($matches[1]);
+                return '=> <span style="color: red;">' . $matches[1] . '</span> </span> <span style="color: blue;">' . $type . '</span>';
             }, $arg);
 
         }else {
-            $arg = '<span style="color: greenyellow;">' . var_export($arg, true) . '</span>';
+            $type = gettype($arg);
+            $arg = '<span style="color: greenyellow;">' . var_export($arg, true) . '</span> <span style="color: blue;">' . $type . '</span>';
         }
         echo $arg;
     }

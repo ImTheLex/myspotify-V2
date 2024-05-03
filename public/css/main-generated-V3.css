@@ -79,6 +79,8 @@
 .h-full { height: 100%; }
 .h-vh-3 { height: 30vh; }
 .h-vh-5 { height: 50vh; }
+.h-vh-6 { height: 60vh; }
+.h-vh-60 { height: 600vh; }
 .header { container-name: header; container-type: inline-size; }
 .hidden { display: none; }
 .hovr-bg-black:hover { background: black; }
@@ -86,6 +88,7 @@
 .hovr-bg-cus-8:hover { background: var(--hover_bg_cus_8); }
 .hovr-bg-cus-9:hover { background: var(--hover_bg_cus_9); }
 .hovr-bg-darkgreen:hover { background: darkgreen; }
+.hovr-bg-darkred:hover { background: darkred; }
 .hovr-bg-pink:hover { background: pink; }
 .hovr-text-black:hover { color: black; }
 .hovr-text-cus-2:hover { color: var(--hover_text_cus_2); }

@@ -228,7 +228,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Admin crud
     elseif(isset($_POST['bAdminCrud']) && $userdatas['role'] == 9){
-
         try {
             $responseSignUp = $user->searchUser($validatedRequest['createUsername'],$validatedRequest['createUserEmail'],null);
         }catch(Exception $e){
@@ -246,16 +245,17 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $user_id = intval($user->createUser($validatedRequest));
             }catch(Exception $e){
                 SessionManager::setSession('error',['model_user_creation' => "<p style='color:red'>{$e->getMessage()}</p>"]);
-                header('Location: /views/signup.php');
+                header('Location: /views/admin.php?admin-create-user');
                 exit;
             }
             $recoverTokenTicket = $ticket->createTicket(['user_id'=>$user_id,'contactSubject'=>'Recover Token', 'contactContent'=>'Auto Message']);
-            if($validatedRequest['newAdminUserRole'] === 2){
+            if(intval($validatedRequest['createUserRole']) === 2){
                 $artistCreated = $artist->createArtist($user_id,$validatedRequest['createUsername']);
             }
+            $user->setNewUserRole($user_id,intval($validatedRequest['createUserRole']));
             $ticket->closeTicket($recoverTokenTicket,$user->getUserinfos($user_id,null)['recover_token']);
             SessionManager::setSession('success',['create_admin_user' => "<p class='text-cus-2'> Création réussie.</p>"]);
-            header('Location: /views/login.php');
+            header('Location: /views/admin.php?admin-create-user');
             exit;
 
         }

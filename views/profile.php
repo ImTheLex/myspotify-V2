@@ -7,7 +7,7 @@
         <div class="col-b gap-x-2 mx-auto w-1/2 make-container:profile-container profile-container min-w-80 ">
             <h1 class=" rounded-2 br-cus-2 br-a-1-s px-12 py-2 text-cus-5 bg-cus-4 ta-c truncate">Bonjour <?= $userdatas['username']?>!</h1>
 
-            <form class="rounded-2 p-2 br-cus-2 br-a-1-s text-cus-5 px-12 py-8 body-grad-2 " action="/controllers/AuthController.php" method="post" enctype="multipart/form-data">
+            <form class="rounded-2 p-2 br-cus-2 br-a-1-s text-cus-5 px-12 py-8 body-grad-2 h-vh-6 overf-a" action="/controllers/AuthController.php" method="post" enctype="multipart/form-data">
                 <div class="flex justify-content-b">
                     <div class="flex gap-y-3 ml-auto">
                         <div class="col-a">
@@ -52,8 +52,8 @@
                 <a class="mb-1 block" href="<?= $myartist ? '/controllers/ArtistController.php?bDropArtist' : '/controllers/ArtistController.php?bCreateArtist'?>"><?= $myartist ? 'Supprimer mon compte artiste' : 'Créer un compte artiste' ?></a>
                 <div class="max-cont-520:flex-col gap-x-1 min-cont-520:center-b">
                     <button class="br-a-1-s br-cus-c-7 text-cus-1 rounded-1 c-p px-4 py-2 ta-c min-cont-520:w-fit bg-cus-5 td-3 hovr-bg-black hovr-text-white" type="submit" name="bUserUpdate">Confirmer</button>
-                    <button class=" br-a-1-s br-cus-c-7 text-cus-7 rounded-1 c-p px-4 py-2 ta-c min-cont-520:w-fit bg-cus-3 td-3" type="submit" name="bPasswordUpdate">Changer Mot de passe</button>
-                    <button class=" br-a-1-s br-cus-c-7 text-cus-7 rounded-1 c-p px-4 py-2 ta-c min-cont-520:w-fit bg-cus-10 td-3 hovr-bg-pink hovr-text-white" type="submit" name="bUserDelete">Supprimer le compte</button>
+                    <button class=" br-a-1-s br-cus-c-7 text-cus-5 rounded-1 c-p px-4 py-2 ta-c min-cont-520:w-fit bg-cus-3 td-3" type="submit" name="bPasswordUpdate">Changer Mot de passe</button>
+                    <button class=" br-a-1-s br-cus-c-7 text-cus-5 rounded-1 c-p px-4 py-2 ta-c min-cont-520:w-fit bg-cus-10 td-3 hovr-bg-darkred hovr-text-white" type="submit" name="bUserDelete">Supprimer le compte</button>
                 </div>
                 <input type="hidden" value="<?= $userdatas['id']?>" name="user_id">
             </form>

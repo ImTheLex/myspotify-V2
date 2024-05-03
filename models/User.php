@@ -37,8 +37,8 @@ class User extends MyModel {
                         "username"=>$datas['createUsername'],
                         "email"=>$datas['createUserEmail'],
                         "password"=> password_hash($datas['createUserPassword'],PASSWORD_DEFAULT),
-                        "birth"=>$datas['signUpBirth'],
-                        "gender"=>$datas['signUpGender'],
+                        "birth"=>$datas['createUserBirth'],
+                        "gender"=>$datas['createUserGender'],
                         "recover_token"=>$token,
                         "profile_picture"=>$imageSource
                     ]);
