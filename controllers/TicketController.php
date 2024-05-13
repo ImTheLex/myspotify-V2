@@ -29,19 +29,26 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $validatedRequest['user_id'] = $userdatas['id'];
             try{
                 // dd($validatedRequest);
-                $ticket->createTicket($validatedRequest);
+                // die(var_dump($validatedRequest));
+                $ticketCreated = $ticket->createTicket($validatedRequest);
             }catch(Exception $e){
                 if($e->getMessage() === "ticket_exists"){
                     SessionManager::setSession('error',['ticket_exists' => "<p style='color:red'>Un ticket est déjà en cours de traitement</p>"]);
                     header("Location: /views/contact.php");
                     exit;
                 }
+                else{
+                    SessionManager::setSession('error',['ticket_model_error' => "<p style='color:red'>{$e->getMessage()}</p>"]);
+                    header("Location: /views/contact.php");
+                    exit;
+                }
             }
-            $message['create_ticket'] = "<p class='text-cus-2'> Création du ticket réussie, vous aurez une réponse dans les plus brefs délais.</p>" ;
-            SessionManager::setSession('success',$message);
-            header("Location: /views/contact.php");
-            exit;
-    
+            if($ticketCreated) {
+                $message['create_ticket'] = "<p class='text-cus-2'> Création du ticket réussie, vous aurez une réponse dans les plus brefs délais.</p>" ;
+                SessionManager::setSession('success',$message);
+                header("Location: /views/contact.php");
+                exit;
+            }
         }
         die("Erreur à gerer username non conforme ou not empty errors");
         header("Location: /views/contact.php");

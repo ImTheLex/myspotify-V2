@@ -15,7 +15,7 @@ use myspotifyV2\Requests\Validator;
     $playlist = new Playlist();
     $track = new Track();
 
-    // die(var_dump($_GET));
+    // die(var_dump($userdatas));
 
 if($userdatas){
 

@@ -45,7 +45,7 @@
                     endfor;
                 else: 
                 ?>
-                <p class="text-cus-2">Vous pouvez désormais créer une playlist !</p>
+                <p class="text-cus-2">Vous pouvez désormais créer une playlist à l'aide du bouton "+" près de "Biblio"!</p>
                  <?php endif?>
             </div>
             <div class="grid grid-col-4 gap-x-4 gap-y-4 pt-15 max-cont-750:grid-col-2 justify-items-c max-cont-500:grid-col-1">

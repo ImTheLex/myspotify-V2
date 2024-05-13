@@ -39,7 +39,6 @@ class Ticket extends MyModel {
      * Based on a user_id will check if any ticket unopened yet exists. If so, "throw new exception" else returns true to say "its valid, continue". 
      */
     public function checkExistingTicket(int $user_id){
-
         $result = $this->query("SELECT id FROM tickets WHERE `user_id` = :user_id AND `state` = 1",
         [
             "user_id" => $user_id

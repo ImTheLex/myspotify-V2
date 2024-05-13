@@ -70,10 +70,10 @@ class MyModel{
                         if($rule === 'int' && !is_numeric($value)){
                             throw new \Exception("Field $field is not a number");
                         }
-                        if(preg_match('/min:(\d+)/', $rule, $matches) && strlen($value) < $matches[1]) {
+                        if(preg_match('/min:(\d+)/', $rule, $matches) && strlen(html_entity_decode($value)) < $matches[1]) {
                             throw new \Exception("Field $field must be at least {$matches[1]} characters long");
                         }
-                        if(preg_match('/max:(\d+)/',$rule,$matches) && strlen($value) > $matches[1]) {
+                        if(preg_match('/max:(\d+)/',$rule,$matches) && strlen(html_entity_decode($value)) > $matches[1]) {
                             throw new \Exception("Field $field must be no more than {$matches[1]} characters long");
                         }
                         if($rule === 'audio'){

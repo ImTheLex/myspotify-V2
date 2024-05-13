@@ -260,12 +260,22 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         }
     }
+    elseif(isset($_POST['bAdminViewUserProfile'])){
+        try {
+            $userToShow = $user->getUserInfos($validatedRequest['adminSearchUser'],null);
+        }
+        catch(Exception $e){
+            echo $e;
+            exit;
+        }
+        SessionManager::setSession('adminViewUserProfileInfos',$userToShow);
+        header('Location: /views/profile.php?userProfile');
+        exit;
+    }
     
 
 
 }
-
-
 
 
 header("Location: /views/home.php");

@@ -96,20 +96,22 @@
                     <a href="<?= $_SERVER['SCRIPT_NAME'] ?>" class="br-a-1-s br-cus-c-7 text-cus-1 rounded-1 px-4 py-2 ta-c min-cont-520:w-fit bg-cus-5 td-3 hovr-bg-black hovr-text-white">Retour</a>
                 </div>
             <?php else: ?>
-                <div class="flex align-items-c gap-y-2">
-                    <label class="flex-col mb-5 fw-6 text-cus-5 w-full" for="adminSearchUser">Rechercher un utilisateur
-                        <input type="search" class="input  h-8 p-2" name="adminSearchUser"  id="adminSearchUser" value=""/>
-                    </label>
-                    <button  
-                        class="br-a-1-s br-cus-c-7 h-8  text-cus-1 rounded-1 px-4 py-2 ta-c w-fit bg-cus-5 td-3 hovr-bg-black hovr-text-white" name="bAdminViewProfile" type="submit">
-                        Consulter
-                    </button>
-                </div>
-                <label class="flex-col mb-5 fw-6 text-cus-5" for="adminSanctionUser">Sanctionner un utilisateur
-                    <select class="input h-8 p-2" name="adminSanctionUser"  id="adminSanctionUser">
-                        <option value="delete">Delete</option>
-                    </select>
-                </label> 
+                <form action="/controllers/AuthController.php" method="POST">
+                    <div class="flex align-items-c gap-y-2">
+                        <label class="flex-col mb-5 fw-6 text-cus-5 w-full" for="adminSearchUser">Rechercher un utilisateur
+                            <input type="search" class="input  h-8 p-2" name="adminSearchUser"  id="adminSearchUser"/>
+                        </label>
+                        <button  
+                            class="br-a-1-s br-cus-c-7 h-8  text-cus-1 rounded-1 px-4 py-2 ta-c w-fit bg-cus-5 td-3 hovr-bg-black hovr-text-white" name="bAdminViewUserProfile" type="submit">
+                            Consulter
+                        </button>
+                    </div>
+                    <label class="flex-col mb-5 fw-6 text-cus-5" for="adminSanctionUser">Sanctionner un utilisateur
+                        <select class="input h-8 p-2" name="adminSanctionUser"  id="adminSanctionUser">
+                            <option value="delete">Delete</option>
+                        </select>
+                    </label> 
+                </form>
                 <a class="btn-1 center" href="<?='?admin-create-user'?>">Creer un utilisateur</a>
             <?php endif?>
             </div>

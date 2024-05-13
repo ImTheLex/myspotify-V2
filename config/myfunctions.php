@@ -22,14 +22,18 @@ function dd() {
             $arg = preg_replace_callback('/=> (.*)/', function ($matches) {
                 // var_dump($matches);
                 $type = gettype($matches[1]);
-                return '=> <span style="color: red;">' . $matches[1] . '</span> </span> <span style="color: blue;">' . $type . '</span>';
+                $keyLength = strlen($matches[1]);
+
+                return '=> <span style="color: red;">' . $matches[1] . ' (length: ' . $keyLength . ') </span> </span> <span style="color: blue;">' . $type . '</span>';
             }, $arg);
+
 
         }else {
             $type = gettype($arg);
             $arg = '<span style="color: greenyellow;">' . var_export($arg, true) . '</span> <span style="color: blue;">' . $type . '</span>';
         }
         echo $arg;
+
     }
     echo '</pre>';
     die();
