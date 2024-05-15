@@ -15,7 +15,7 @@ Once users are logged in for the first time, they will be notified with a "recov
 They can save it somewhere for later in case they need a password reset.
 
 
-1) Users can :
+## 1) Users can :
    
     - Manage playlists:
         - Create using a "+" button.
@@ -47,7 +47,7 @@ They can save it somewhere for later in case they need a password reset.
         - The notification system also allow to interact with the administration so in case a user has a question, he can "submit" a ticket.
         - Only 1 ticket can be submited at a time by a user until its responded.
 
-2) Artists can :
+## 2) Artists can :
 
     - Manage their artist profile
 
@@ -56,3 +56,14 @@ They can save it somewhere for later in case they need a password reset.
         - And of course modifying the artist name and so on.
 
 
+# What is wrong with the site ?
+
+A lot I guess lol, to be honest 
+
+# Why is it this way ?
+
+Due to certain project restrictions, such as the inability use libraries or add-ons, some functionalities may be less than ideal.
+
+For instance, audio cannot be played across different pages.
+
+However, it was crucial that the site function independently of Javascript, I've done my best to ensure this is the case !
