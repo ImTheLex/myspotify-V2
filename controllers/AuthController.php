@@ -134,28 +134,55 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // Update
     elseif (isset($_POST['bUserUpdate'])){
-
+        // Admin user update
         if (empty($errors)) {
-            try {
-                $updated = $user->updateUser($userdatas,$validatedRequest,$_FILES);
-            }catch(Exception $e){
-                if ($e->getMessage() === "email"){
-                    SessionManager::setSession('error',["update_email"=>"<p style='color:red'>L'email existe déjà</p>"]);
+            if(strpos($_SERVER['HTTP_REFERER'],'profile.php?userProfile')){
+                $viewUserProfile = SessionManager::getSession('adminViewUserProfileInfos') ?? false;
+                try{
+                    $updated = $user->updateUser($viewUserProfile,$validatedRequest,$_FILES);
+                }catch(Exception $e){
+                    if ($e->getMessage() === "email"){
+                        SessionManager::setSession('error',["update_email"=>"<p style='color:red'>L'email existe déjà</p>"]);
+                    }
+                    if ($e->getMessage() === "username"){
+                        SessionManager::setSession('error',['update_username' => "<p style='color:red'>Le username existe déjà</p>"]);
+                    }
+                    header('Location: /views/profile.php?userProfile');
+                    exit;
                 }
-                if ($e->getMessage() === "username"){
-                    SessionManager::setSession('error',['update_username' => "<p style='color:red'>Le username existe déjà</p>"]);
-                }
-                header('Location: /views/profile.php');
-                exit;
-            } 
-            if($updated){
-                $userinfo = $user->getUserInfos($_POST['usernameUpdate'],null);
-                $message['update_user'] = "<p class='text-cus-2'> Mise à jour des informations réussie.</p>" ;
-                SessionManager::setSession('userdatas',$userinfo);
-                SessionManager::setSession('success',$message);
-                header('Location: /views/profile.php');
-                exit;
-            } 
+                if($updated){
+                    $viewUserProfile = $user->getUserInfos($_POST['usernameUpdate'],null);
+                    $message['update_user'] = "<p class='text-cus-2'> Mise à jour des informations réussie.</p>" ;
+                    SessionManager::setSession('adminViewUserProfileInfos',$viewUserProfile);
+                    SessionManager::setSession('success',$message);
+                    header('Location: /views/profile.php?userProfile');
+                    exit;
+                } 
+            }
+            // Normal user update
+            else{
+                try {
+                    $updated = $user->updateUser($userdatas,$validatedRequest,$_FILES);
+                }catch(Exception $e){
+                    if ($e->getMessage() === "email"){
+                        SessionManager::setSession('error',["update_email"=>"<p style='color:red'>L'email existe déjà</p>"]);
+                    }
+                    if ($e->getMessage() === "username"){
+                        SessionManager::setSession('error',['update_username' => "<p style='color:red'>Le username existe déjà</p>"]);
+                    }
+                    header('Location: /views/profile.php');
+                    exit;
+                } 
+                if($updated){
+                    $userinfo = $user->getUserInfos($_POST['usernameUpdate'],null);
+                    $message['update_user'] = "<p class='text-cus-2'> Mise à jour des informations réussie.</p>" ;
+                    SessionManager::setSession('userdatas',$userinfo);
+                    SessionManager::setSession('success',$message);
+                    header('Location: /views/profile.php');
+                    exit;
+                } 
+            }
+
         }
         SessionManager::setSession('error',$errors);
         header('Location: /views/profile.php');

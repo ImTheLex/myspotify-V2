@@ -78,7 +78,7 @@ class MyModel{
                         }
                         if($rule === 'audio'){
 
-                            if(!preg_match('/\.(mp3|wav|ogg|flac|m4a|aac|wma|mpa)/',$value)){
+                            if(!preg_match('/\.(mp3|mp4|wav|ogg|flac|m4a|aac|wma|mpa)/',$value)){
                                 throw new \Exception("Field $field must contain a valid audio file (e.g., .mp3, .wav, .ogg,...)");
                             }
                         }

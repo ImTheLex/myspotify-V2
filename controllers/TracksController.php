@@ -63,13 +63,13 @@ if($userdatas){
 
         $errors = $validator->get_errors();
         $validatedRequest = $validator->get_request();
-
-        // dd($_POST); 
+        // var_dump($_FILES);
+        // dd($_POST, $errors,$_FILES);
         if(isset($_POST['bCreateTrack'])){
             
             if(empty($errors)) {
                 try{      
-                    $createdTrack = $track->createTrack($validatedRequest,$myartistid);
+                    $createdTrack = $track->createTrack($validatedRequest,$myartistid,$_FILES);
                 }catch(Exception $e){          
                     SessionManager::setSession('error',["model_track_creation"=>"<p style='color:red' class='grid-col-span-2'>{$e->getMessage()}</p>"]);
                     header('Location: /views/home.php?create_track');

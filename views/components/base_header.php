@@ -16,6 +16,11 @@
         SessionManager::unsetSession('signupDatasStep2') ?? '' ;
         
     }
+
+    else if($_SERVER['REQUEST_URI'] !== '/views/profile.php?userProfile'){
+        SessionManager::unsetSession('adminViewUserProfileInfos');
+    }
+
     $userdatas = SessionManager::getSession('userdatas') ?? false;
     $myartist =  SessionManager::getSession('my_artist_id') ?? false;
     $mytracks =  SessionManager::getSession('my_tracks') ?? false;
@@ -39,8 +44,8 @@ ob_flush();
     <link rel="stylesheet" href="/public/css/left_container.css">
     <link rel="stylesheet" href="/public/css/new.css">
     <link rel="stylesheet" href="/public/css/main-generated-V3.css">
-
-    <?= isset($js)  && $js ? "<script src='/public/js/$js';type='module'  defer></script>" : "" ?>
+    <!-- <script src='/public/js/home.js'></script> -->
+    <?= isset($js)  && $js ? "<script src='/public/js/$js' defer></script>" : "" ?>
     <!-- <script src='/public/js/Spotify.js' type="module" defer></script> -->
     <script src='/public/js/generate_css_php.js' type="module" defer></script>
 

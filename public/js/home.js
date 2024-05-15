@@ -45,6 +45,10 @@ function resetAudioButtons(){
  */
 function playAudio(event) {
     let audio = document.getElementById('audio');
+
+    if(!audio.querySelector('source')){
+        audio.innerHTML = '<source src="" type="audio/mpeg">'
+    }
     let source = audio.querySelector('source');
     if(source.getAttribute('src') === "" || source.getAttribute('src') !== event.currentTarget.value){
         source.src = event.currentTarget.value;
@@ -75,37 +79,62 @@ document.addEventListener('DOMContentLoaded', function() {
     // In this block if we can find .tracks-table, then it probably means that we are visualizing either a playlist or an artist. So we look forward for the "audio" tag to attach a "ended" listener.
     if(document.querySelector('.tracks-table')){
         let audio = document.getElementById('audio')
-    
-        audio.addEventListener('ended', function(){
-            resetAudioButtons();
-        })
+        
+        if(audio.getAttribute('src') !== ""){
+            audio.addEventListener('ended', function(){
+                resetAudioButtons();
+            })
+        } 
     }
     
-    if(document.getElementById('createTrackLink')){
+    if(document.getElementById('createTrackForm')){
 
-        var audio = new Audio();
-        var duration;
+        let audio = new Audio();
+        let duration;
       
+        
         // Listen for changes on the audio link field
         document.getElementById('createTrackLink').addEventListener('change', function() {
-            // Update the audio source
-            audio.src = this.value;
+            let url = this.value;
+            let proxy = 'https://cors-anywhere.herokuapp.com/'
+            let proxyUrl = proxy + url;
+            let body = document.querySelector('body')
+            fetch(proxyUrl)
+            .then(response => response.blob())
+            // .then(blob => console.log(blob))
 
-            audio.onerror = function() {
-                console.log('Invalid audio source');
-                audio.src = ''; // Reset the audio source
-                document.getElementById('createTrackDuration').value = 0;
-                return; // Exit the function
-            };
-            
-            // When the audio metadata is loaded, store the duration
-            audio.onloadedmetadata = function(){
-                console.log(audio.duration,audio.src,document.getElementById('createTrackForm'));
-                duration = audio.duration;
-                document.getElementById('createTrackDuration').value = duration;
-            };
+            .then(blob => blob.text())
+            .then(text => body.innerHTML = text)
+            // .then(text => console.log(text))
+            // audio.src = ;
         });
 
+        // Listen for changes on the audio link field file
+        document.getElementById('createTrackLinkFile').addEventListener('change', function() {
+
+            let file = this.files[0];
+            let url = URL.createObjectURL(file);
+            audio.src = url;
+            // console.log(file);
+            document.getElementById('createTrackLink').value = file.name;
+        });
+
+        // Update the audio source
+        audio.onerror = function() {
+
+            console.log('Invalid audio source');
+            if (audio.src === '') return;
+            audio.src = ''; // Reset the audio source
+            document.getElementById('createTrackDuration').value = 0;
+            return; // Exit the function
+        };
+            
+        // When the audio metadata is loaded, store the duration
+        audio.onloadedmetadata = function(){
+            console.log(audio.duration,audio.src,document.getElementById('createTrackForm'));
+            duration = audio.duration * 1000;
+            document.getElementById('createTrackDuration').value = duration;
+        };
     }
     
     // Gère le l'animation du bouton search de left-container par application de classe

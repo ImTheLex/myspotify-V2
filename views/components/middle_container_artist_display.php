@@ -46,17 +46,31 @@
         </div>
     </div>
     <?php if(isset($_GET['create_track'])):?>
-    <form action="/controllers/TracksController.php" method="post" class="grid grid-col-2 align-content-c gap-y-4 mx-4 mb-5" id="createTrackForm">
+    <form action="/controllers/TracksController.php" method="post" class="grid grid-col-2 align-content-c gap-y-4 mx-4 mb-5" id="createTrackForm" enctype="multipart/form-data">
         <?= SessionManager::getSession('error')['model_track_creation'] ?? false; ?>
         <?= SessionManager::getSession('success')['create_track'] ?? false; ?>
         <label class="flex-col mb-5 mt-2" for="createTrackTitle">Titre
             <input type="text" class="input" name="createTrackTitle" id="createTrackTitle">
         </label>
-        <label class="flex-col mb-5 mt-2" for="createTrackLink">Lien audio
+        <label class="flex-col mb-5 mt-2" for="createTrackLink">Si lien audio
             <input type="text" class="input" name="createTrackLink" id="createTrackLink">
+        </label> 
+        <label class="flex-col mb-5 mt-2" for="createTrackCategory">Categorie
+            <select class="input" name="createTrackCategory" id="createTrackCategory">
+                <option class="text-black px-2" value="1">Rock</option>
+                <option class="text-black px-2" value="2">Pop</option>
+            </select>
         </label>
+
+        <div class="flex-col mt-2 b">Si fichier audio
+            <label class="btn-1 ta-c" for="createTrackLinkFile">Choisir
+                <input type="file" class="hidden" name="createTrackLinkFile" id="createTrackLinkFile">
+            </label>
+        </div>
+        <label class="flex-col" for="bCreateTrack"> 
+            <button type="submit" class="btn-1" name="bCreateTrack" id="bCreateTrack">Confirmer</button>
+        </label> 
         <input type="hidden" name="createTrackDuration" id="createTrackDuration">
-        <button type="submit" class="btn-1 my-1" name="bCreateTrack">Confirmer</button>
     </form>
     <?php endif ?>  
     <table class="w-full collapse tracks-table">
@@ -81,7 +95,9 @@
                             </svg>
                         </button>
                         <button type="button"  class=" c-p bg-transparent border-none text-cus-7 hovr-text-cus-5 hidden pause-button" value="<?= $artisttodisplaytrack['audio_link']?>" onclick="pauseAudio(event)">
-                            ok ?
+                            <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 320 512">
+                                <path opacity="1" fill="currentColor" d="M48 64C21.5 64 0 85.5 0 112V400c0 26.5 21.5 48 48 48H80c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H48zm192 0c-26.5 0-48 21.5-48 48V400c0 26.5 21.5 48 48 48h32c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H240z"/>
+                            </svg>
                         </button>
                     </div>
                 </td>

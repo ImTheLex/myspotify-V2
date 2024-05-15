@@ -13,3 +13,4 @@ define("MY_PLAYLIST_DEFAULT_IMAGES", ".." . DIRECTORY_SEPARATOR . "public" . DIR
 define("MY_RELATIVE_PATH_TO_USER_IMAGE", "/public/ressources/users_image/");
 define("MY_RELATIVE_PATH_TO_PLAYLIST_IMAGE", "/public/ressources/playlists_image/");
 define("MY_RELATIVE_PATH_TO_ARTIST_IMAGE", "/public/ressources/artists_image/");
+define("MY_RELATIVE_PATH_TO_TRACKS_AUDIO", "/public/ressources/tracks_audio/");

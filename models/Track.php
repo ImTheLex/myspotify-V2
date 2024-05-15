@@ -7,6 +7,8 @@ use myspotifyV2\models\PlaylistTrackRelation;
 
 require_once '../dependencies/MyModel.php';
 require_once '../models/PlaylistTrackRelation.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/config/myconfig.php';
+
 class Track extends MyModel {
 
     private $relations;
@@ -24,23 +26,43 @@ class Track extends MyModel {
         $this->relations = $relations;
     }
 
-    public function createTrack(array $trackDatas, $artist_id){
-
+    public function createTrack(array $trackDatas, $artist_id,$files){
+            
         if($this->validate($trackDatas,$this->rules())){
-            $ok = 2;
-            $result = $this->query("INSERT INTO $this->table (title, duration, audio_link, category_id, artist_id) VALUES (:title, :duration, :audio_link, :category_id, :artist_id)",
+
+            $insertedTrackId = $this->query("INSERT INTO $this->table (title, duration, audio_link, category_id, artist_id) VALUES (:title, :duration, :audio_link, :category_id, :artist_id)",
             [
                 'title' => $trackDatas['createTrackTitle'],
                 'duration' => $trackDatas['createTrackDuration'],
                 'audio_link' => $trackDatas['createTrackLink'],
+                'category_id' => $trackDatas['createTrackCategory'],
                 'artist_id' => $artist_id,
-                'category_id' => $ok,
             ]);
+
+            if(!empty($files) && ($files['createTrackLinkFile']['size'] > 0)){
+                $extension = pathinfo($_FILES['createTrackLinkFile']['name'], PATHINFO_EXTENSION);
+                $fileName = $insertedTrackId . '-audio-link';
+                $uploadDir = ".." . MY_RELATIVE_PATH_TO_TRACKS_AUDIO;
+                $uploadFile = $uploadDir . $fileName . '.'.$extension;
+    
+                if (!is_dir($uploadDir)) {
+                    mkdir($uploadDir, 0777, true);
+                }
+
+                array_map('unlink', glob($uploadDir . $fileName . '.*'));
+                move_uploaded_file($_FILES['createTrackLinkFile']['tmp_name'], $uploadFile);
+                $this->query("UPDATE $this->table SET audio_link = :audio_link WHERE id = :id",
+                [
+                    'audio_link'=> $uploadFile,
+                    'id' => $insertedTrackId
+                ]);
+                $insertedTrackId = true;
+            }
             // die(var_dump($result));
-            if(!$result){
+            if(!$insertedTrackId){
                 throw new \Exception('error sql');
             }
-            return $result;
+            return $insertedTrackId;
         }
         
     }
