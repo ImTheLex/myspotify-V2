@@ -18,7 +18,7 @@
                     <label class="flex-col mb-5 fw-6 text-white" for="contactContent">Votre demande
                         <textarea class=" input-height-l h-40 p-1" id="contactContent" name="contactContent"></textarea>
                     </label>
-                    <button class="center w-full br-a-1-s br-cus-c-7 text-cus-1 rounded-1 c-p px-4 py-2 bg-cus-5 td-3 hovr-bx-shadow-cus-2" name="bSubmitTicket" type="submit">Envoyer</button>
+                    <button class="br-a-1-s br-cus-c-7 text-cus-1 rounded-1 c-p px-4 py-2 ta-c w-full bg-cus-5 td-3 hovr-bg-black hovr-text-white" name="bSubmitTicket" type="submit">Envoyer</button>
                 </form>
             </div>
         </div>    
