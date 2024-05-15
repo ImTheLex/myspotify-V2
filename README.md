@@ -16,44 +16,45 @@ They can save it somewhere for later in case they need a password reset.
 
 
 ## 1) Users can :
-   
-    - Manage playlists:
-        - Create using a "+" button.
 
-        ![Create Button](/public/ressources/tutoriel_image/image.png)
+- Manage playlists:
+    - Create using a "+" button.
 
-        - Update by clicking on it, then look after an "edit" button.
+    ![Create Button](/public/ressources/tutoriel_image/image.png)
 
-        ![Edit playlist](image(1).png)
+    - Update by clicking on it, then look after an "edit" button.
 
-        - Add music tracks, this requires that an Artist has published a music track.
+    ![Edit playlist](image(1).png)
 
-        ![Add Track](image.png)
+    - Add music tracks, this requires that an Artist has published a music track.
 
-        - Delete playlists.
+    ![Add Track](image.png)
 
-        ![Delete Playlist](image-1.png)
+    - Delete playlists.
 
-    - Manage their profile.
+    ![Delete Playlist](image-1.png)
 
-        - Update their account information as well as deleting it.
+- Manage their profile.
 
-        - Create an Artist profile look after on your "profile" 
+    - Update their account information as well as deleting it.s
 
-        ![Create or Delete Artist](image-2.png)
+    - Create an Artist profile look after on your "profile" 
 
-    - Contact the "support" through the site.
+    ![Create or Delete Artist](image-2.png)
 
-        - The notification system also allow to interact with the administration so in case a user has a question, he can "submit" a ticket.
-        - Only 1 ticket can be submited at a time by a user until its responded.
+- Contact the "support" through the site.
+
+    - The notification system also allow to interact with the administration so in case a user has a question, he can "submit" a ticket.
+    - Only 1 ticket can be submited at a time by a user until its responded.
+
 
 ## 2) Artists can :
 
-    - Manage their artist profile
+- Manage their artist profile
 
-        - This includes adding tracks
+    - This includes adding tracks
 
-        - And of course modifying the artist name and so on.
+    - And of course modifying the artist name and so on.
 
 
 # What is wrong with the site ?
