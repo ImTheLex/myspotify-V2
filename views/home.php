@@ -3,6 +3,7 @@
 <?php 
 require_once $_SERVER['DOCUMENT_ROOT'] . "/config/spotify_access.php"
 
+;
     ?>
 
 

@@ -44,7 +44,7 @@ ob_flush();
     <link rel="stylesheet" href="/public/css/left_container.css">
     <link rel="stylesheet" href="/public/css/new.css">
     <link rel="stylesheet" href="/public/css/main-generated-V3.css">
-    <!-- <script src='/public/js/home.js'></script> -->
+    <script src='/public/js/main.js'></script>
     <?= isset($js)  && $js ? "<script src='/public/js/$js' defer></script>" : "" ?>
     <!-- <script src='/public/js/Spotify.js' type="module" defer></script> -->
     <script src='/public/js/generate_css_php.js' type="module" defer></script>
@@ -52,10 +52,10 @@ ob_flush();
     <title><?= ucfirst(basename(dirname(__DIR__) . DIRECTORY_SEPARATOR . $_SERVER['SCRIPT_NAME'],'.php'))?></title>
 </head>
 <body  class="gap-y-5 col-b <?= $_SERVER['SCRIPT_NAME'] == '/views/home.php' ? 'body-grad-2' : 'body-grad-1'?>">
-    <header class="bg-cus-1 br-b-2-s make-container:header header">
+    <header class="p-rel zi-5 bg-cus-1 br-b-2-s make-container:header header">
         <nav class="px-4 py-4 center-b">
             <div class="logo-spotify">
-               
+               <img class="w-40 h-10 cov" src="/public/ressources/spotify-icons-logos/logos/01_RGB/02_PNG/Spotify_Logo_RGB_Green.png" alt="">
             </div>
             <ul class="gap-y-8 flex justify-content-c align-items-c">  
             <?php if($userdatas && $userdatas['role'] === 9):?>
@@ -105,13 +105,45 @@ ob_flush();
                            <p class="hovr-text-white">Profile</p>
                      </a>
                     <?php else: ?>
-                        <a class=" hovr-text-white" href="/views/login.php">Se connecter</a>
+                        <a class=" hovr-text-white center gap-y-2" href="/views/login.php">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="25" width="25" viewBox="0 0 512 512">
+                                <path fill="currentColor" d="M217.9 105.9L340.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L217.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1L32 320c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM352 416l64 0c17.7 0 32-14.3 32-32l0-256c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l64 0c53 0 96 43 96 96l0 256c0 53-43 96-96 96l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32z"/>
+                            </svg>Se connecter</a>
                     <?php endif ?>
                 </li>
-                <li>
-                    <button type="button" id="menuBurger" class="center br-none bg-transparent text-cus-7 hovr-text-white c-p">
+                <li class="min-cont-1100:hidden">
+                    <button type="button" id="menuBurger" class="center br-none bg-transparent text-cus-7 hovr-text-white c-p" onclick="displayBurger()">
                         <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512"><path opacity="1" fill="currentColor" d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg>
                     </button>
+                </li>
+            </ul>
+        </nav>
+        <nav class="p-abs w-full br-t-2-s hidden" id="navBurger">
+            <ul class="flex-col justify-content-c align-items-c bg-cus-3 ta-c ">  
+            <?php if($userdatas && $userdatas['role'] === 9):?>
+                <li class="min-cont-1100:hidden w-full br-b-2-s py-2">
+                    <a class=" hovr-text-white" href="<?= "/controllers/RoutingController.php?admin" ?>">Admin</a>                   
+                </li>
+                <?php endif?>
+                <?php if($myartist && $userdatas['role'] > 1 ):?>
+                <li class="min-cont-1000:hidden w-full br-b-2-s py-2">
+                    <a href="<?= "/controllers/ArtistController.php?bOpenArtist={$myartist}"?>" class=" hovr-text-white">Compte artiste</a>   
+                </li>
+                <?php endif?>
+                <li class="min-cont-900:hidden w-full br-b-2-s py-2">            
+                    <a class=" hovr-text-white " href='<?= "/controllers/RoutingController.php?accueil"?>'>Accueil</a>
+                </li>
+                <li class="min-cont-800:hidden w-full br-b-2-s py-2">
+                    <a class=" hovr-text-white " href="/views/contact.php">Contact</a>
+               </li>
+                <li class="min-cont-750:hidden w-full br-b-2-s py-2">
+                    <?php if($userdatas):?>
+                        <a class=" hovr-text-white " href="logout.php">Se déconnecter</a> 
+                </li>
+                <li>
+                    <?php else: ?>
+                        <a class=" hovr-text-white " href="/views/login.php">Se connecter</a>
+                    <?php endif ?>
                 </li>
             </ul>
         </nav>

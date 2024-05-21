@@ -1,4 +1,6 @@
-<?php if(!$userdatas):?>
+<?php 
+// var_dump($_SESSION);
+if(!$userdatas):?>
 <!-- Date -->
 <label class="flex-col mb-5"  for="createUserBirth">Choisissez votre date de naissance
     <input class="input h-8 border-ridge px-2" type="date" name="createUserBirth" id="createUserBirth" onchange="validateDateNaissance(event)" required>
@@ -6,6 +8,7 @@
 </label>
 
 <!-- gender -->
+<!-- <input type="color" name="" id=""> -->
 <label class="flex-col mb-5"  for="createUserGender">Choisissez votre genre
     <select class="input h-8 border-ridge px-2" name="createUserGender" id="createUserGender" required>
         <option class="text-black px-2" value="Male">M</option>

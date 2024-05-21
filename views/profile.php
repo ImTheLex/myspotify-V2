@@ -62,7 +62,7 @@
                     <button class=" br-a-1-s br-cus-c-7 text-cus-5 rounded-1 c-p px-4 py-2 ta-c min-cont-520:w-fit bg-cus-3 td-3" type="submit" name="bPasswordUpdate">Changer Mot de passe</button>
                     <button class=" br-a-1-s br-cus-c-7 text-cus-5 rounded-1 c-p px-4 py-2 ta-c min-cont-520:w-fit bg-cus-10 td-3 hovr-bg-darkred hovr-text-white" type="submit" name="bUserDelete">Supprimer le compte</button>
                 </div>
-                <input type="hidden" value="<?= $userdatas['id']?>" name="user_id">
+                <input type="hidden" value="<?= $viewUserProfile['id'] ?? $userdatas['id']?>" name="user_id">
             </form>
         </div>
 </section>

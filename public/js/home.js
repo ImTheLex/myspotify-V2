@@ -1,5 +1,10 @@
-    
 
+
+// I know thoses 2 are "duplicates" for now it will remain like this.
+
+/**
+ * Function with the purpose to show a preview of the inserted image (input file)
+ */
 function previewImagePlaylist() {
     let reader = new FileReader();
     let fileTarget = document.getElementById('updatePlaylistPicture')
@@ -11,6 +16,9 @@ function previewImagePlaylist() {
     reader.readAsDataURL(fileTarget.files[0]);
 }
 
+/**
+ * Function with the purpose to show a preview of the inserted image (input file)
+ */
 function previewImageArtist() {
     let reader = new FileReader();
     let fileTarget = document.getElementById('updateArtistPicture')
@@ -22,6 +30,9 @@ function previewImageArtist() {
     reader.readAsDataURL(fileTarget.files[0]);
 }
 
+/**
+ * Reset the audio buttons to the play visual states
+ */
 function resetAudioButtons(){
 
     document.querySelectorAll('.pause-button').forEach(button => {
@@ -138,34 +149,34 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Gère le l'animation du bouton search de left-container par application de classe
-    let leftSearchBox = document.querySelectorAll('.form-left-side-container form , .form-left-side-container form input')
-    let searchIcon = document.querySelector('#Search_Icon_2')
-    let searchInput = document.querySelector('#Search_Input')
+//     let leftSearchBox = document.querySelectorAll('.form-left-side-container form , .form-left-side-container form input')
+//     let searchIcon = document.querySelector('#Search_Icon_2')
+//     let searchInput = document.querySelector('#Search_Input')
 
-    searchIcon.addEventListener('click', () => {
-        let clientLibrary = document.querySelectorAll('.left-scrollable-container :is(.artist-name, .playlist-name)')
+//     searchIcon.addEventListener('click', () => {
+//         let clientLibrary = document.querySelectorAll('.left-scrollable-container :is(.artist-name, .playlist-name)')
         
-        for (let item of leftSearchBox) {
-            item.classList.toggle('searching')           
-        }
-        if(searchInput.classList.contains('searching')){
+//         for (let item of leftSearchBox) {
+//             item.classList.toggle('searching')           
+//         }
+//         if(searchInput.classList.contains('searching')){
 
-            // Gère la recherche dans la bibliothèque.                
-            searchInput.addEventListener('input', function () {
-            let inputLetters = searchInput.value.toLowerCase()
-            for (let data of clientLibrary){    
-                let dataText = data.innerText.toLowerCase()              
-                if (dataText.includes(inputLetters))
-                {
-                    data.parentNode.parentNode.style.display= "flex"
-                }                
-                else {
-                    data.parentNode.parentNode.style.display = "none"
-                }
-            }
-            })
-        }
-    })
+//             // Gère la recherche dans la bibliothèque.                
+//             searchInput.addEventListener('input', function () {
+//             let inputLetters = searchInput.value.toLowerCase()
+//             for (let data of clientLibrary){    
+//                 let dataText = data.innerText.toLowerCase()              
+//                 if (dataText.includes(inputLetters))
+//                 {
+//                     data.parentNode.parentNode.style.display= "flex"
+//                 }                
+//                 else {
+//                     data.parentNode.parentNode.style.display = "none"
+//                 }
+//             }
+//             })
+//         }
+//     })
 });
 
             
