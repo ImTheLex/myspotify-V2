@@ -33,6 +33,10 @@
     $publicplaylists = SessionManager::getSession('public_playlists_datas') ?? false;
     $unreadtickets = SessionManager::getSession('unread_tickets') ?? false;  
         // var_dump($_SESSION);
+        // var_dump($_SERVER);
+
+    $isMobile = preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
+    // $isMobile = true;
 ob_flush();
 ?>
 <!DOCTYPE html>
@@ -51,7 +55,7 @@ ob_flush();
 
     <title><?= ucfirst(basename(dirname(__DIR__) . DIRECTORY_SEPARATOR . $_SERVER['SCRIPT_NAME'],'.php'))?></title>
 </head>
-<body  class="gap-y-5 col-b <?= $_SERVER['SCRIPT_NAME'] == '/views/home.php' ? 'body-grad-2' : 'body-grad-1'?>">
+<body  class="gap-y-5 col-b <?= $_SERVER['SCRIPT_NAME'] == '/views/home.php' ? 'body-grad-2' : 'body-grad-1'?> <?= ($_SERVER['SCRIPT_NAME'] == '/views/admin.php' || $_SERVER['SCRIPT_NAME'] == '/views/contact.php') && $isMobile ? 'h-full' : 'h-vh-10'?>">
     <header class="p-rel zi-5 bg-cus-1 br-b-2-s make-container:header header">
         <nav class="px-4 py-4 center-b">
             <div class="logo-spotify">

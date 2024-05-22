@@ -119,10 +119,11 @@ a{
 }
 body {
 font-family: 'jost';
-height: 100vh;
+/* height: 100vh; */
 /* overflow: hidden; */
 color:var(--customColor_7)
 }
+
 
 main {
     height: calc(100% - 15.45rem);
@@ -159,7 +160,7 @@ p, .p {
 .p-a{
     font-size: 0.875rem;
 }
-section {
+section:not([data-id="contact"],[data-id="admin"]) {
     height: 70vh;
 }
 .global-feed h2{

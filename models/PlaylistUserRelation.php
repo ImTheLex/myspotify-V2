@@ -18,8 +18,22 @@ class PlaylistUserRelation extends MyModel {
      */
     public function createRelation($user_id,$playlist_id){
 
+        // die(var_dump($playlist_id,$user_id));
+
         $this->db->beginTransaction();
             $result = $this->query("INSERT INTO $this->table (playlist_id,user_id) VALUES (:playlist_id,:user_id)",
+            [
+                'playlist_id'=>$playlist_id,
+                'user_id'=>$user_id
+            ]);
+        $this->db->commit();
+        return $result;
+    }
+
+    public function deleteRelation($user_id,$playlist_id){
+
+        $this->db->beginTransaction();
+            $result = $this->query("DELETE FROM $this->table WHERE playlist_id = :playlist_id AND user_id = :user_id",
             [
                 'playlist_id'=>$playlist_id,
                 'user_id'=>$user_id

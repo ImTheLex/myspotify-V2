@@ -7,9 +7,9 @@
 <?php if($userdatas && $userdatas['role'] === 9):?>
 
 
-<section  data-id="admin">
+<section  data-id="admin" class="h-vh-7 max-media-680:h-full gap-x-8 max-media-680:col-c ">
 
-    <div class="gap-y-4 mx-4 center-b">
+    <div class="gap-y-4 mx-4 center-b max-media-680:flex-col max-media-680:h-full max-media-680:py-4 max-media-680:gap-x-4">
         <!-- Inbox -->
         <div class="col-b h-full gap-x-5 w-2/5 min-w-80  inbox-overview ">
             <h1 class="ta-c rounded-2 py-2 px-12 bg-cus-4 br-a-1-s br-cus-c-2"><?= isset($_GET['admin-create-user']) ? 'Créer' : 'Inbox' ?></h1>
@@ -65,7 +65,7 @@
         </div>
 
         <!-- Admin -->
-        <div class="col-b h-full w-4/5 gap-x-5 min-w-80 admin-overview ">
+        <div class="col-b h-full w-4/5 gap-x-5 min-w-80 max-media-680:max-w-80 admin-overview ">
             <h2 class="h1 ta-c w-full rounded-2 py-2 px-12 bg-cus-4 br-a-1-s br-cus-c-2">Admin</h2>
             <div class=" rounded-2 flex-col gap-x-5 h-vh-6 w-full py-4 px-12 body-grad-2 br-a-1-s br-cus-c-2 overf-a">
                 <?php if(isset($_GET['ticket'])):?>
@@ -106,11 +106,11 @@
                             Consulter
                         </button>
                     </div>
-                    <label class="flex-col mb-5 fw-6 text-cus-5" for="adminSanctionUser">Sanctionner un utilisateur
+                    <!-- <label class="flex-col mb-5 fw-6 text-cus-5" for="adminSanctionUser">Sanctionner un utilisateur
                         <select class="input h-8 p-2" name="adminSanctionUser"  id="adminSanctionUser">
                             <option value="delete">Delete</option>
                         </select>
-                    </label> 
+                    </label>  -->
                 </form>
                 <a class="btn-1 center" href="<?='?admin-create-user'?>">Creer un utilisateur</a>
             <?php endif?>

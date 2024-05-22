@@ -61,11 +61,11 @@
                         </p>
                     </div>
                     <div class="center-b footer-bottom-middle-container">
-                        <p class="current-footer-timer">00:00</p>|
+                        <p id="currentTrackDuration">00:00</p>|
                             <!-- <form action="" class="current-footer-progression-bar">
                                 <input type="range" min="0" max="100" step="1" value="0">
                             </form> -->
-                        <p class="footer-track track-length">00:00</p>
+                        <p id="currentTrackMaxLenght">00:00</p>
                     </div>
                 </div>
                 <div class="right-footer-container">

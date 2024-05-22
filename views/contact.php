@@ -1,8 +1,8 @@
 <?php require 'components/base_header.php' ?>
 
 <?php if($userdatas):?>
-<section  data-id="contact">
-    <div class="gap-y-4 mx-4 center-b">
+<section  data-id="contact" class="h-vh-7 max-media-680:h-full gap-x-8 max-media-680:col-c ">
+    <div class="gap-y-4 mx-4 max-media-680:flex-col max-media-680:h-full max-media-680:py-4 max-media-680:gap-x-4 center-b">
         <div class="flex-col w-4/12 gap-x-5 min-w-80 inbox">
             <h1 class="ta-c rounded-2 py-2 px-12 bg-cus-4 br-a-1-s br-cus-c-2">Contact</h1>
             <div class="rounded-2 py-4 px-12 bg-cus-4 br-a-1-s br-cus-c-2 h-vh-6 overf-a">
@@ -22,7 +22,7 @@
                 </form>
             </div>
         </div>    
-        <div class="w-6/12 flex-col min-w-80 gap-x-5 ta-c make-container:faq-container faq-container" id="faq">
+        <div class="w-6/12 flex-col min-w-80 gap-x-5 ta-c  make-container:faq-container faq-container" id="faq">
             <h2 class="h1 ta-c w-full rounded-2 py-2 px-12 bg-cus-4 br-a-1-s br-cus-c-2">FAQ</h2>
             <div class="grid grid-col-2 gap-y-12 gap-x-12 h-vh-6">
                 <a  class="body-grad-2 td-2 p-4 br-cus-2 br-a-1-s rounded-2 h4 center max-cont-450:fs-4 hovr-bg-cus-7 hovr-text-black" href="">Comment devenir artiste ?</a>

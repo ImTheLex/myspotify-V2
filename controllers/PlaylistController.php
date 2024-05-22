@@ -2,20 +2,25 @@
 session_start();
 
 use myspotifyV2\models\Playlist;
+use myspotifyV2\models\PlaylistUserRelation;
 use myspotifyV2\models\Track;
 use myspotifyV2\Requests\Validator;
 
     require_once $_SERVER['DOCUMENT_ROOT'] . '/requests/Validator.php';
     require_once $_SERVER['DOCUMENT_ROOT'] . "/models/Playlist.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/models/PlaylistUserRelation.php";
     require_once $_SERVER['DOCUMENT_ROOT'] . "/models/Track.php";
     require_once $_SERVER['DOCUMENT_ROOT'] . "/models/SessionManager.php";
 
 
     $userdatas = SessionManager::getSession('userdatas');
     $playlist = new Playlist();
+    $playlistRelation = new PlaylistUserRelation();
     $track = new Track();
 
     // die(var_dump($userdatas));
+    // die(var_dump($_POST));
+
 
 if($userdatas){
 
@@ -63,6 +68,42 @@ if($userdatas){
                 SessionManager::setSession('playlist_to_display',$playlistToDisplay);
             }
         }
+        elseif(isset($_GET['bSubscribePlaylist'])){
+
+            if(empty($errors)){
+                try{
+                    $playlistRelation = $playlistRelation->createRelation($userdatas['id'],$validatedRequest['bSubscribePlaylist']);
+                }catch(Exception $e){
+                    header("Location: /views/home.php");
+                    exit;
+                }
+                if($playlistRelation){
+                    $relations = $playlist->getMyPlaylistRelations($userdatas['id']);
+                }
+                SessionManager::setSession('playlists_datas',$relations);
+                header("Location: /views/home.php");
+                exit;
+            }
+        }
+
+        elseif(isset($_GET['bUnSubscribePlaylist'])){
+            // die(var_dump($_GET));
+            if(empty($errors)){
+                try{
+                    $playlistRelation = $playlistRelation->deleteRelation($userdatas['id'],$validatedRequest['bUnSubscribePlaylist']);
+                }catch(Exception $e){
+                    header("Location: /views/home.php");
+                    exit;
+                }
+                if($playlistRelation){
+                    $relations = $playlist->getMyPlaylistRelations($userdatas['id']);
+                }
+                SessionManager::setSession('playlists_datas',$relations);
+                header("Location: /views/home.php");
+                exit;
+            }
+        }
+
     }
 
     if($_SERVER['REQUEST_METHOD'] === 'POST'){

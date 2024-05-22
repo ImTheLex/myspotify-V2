@@ -120,7 +120,9 @@
                         <input type="hidden" value="<?= $artisttodisplaytrack['id']?>" name="trackRelationId">
                         <select class="input border-ridge px-2" name="playlistRelationId">
                         <?php foreach($playlistdatas as $playlistdata):?>
+                        <?php if($playlistdata['user_id'] === $userdatas['id']):?>
                             <option class="text-black px-2" value="<?=$playlistdata['id']?>"><?=$playlistdata['title']?></option>
+                        <?php endif?>
                         <?php endforeach?>
                         </select>
                         <button class="btn-1" type="submit" name="bCreateTrackRelation">Add</button>

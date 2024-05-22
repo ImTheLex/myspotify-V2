@@ -39,15 +39,28 @@
                 </button>
             </form>
             <div class="flex gap-y-2" >
-                <button class="btn-1" type="submit">S'abonner</button>
-                <?php if (($playlisttodisplay['user_id'] === $userdatas['id']) ||  $userdatas['role'] === 9):?>
-                <?php if($_SERVER['REQUEST_URI'] === "/views/home.php?edit"): ?>
-                    <label class="btn-1" for="updatePlaylistPicture"> Modifier Image</label>
-                    <button class="btn-1" type="submit" name="bUpdatePlaylist" form="playlistFormUpdate">Confirmer</button>
-                <?php else:?>
-                    <a href="/views/home.php?edit" class="btn-1" type="button" >Editer</a>
-                <?php endif?>
-                <?php endif?>
+            <?php $isSubscribed = false;
+            foreach($playlistdatas as $playlistdata){
+                if ($playlistdata['id'] === $playlisttodisplay['id']){
+                    $isSubscribed = true;
+                    break;
+                }
+            }
+            if ($playlisttodisplay['user_id'] !== $userdatas['id']){
+                if ($isSubscribed) : ?>
+                    <a class="btn-1" href="/controllers/PlaylistController.php?bUnSubscribePlaylist=<?= $playlisttodisplay['id']?>" >Se désabonner</a>
+                <?php else : ?>
+                    <a class="btn-1" href="/controllers/PlaylistController.php?bSubscribePlaylist=<?= $playlisttodisplay['id']?>" >S'abonner</a>
+                 <?php endif;
+                }?>
+            <?php if (($playlisttodisplay['user_id'] === $userdatas['id']) ||  $userdatas['role'] === 9):?>
+            <?php if($_SERVER['REQUEST_URI'] === "/views/home.php?edit"): ?>
+                <label class="btn-1" for="updatePlaylistPicture"> Modifier Image</label>
+                <button class="btn-1" type="submit" name="bUpdatePlaylist" form="playlistFormUpdate">Confirmer</button>
+            <?php else:?>
+                <a href="/views/home.php?edit" class="btn-1" type="button" >Editer</a>
+            <?php endif?>
+            <?php endif?>
             </div>
         </div>
     </div>      
@@ -91,7 +104,7 @@
                 // var_dump($hours,$minutes,$seconds,$roundedSeconds,$trackDuration);
 
                ?>
-                <td class="py-2 px-2 ta-s "><?= $trackDuration ?></td>
+                <td class="py-2 px-2 ta-s " data-id = "duration"><?= $trackDuration ?></td>
                 <td class="py-2 px-2 ta-c ">...</td>
             </tr>
         <!-- <tr class="br-a-1-s br-cus-c-5"> -->

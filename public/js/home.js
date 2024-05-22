@@ -56,6 +56,27 @@ function resetAudioButtons(){
  */
 function playAudio(event) {
     let audio = document.getElementById('audio');
+    let audioVolume = document.getElementById('Volume');
+    audioVolume.addEventListener('change', function(event){
+        console.log(audioVolume, event.currentTarget);
+        audio.volume = event.currentTarget.value
+    })
+    // let currentDuration = event.currentTarget.parentNode.parentNode.parentNode.querySelector('[data-id="duration"]').innerHTML
+    // document.getElementById('currentTrackMaxLenght').innerHTML = currentDuration;
+
+    audio.addEventListener('loadedmetadata', function() {
+        let totalMinutes = Math.floor(audio.duration / 60);
+        let totalSeconds = Math.floor(audio.duration - totalMinutes * 60);
+        let formattedTotalTime = (totalMinutes < 10 ? '0' : '') + totalMinutes + ':' + (totalSeconds < 10 ? '0' : '') + Math.round(totalSeconds);
+        document.getElementById('currentTrackMaxLenght').innerHTML = formattedTotalTime;
+    });
+
+    audio.addEventListener('timeupdate', function() {
+        let minutes = Math.floor(audio.currentTime / 60);
+        let seconds = Math.floor(audio.currentTime - minutes * 60);
+        let formattedTime = (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+        document.getElementById('currentTrackDuration').innerHTML = formattedTime;
+    });
 
     if(!audio.querySelector('source')){
         audio.innerHTML = '<source src="" type="audio/mpeg">'
