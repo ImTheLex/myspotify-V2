@@ -93,6 +93,12 @@ Here's a resume of what doesn't work yet:
 - Responsive for contact and admin pages
 - Some audio related functionnalities.
 
+## Important note ##
+
+In a matter of not overflowing github with my countless tests I "gitignored" the datas in those folders.
+However they may not be pushed in case they are empty, if they are not on the repo, ensure that you create them before using the "csv"
+![alt text](image-3.png) 
+
 # Why is it this way ?
 
 Due to certain project restrictions, such as the inability use libraries or add-ons, some functionalities may be less than ideal.

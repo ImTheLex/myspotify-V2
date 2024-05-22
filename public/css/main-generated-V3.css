@@ -243,6 +243,7 @@
 @container (max-width: 230px) { .max-cont-230\:hidden { display: none; } }
 @container (max-width: 200px) { .max-cont-200\:wrap { flex-wrap: wrap; } }
 @container (max-width: 200px) { .max-cont-200\:w-full { width: 100%; } }
+@media screen and (max-width: 690px) { .max-media-690\:h-full { height: 100%; } }
 @media screen and (max-width: 680px) { .max-media-680\:max-w-80 { max-width: 20rem; } }
 @media screen and (max-width: 680px) { .max-media-680\:py-4 { padding-block: 1rem; } }
 @media screen and (max-width: 680px) { .max-media-680\:my-4 { margin-block: 1rem; } }
