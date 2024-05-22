@@ -89,7 +89,9 @@ Here's a resume of what doesn't work yet:
 - Add an Artist Relation
 - Delete an Artist Relation
 - FAQ pages
-- Reset password through your account (forgot password should work based on recover token) 
+- Change password through your account (forgot password should work based on recover token)
+- Responsive for contact and admin pages
+- Some audio related functionnalities.
 
 # Why is it this way ?
 
