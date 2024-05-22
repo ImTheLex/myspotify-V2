@@ -8,7 +8,7 @@ This site acts like spotify in some way.
 
 Well if nothing is broken (lol) basicly you can have a users/artists/admin hierarchy.
 
-All of those "roles" needs to go through the signup steps first in order to use the rest of the site.
+All of those "roles" need to go through the signup steps first in order to use the rest of the site.
 
 Once users are logged in for the first time, they will be notified with a "recover-token" message.
 
@@ -34,6 +34,8 @@ They can save it somewhere for later in case they need a password reset.
 
     ![Delete Playlist](image-1.png)
 
+    - Subscribe and unsubscribe playlists.
+
 - Manage their profile.
 
     - Update their account information as well as deleting it.s
@@ -57,9 +59,37 @@ They can save it somewhere for later in case they need a password reset.
     - And of course modifying the artist name and so on.
 
 
+## Can I import datas ?
+
+In the "tools" folder, you'll find several files designed to facilitate a smooth and functional installation of this project. The setup relies on a ".env" file for data connection. Please refer to the provided ".env.example" as a template to create your own ".env" file.
+
+
+## Sources
+
+Trello :
+
+- https://trello.com/b/Jt9ucQf3/spotify
+
+Figma :
+
+- https://www.figma.com/design/PLHbcuAjIPrfwzauyTUxC2/MyLittleBigProject?node-id=35-190&t=exxS2U3lkUBDlh0n-0
+
+FigJam :
+
+- https://www.figma.com/board/Kdqm6WEQHasQ7AynwDWGlk/todos-trello?t=exxS2U3lkUBDlh0n-0
+
 # What is wrong with the site ?
 
 A lot I guess lol, to be honest 
+
+Here's a resume of what doesn't work yet:
+
+- Delete a Track
+- Delete a Track Relation
+- Add an Artist Relation
+- Delete an Artist Relation
+- FAQ pages
+- Reset password through your account (forgot password should work based on recover token) 
 
 # Why is it this way ?
 
