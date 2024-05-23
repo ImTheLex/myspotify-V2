@@ -1,6 +1,7 @@
 .env
 myartisan
 generate_css.php
+test.php
 public/js/generate_css_php.js
 public/js/Spotify_Api.js
 public/ressources/playlists_image/*

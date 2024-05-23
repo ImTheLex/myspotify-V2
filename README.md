@@ -4,6 +4,11 @@ Alright so let me introduce one of my biggest project so far.
 
 This site acts like spotify in some way.
 
+It might be obvious, but this site doesn't have real connection with Spotify.
+
+Apart from fetching the "previews audios".
+
+
 # What is the purpose of this site ?
 
 Well if nothing is broken (lol) basicly you can have a users/artists/admin hierarchy.
@@ -59,9 +64,20 @@ They can save it somewhere for later in case they need a password reset.
     - And of course modifying the artist name and so on.
 
 
+
 ## Can I import datas ?
 
 In the "tools" folder, you'll find several files designed to facilitate a smooth and functional installation of this project. The setup relies on a ".env" file for data connection. Please refer to the provided ".env.example" as a template to create your own ".env" file.
+
+If you wish to use the csv to import some datas, I would recommend to follow this order, just in case some foreign keys causing trouble.
+
+1. Users.csv
+2. Artists.csv
+3. Playlists.csv
+4. Categories.csv
+5. Tracks.csv
+6. Playlist_users_relations.csv
+7. Tracks_users_relations.csv
 
 
 ## Sources
@@ -78,6 +94,7 @@ FigJam :
 
 - https://www.figma.com/board/Kdqm6WEQHasQ7AynwDWGlk/todos-trello?t=exxS2U3lkUBDlh0n-0
 
+
 # What is wrong with the site ?
 
 A lot I guess lol, to be honest 
@@ -90,14 +107,16 @@ Here's a resume of what doesn't work yet:
 - Delete an Artist Relation
 - FAQ pages
 - Change password through your account (forgot password should work based on recover token)
-- Responsive for contact and admin pages
-- Some audio related functionnalities.
+- Some audio related functionnalities
+- "Remember me" when logging in
+
 
 ## Important note ##
 
 In a matter of not overflowing github with my countless tests I "gitignored" the datas in those folders.
 However they may not be pushed in case they are empty, if they are not on the repo, ensure that you create them before using the "csv"
 ![alt text](/public/ressources/tutoriel_image/image_5.png) 
+
 
 # Why is it this way ?
 
