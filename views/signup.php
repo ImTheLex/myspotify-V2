@@ -61,9 +61,6 @@
 
      
 <?php 
-            // SessionManager::unsetSession('signupDatasStep1');
-            // SessionManager::unsetSession('signupDatasStep2');
-
 else: 
     header("Location: /views/home.php");
     exit;

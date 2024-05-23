@@ -33,7 +33,7 @@
                         <input class="hidden" type="radio" name="loginToken" value="Non" id="loginTokenNo" checked>
                     </label>
                 </div>
-                <p class="text-white">Se souvenir de moi</p>
+                <s class="text-white" style="text-decoration: line-through;">Se souvenir de moi</s>
             </div>
             <button class="bLogin br-a-1-s hovr-bg-darkgreen  hovr-text-white c-p bg-cus-2 mb-5 mx-auto px-8 py-2 w-full rounded-9" type="submit" name="bLogin">Confirmer</button>
             <a class=" mx-auto block text-cus-7 w-fit br-b-1-s hovr-text-white" href="forgot_password.php">Mot de passe oublié ?</a>
@@ -41,7 +41,7 @@
 
             <div class="mx-auto w-fit">
                 <p class="w-fit max-cont-350:block inline-block" >Pas encore inscrit ?</p>
-                <a href="signup.php" class=" hovr-text-white  text-cus-7 br-b-1-s max-cont-350:block">S'incrire ici !</a>
+                <a href="signup.php" class=" hovr-text-white  text-cus-7 br-b-1-s max-cont-350:block">S'inscrire ici !</a>
             </div>
 
         </form>

@@ -46,7 +46,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                     SessionManager::setSession('error',["logins" => "<p style='color:red'>Les identifiants n'existent pas.</p>"]);
                 }
                 if($e->getMessage() === "get_auth_wrong_password"){
-                    SessionManager::setSession('error',["login_password" => "<p style='color:red'>Le password est incorrect.</p>"]);
+                    SessionManager::setSession('error',["login_password" => "<p style='color:red'>Le mot de passe est incorrect.</p>"]);
                 } 
                 header('Location: /views/login.php');
                 exit;  
@@ -255,36 +255,43 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Admin crud
     elseif(isset($_POST['bAdminCrud']) && $userdatas['role'] == 9){
-        try {
-            $responseSignUp = $user->searchUser($validatedRequest['createUsername'],$validatedRequest['createUserEmail'],null);
-        }catch(Exception $e){
-            if ($e->getMessage() === "email"){
-                SessionManager::setSession('error',["sign_up_email"=>"<p style='color:red'>L'email existe déjà</p>"]);
-
-            }elseif ($e->getMessage() === "username"){
-                SessionManager::setSession('error',['sign_up_username' => "<p style='color:red'>Le username existe déjà</p>"]);
-            }
-            header('Location: /views/admin.php?admin-create-user');
-            exit;
-        }
-        if($responseSignUp){
-            try{
-                $user_id = intval($user->createUser($validatedRequest));
+        if(empty($errors)){
+            try {
+                $responseSignUp = $user->searchUser($validatedRequest['createUsername'],$validatedRequest['createUserEmail'],null);
             }catch(Exception $e){
-                SessionManager::setSession('error',['model_user_creation' => "<p style='color:red'>{$e->getMessage()}</p>"]);
+                if ($e->getMessage() === "email"){
+                    SessionManager::setSession('error',["sign_up_email"=>"<p style='color:red'>L'email existe déjà</p>"]);
+
+                }elseif ($e->getMessage() === "username"){
+                    SessionManager::setSession('error',['sign_up_username' => "<p style='color:red'>Le username existe déjà</p>"]);
+                }
                 header('Location: /views/admin.php?admin-create-user');
                 exit;
             }
-            $recoverTokenTicket = $ticket->createTicket(['user_id'=>$user_id,'contactSubject'=>'Recover Token', 'contactContent'=>'Auto Message']);
-            if(intval($validatedRequest['createUserRole']) === 2){
-                $artistCreated = $artist->createArtist($user_id,$validatedRequest['createUsername']);
+            if($responseSignUp){
+                try{
+                    $user_id = intval($user->createUser($validatedRequest));
+                }catch(Exception $e){
+                    SessionManager::setSession('error',['model_user_creation' => "<p style='color:red'>{$e->getMessage()}</p>"]);
+                    header('Location: /views/admin.php?admin-create-user');
+                    exit;
+                }
+                $recoverTokenTicket = $ticket->createTicket(['user_id'=>$user_id,'contactSubject'=>'Recover Token', 'contactContent'=>'Auto Message']);
+                if(intval($validatedRequest['createUserRole']) === 2){
+                    $artistCreated = $artist->createArtist($user_id,$validatedRequest['createUsername']);
+                }
+                $user->setNewUserRole($user_id,intval($validatedRequest['createUserRole']));
+                $ticket->closeTicket($recoverTokenTicket,$user->getUserinfos($user_id,null)['recover_token']);
+                SessionManager::setSession('success',['create_admin_user' => "<p class='text-cus-2'> Création réussie.</p>"]);
+                header('Location: /views/admin.php?admin-create-user');
+                exit;
+
             }
-            $user->setNewUserRole($user_id,intval($validatedRequest['createUserRole']));
-            $ticket->closeTicket($recoverTokenTicket,$user->getUserinfos($user_id,null)['recover_token']);
-            SessionManager::setSession('success',['create_admin_user' => "<p class='text-cus-2'> Création réussie.</p>"]);
+        }
+        else{
+            SessionManager::setSession('error',$errors);
             header('Location: /views/admin.php?admin-create-user');
             exit;
-
         }
     }
     elseif(isset($_POST['bAdminViewUserProfile'])){
@@ -292,7 +299,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
             $userToShow = $user->getUserInfos($validatedRequest['adminSearchUser'],null);
         }
         catch(Exception $e){
-            echo $e;
+
+            SessionManager::setSession('error',['user_search' => "<p style='color:red'>{$e->getMessage()}</p>"]);
+            header('Location: /views/admin.php');
             exit;
         }
         SessionManager::setSession('adminViewUserProfileInfos',$userToShow);
@@ -300,8 +309,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
     
-
-
 }
 
 

@@ -61,7 +61,7 @@
             </div>
         </div>
         <?php else:?>
-        <h2 class="mx-auto w-fit m-auto">Veuillez vous connecter pour accéder au contenu :)</h2>
+        <h2 class="mx-auto w-fit m-auto ta-c">Veuillez vous connecter pour accéder au contenu :)</h2>
         <?php endif ?>
     </div>
 </section>

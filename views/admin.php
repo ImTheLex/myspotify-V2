@@ -18,19 +18,26 @@
             <?php if(isset($_GET['admin-create-user'])):?>
                 <form action="/controllers/AuthController.php" method="post">
                     <label class="flex-col mb-5 fw-6 text-white" for="newAdminUserUsername">Pseudo
+                    <?= SessionManager::getSession('error')["sign_up_username"] ?? ''?>                    
+                    <?= SessionManager::getSession('error')["createUsername"] ?? ''?>                    
                         <input id="newAdminUserUsername" name="createUsername" class="input" type="text">
                     </label>
                     <label class="flex-col mb-5 fw-6 text-white" for="newAdminUserEmail">Email
+                    <?= SessionManager::getSession('error')["sign_up_email"] ?? ''?>
+                    <?= SessionManager::getSession('error')["createUserEmail"] ?? ''?>
                         <input class="input" id="newAdminUserEmail"  name="createUserEmail" type="text">
                     </label>
                     <label class="flex-col mb-5 fw-6 text-white" for="newAdminUserPassword">Mot de passe
+                    <?= SessionManager::getSession('error')["createUserPassword"] ?? ''?>
                         <input class="input" id="newAdminUserPassword"  name="createUserPassword" type="text">
                     </label>
                     <label class="flex-col mb-5 fw-6 text-white" for="newAdminUserPassword1">Confirmer mot de passe
+                    <?= SessionManager::getSession('error')["createUserPassword1"] ?? ''?>
                         <input class="input" id="newAdminUserPassword1"  name="createUserPassword1" type="text">
                     </label>
                     <!-- gender -->
                     <label class="flex-col mb-5 fw-6 text-white"  for="newAdminUserGender">Genre
+                    <?= SessionManager::getSession('error')["newAdminUserGender"] ?? ''?>
                         <select class="input h-8 border-ridge px-2" name="createUserGender" id="newAdminUserGender">
                             <option class="text-black px-2" value="Male">M</option>
                             <option class="text-black px-2" value="Female">F</option>
@@ -41,6 +48,7 @@
                     </label>
                     <!-- Date -->
                     <label class="flex-col mb-5 fw-6 text-white"  for="newAdminUserBirth">Date de naissance
+                    <?= SessionManager::getSession('error')["createUserBirth"] ?? ''?>
                         <input class="input h-8 border-ridge px-2" type="date" name="createUserBirth" id="newAdminUserBirth">
                     </label>
                     <label class="flex-col mb-5 fw-6 text-white"  for="newAdminUserRole">Role
@@ -93,24 +101,22 @@
                 <?php endif?>
             <?php if($_SERVER['REQUEST_URI'] !== "/views/admin.php"):?>
                 <div>
-                    <a href="<?= $_SERVER['SCRIPT_NAME'] ?>" class="br-a-1-s br-cus-c-7 text-cus-1 rounded-1 px-4 py-2 ta-c min-cont-520:w-fit bg-cus-5 td-3 hovr-bg-black hovr-text-white">Retour</a>
+                <?= SessionManager::getSession('success')['create_admin_user'] ?? ''?>
+                <?= SessionManager::getSession('error')['model_user_creation'] ?? ''?>
+                    <a href="<?= $_SERVER['SCRIPT_NAME'] ?>" class="br-a-1-s br-cus-c-7 text-cus-1 rounded-1 px-4 py-2 ta-c min-cont-520:w-fit bg-cus-5 td-3 block hovr-bg-black hovr-text-white">Retour</a>
                 </div>
             <?php else: ?>
                 <form action="/controllers/AuthController.php" method="POST">
-                    <div class="flex align-items-c gap-y-2">
+                    <div class="flex align-items-c wrap gap-y-2">
+                    <?= SessionManager::getSession('error')['user_search'] ?? ''?>
                         <label class="flex-col mb-5 fw-6 text-cus-5 w-full" for="adminSearchUser">Rechercher un utilisateur
                             <input type="search" class="input  h-8 p-2" name="adminSearchUser"  id="adminSearchUser"/>
                         </label>
                         <button  
-                            class="br-a-1-s br-cus-c-7 h-8  text-cus-1 rounded-1 px-4 py-2 ta-c w-fit bg-cus-5 td-3 hovr-bg-black hovr-text-white" name="bAdminViewUserProfile" type="submit">
+                            class="btn-1 center w-full" name="bAdminViewUserProfile" type="submit">
                             Consulter
                         </button>
                     </div>
-                    <!-- <label class="flex-col mb-5 fw-6 text-cus-5" for="adminSanctionUser">Sanctionner un utilisateur
-                        <select class="input h-8 p-2" name="adminSanctionUser"  id="adminSanctionUser">
-                            <option value="delete">Delete</option>
-                        </select>
-                    </label>  -->
                 </form>
                 <a class="btn-1 center" href="<?='?admin-create-user'?>">Creer un utilisateur</a>
             <?php endif?>
@@ -123,12 +129,6 @@
 header("Location: home.php");
 endif
 ?>
-
-
-
-
-
-
 
 
 <?php require 'components/base_footer.php' ?>
