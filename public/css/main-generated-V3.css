@@ -234,6 +234,7 @@
 @container (max-width: 500px) { .max-cont-500\:h-12 { height: 3rem; } }
 @container (max-width: 500px) { .max-cont-500\:w-12 { width: 3rem; } }
 @container (max-width: 500px) { .max-cont-500\:ta-s { text-align: start; } }
+@container (max-width: 480px) { .max-cont-480\:grid-col-span-2 { grid-column: span 2; } }
 @container (max-width: 450px) { .max-cont-450\:fs-4 { font-size: 1rem; } }
 @container (max-width: 370px) { .max-cont-370\:fs-5 { font-size: 1.25rem; } }
 @container (max-width: 350px) { .max-cont-350\:block { display: block; } }

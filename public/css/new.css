@@ -160,9 +160,9 @@ p, .p {
 .p-a{
     font-size: 0.875rem;
 }
-section:not([data-id="contact"],[data-id="admin"]) {
+/* section:not([data-id="contact"],[data-id="admin"],[data-id="signup"]) {
     height: 70vh;
-}
+} */
 .global-feed h2{
     width: 100%;
 }

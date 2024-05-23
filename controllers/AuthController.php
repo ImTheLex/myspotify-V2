@@ -87,13 +87,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     // Signup
     elseif (isset($_POST['bSignUp'])){
-    
+        
         if(empty($errors)){
             // var_dump($_SESSION,$validatedRequest);
             // die;
             $validatedRequest = array_merge(SessionManager::getSession('signupDatasStep1'),SessionManager::getSession('signupDatasStep2'));
             SessionManager::unsetSession('signupDatasStep2');SessionManager::unsetSession('signupDatasStep1');
-    
             try {
                 $responseSignUp = $user->searchUser($validatedRequest['createUsername'],$validatedRequest['createUserEmail'],null);
             }catch(Exception $e){
@@ -107,6 +106,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                 exit;
             }
             if ($responseSignUp){
+
                 try{
                     $user_id = intval($user->createUser($validatedRequest));
                 }catch(Exception $e){

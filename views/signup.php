@@ -11,7 +11,7 @@
     <div class="col-b gap-x-2 mx-auto w-1/2 make-container:login-container login-container min-w-80 ">
 
         <h1 class="ta-c text-white rounded-2 py-4 px-12 bg-cus-4 br-a-1-s br-cus-2 ">S'inscrire</h1>
-        <div class="rounded-2 p-2 br-cus-2 br-a-1-s text-cus-5 px-12 py-8 body-grad-2 <?= $_SERVER['REQUEST_URI'] === '/views/signup.php' ? 'ta-c' : ''?>">          
+        <div class="rounded-2 p-2 br-cus-2 br-a-1-s text-cus-5 px-12 py-8 body-grad-2 h-vh-6 overf-a <?= $_SERVER['REQUEST_URI'] === '/views/signup.php' ? 'ta-c' : ''?>">          
 
         <?php if($_SERVER['REQUEST_URI'] === '/views/signup.php'):?>
             <p class="max-w-80 mx-auto mb-2">Il est important de mentionner que ce site ne fait <b class="br-b-1-s">pas partie du groupe spotify.</b></p>
@@ -21,8 +21,8 @@
             <p class="max-w-80 mx-auto mb-2">En cliquant sur ce bouton vous consentez à avoir pris connaissance du message-ci dessus.</p>
 
             <hr class="my-5">
-            <a href="signup.php?signupStep1" class="btn-signup ">Je confirme avoir pris connaissance  de ce message.</a>
-            <?=SessionManager::getSession('error')['model'] ?? '' ?>
+            <a href="signup.php?signupStep1" class="btn-signup block">Je confirme avoir pris connaissance  de ce message.</a>
+            <?=SessionManager::getSession('error')['model_user_creation'] ?? '' ?>
 
         <?php else: ?>                
                 <!-- Form Signup -->
@@ -41,7 +41,7 @@
                     <?php elseif($signupStep2Datas):?>
 
                         <?php include 'components/signup_step_3.php' ?>
-                        <button class="btn-signup" type="submit" name="bSignUp">Terminer</button>
+                        <button class="btn-signup mt-8" type="submit" name="bSignUp">Terminer</button>
 
                     <?php endif ?>
 
