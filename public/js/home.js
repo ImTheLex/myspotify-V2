@@ -108,7 +108,7 @@ function pauseAudio(event) {
 
 document.addEventListener('DOMContentLoaded', function() {
 
-    // In this block if we can find .tracks-table, then it probably means that we are visualizing either a playlist or an artist. So we look forward for the "audio" tag to attach a "ended" listener.
+    // In this block if we can find .tracks-table, then it probably means that we are visualizing either a playlist or an artist. So we look forward for the "audio" tag to attach an "ended" listener.
     if(document.querySelector('.tracks-table')){
         let audio = document.getElementById('audio')
         
@@ -126,20 +126,20 @@ document.addEventListener('DOMContentLoaded', function() {
       
         
         // Listen for changes on the audio link field
-        document.getElementById('createTrackLink').addEventListener('change', function() {
-            let url = this.value;
-            let proxy = 'https://cors-anywhere.herokuapp.com/'
-            let proxyUrl = proxy + url;
-            let body = document.querySelector('body')
-            fetch(proxyUrl)
-            .then(response => response.blob())
-            // .then(blob => console.log(blob))
+        // document.getElementById('createTrackLink').addEventListener('change', function() {
+        //     let url = this.value;
+        //     let proxy = 'https://cors-anywhere.herokuapp.com/'
+        //     let proxyUrl = proxy + url;
+        //     let body = document.querySelector('body')
+        //     fetch(proxyUrl)
+        //     .then(response => response.blob())
+        //     // .then(blob => console.log(blob))
 
-            .then(blob => blob.text())
-            .then(text => body.innerHTML = text)
-            // .then(text => console.log(text))
-            // audio.src = ;
-        });
+        //     .then(blob => blob.text())
+        //     .then(text => body.innerHTML = text)
+        //     // .then(text => console.log(text))
+        //     // audio.src = ;
+        // });
 
         // Listen for changes on the audio link field file
         document.getElementById('createTrackLinkFile').addEventListener('change', function() {

@@ -37,7 +37,7 @@ if($userdatas){
         $validatedRequest = $validator->get_request();
   
         // }
-        // elseif(isset($_GET['bDropArtist'])){
+        // elseif(isset($_GET['bDroptracks'])){
 
         //     if(empty($errors)){
         //         if($myartistid) {

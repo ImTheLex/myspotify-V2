@@ -48,14 +48,18 @@
     <?php if(isset($_GET['create_track'])):?>
     <form action="/controllers/TracksController.php" method="post" class="grid grid-col-2 align-content-c gap-y-4 mx-4 mb-5" id="createTrackForm" enctype="multipart/form-data">
         <?= SessionManager::getSession('error')['model_track_creation'] ?? false; ?>
+        <?= SessionManager::getSession('error')['createTrackDuration'] ?? false; ?>
         <?= SessionManager::getSession('success')['create_track'] ?? false; ?>
         <label class="flex-col mb-5 mt-2" for="createTrackTitle">Titre
+        <?= SessionManager::getSession('error')['createTrackTitle'] ?? false; ?>
             <input type="text" class="input" name="createTrackTitle" id="createTrackTitle">
         </label>
         <label class="flex-col mb-5 mt-2" for="createTrackLink">Si lien audio
+        <?= SessionManager::getSession('error')['createTrackLink'] ?? false; ?>
             <input type="text" class="input" name="createTrackLink" id="createTrackLink">
         </label> 
         <label class="flex-col mb-5 mt-2" for="createTrackCategory">Categorie
+        <?= SessionManager::getSession('error')['createTrackCategory'] ?? false; ?>
             <select class="input" name="createTrackCategory" id="createTrackCategory">
                 <option class="text-black px-2" value="1">Rock</option>
                 <option class="text-black px-2" value="2">Pop</option>
