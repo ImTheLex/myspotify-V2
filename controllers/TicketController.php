@@ -25,34 +25,44 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
     if(isset($_POST["bSubmitTicket"])){
 
-        if(empty($errors) && $validatedRequest['contactUsername'] === $userdatas['username']){
-            $validatedRequest['user_id'] = $userdatas['id'];
-            try{
-                // dd($validatedRequest);
-                // die(var_dump($validatedRequest));
-                $ticketCreated = $ticket->createTicket($validatedRequest);
-            }catch(Exception $e){
-                if($e->getMessage() === "ticket_exists"){
-                    SessionManager::setSession('error',['ticket_exists' => "<p style='color:red'>Un ticket est déjà en cours de traitement</p>"]);
-                    header("Location: /views/contact.php");
-                    exit;
+        if(empty($errors)){
+
+            if($validatedRequest['contactUsername'] === $userdatas['username']){
+
+                $validatedRequest['user_id'] = $userdatas['id'];
+                try{
+                    $ticketCreated = $ticket->createTicket($validatedRequest);
+                }catch(Exception $e){
+                    if($e->getMessage() === "ticket_exists"){
+                        SessionManager::setSession('error',['ticket_exists' => "<p style='color:red'>Un ticket est déjà en cours de traitement</p>"]);
+                        header("Location: /views/contact.php");
+                        exit;
+                    }
+                    else{
+                        SessionManager::setSession('error',['ticket_model_error' => "<p style='color:red'>{$e->getMessage()}</p>"]);
+                        header("Location: /views/contact.php");
+                        exit;
+                    }
                 }
-                else{
-                    SessionManager::setSession('error',['ticket_model_error' => "<p style='color:red'>{$e->getMessage()}</p>"]);
+                if($ticketCreated) {
+                    $message['create_ticket'] = "<p class='text-cus-2'> Création du ticket réussie, vous aurez une réponse dans les plus brefs délais.</p>" ;
+                    SessionManager::setSession('success',$message);
                     header("Location: /views/contact.php");
                     exit;
                 }
             }
-            if($ticketCreated) {
-                $message['create_ticket'] = "<p class='text-cus-2'> Création du ticket réussie, vous aurez une réponse dans les plus brefs délais.</p>" ;
-                SessionManager::setSession('success',$message);
+            else{
+                SessionManager::setSession('error',['username_different' => "<p style='color:red'>Le nom que vous avez fourni est différent du votre</p>"]); 
                 header("Location: /views/contact.php");
-                exit;
+                exit;   
             }
         }
-        die("Erreur à gerer username non conforme ou not empty errors");
-        header("Location: /views/contact.php");
-        exit;
+        else{
+            SessionManager::setSession('error',$errors); 
+            header("Location: /views/contact.php");
+            exit;      
+        }
+        
     }
     elseif(isset($_POST['bRespondTicket'])){
         if(empty($errors)){

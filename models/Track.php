@@ -72,6 +72,8 @@ class Track extends MyModel {
         $relation = $this->relations->createPlaylistTrackRelation($trackId,$playlistId);
         return $relation;
     }
+
+    
     public function getTracks($artist_id){
 
         $result = $this->query("SELECT * FROM  $this->table WHERE artist_id = :artist_id",
@@ -87,7 +89,6 @@ class Track extends MyModel {
         $result = $this->query("SELECT * FROM  $this->table WHERE id = :artist_id",);
 
     }
-
 
    
     public function getPlaylistTracks($playlistId){
