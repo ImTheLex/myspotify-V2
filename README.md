@@ -109,13 +109,15 @@ Here's a resume of what doesn't work yet:
 - Change password through your account (forgot password should work based on recover token)
 - Some audio related functionnalities
 - "Remember me" when logging in
-
+- Some "success" or "error" messages are not displayed yet.
+ 
 
 ## Important note ##
 
 In a matter of not overflowing github with my countless tests I "gitignored" the datas in those folders.
 However they may not be pushed in case they are empty, if they are not on the repo, ensure that you create them before using the "csv"
-![alt text](/public/ressources/tutoriel_image/image_5.png) 
+
+![alt text](/public/ressources/tutoriel_image/image_6.png) 
 
 
 # Why is it this way ?
