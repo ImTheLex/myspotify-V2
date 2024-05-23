@@ -20,19 +20,19 @@ They can save it somewhere for later in case they need a password reset.
 - Manage playlists:
     - Create using a "+" button.
 
-    ![Create Button](/public/ressources/tutoriel_image/image.png)
+    ![Create Button](/public/ressources/tutoriel_image/image_1.png)
 
     - Update by clicking on it, then look after an "edit" button.
 
-    ![Edit playlist](image(1).png)
+    ![Edit playlist](/public/ressources/tutoriel_image/image_2.png)
 
     - Add music tracks, this requires that an Artist has published a music track.
 
-    ![Add Track](image.png)
+    ![Add Track](/public/ressources/tutoriel_image/image_3.png)
 
     - Delete playlists.
 
-    ![Delete Playlist](image-1.png)
+    ![Delete Playlist](/public/ressources/tutoriel_image/image_4.png)
 
     - Subscribe and unsubscribe playlists.
 
@@ -42,7 +42,7 @@ They can save it somewhere for later in case they need a password reset.
 
     - Create an Artist profile look after on your "profile" 
 
-    ![Create or Delete Artist](image-2.png)
+    ![Create or Delete Artist](/public/ressources/tutoriel_image/image_5.png)
 
 - Contact the "support" through the site.
 
@@ -97,7 +97,7 @@ Here's a resume of what doesn't work yet:
 
 In a matter of not overflowing github with my countless tests I "gitignored" the datas in those folders.
 However they may not be pushed in case they are empty, if they are not on the repo, ensure that you create them before using the "csv"
-![alt text](image-3.png) 
+![alt text](/public/ressources/tutoriel_image/image_5.png) 
 
 # Why is it this way ?
 
