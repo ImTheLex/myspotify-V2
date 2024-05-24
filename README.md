@@ -1,4 +1,4 @@
-# Spotify 'Clone'
+# Spotify 'Clone' #
 
 Alright so let me introduce one of my biggest project so far.
 
@@ -10,7 +10,7 @@ Apart from fetching the "previews audios".
 
 
 
-# What is the purpose of this site ?
+# What is the purpose of this site ? #
 
 Well if nothing is broken (lol) basicly you can have a users/artists/admin hierarchy.
 
@@ -20,7 +20,7 @@ Tracks data can either come from a file upload, or from a url link (this seems t
 
 
 
-# How to install it and what are the requirements ?
+# How to install it and what are the requirements ? #
 
 When cloning the repo, you should have a folder called "tools" in this folder you'll find the main schematics for the database (spotify_release.sql)
 
@@ -88,7 +88,7 @@ Here's a resume of what doesn't work yet:
 - Some playlist responsive is not well handled
  
 
-# Why is it this way ?
+# Why is it this way ? #
 
 Due to certain project restrictions, such as the inability use libraries or add-ons, some functionalities may be less than ideal.
 
