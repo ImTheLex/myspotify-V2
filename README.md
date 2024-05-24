@@ -72,6 +72,18 @@ FigJam :
 - https://www.figma.com/board/Kdqm6WEQHasQ7AynwDWGlk/todos-trello?t=exxS2U3lkUBDlh0n-0
 
 
+## User logins ##
+
+So in order to connect with the provided users in the "users.csv" here are the logins.
+
+1) Normal users
+Usernames : "UserNormal", "UserArtist", "UserAdmin"
+Password : "Carotte1"
+
+2) Spotify imported/created users
+Usernames : Should be identical as the seen "artistname" so if artist name is "Louane" then username for this account is probably the same.
+Password : "Spotify1"
+
 # What is wrong with the site ? #
 
 A lot I guess lol, to be honest 
