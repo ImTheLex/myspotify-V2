@@ -9,15 +9,50 @@ It might be obvious, but this site doesn't have real connection with Spotify.
 Apart from fetching the "previews audios".
 
 
+
 # What is the purpose of this site ?
 
 Well if nothing is broken (lol) basicly you can have a users/artists/admin hierarchy.
 
-All of those "roles" need to go through the signup steps first in order to use the rest of the site.
+Every user can decide to create an artist page, once it is done, they can then add tracks from their "artist profile".
 
-Once users are logged in for the first time, they will be notified with a "recover-token" message.
+Tracks data can either come from a file upload, or from a url link (this seems to work only for spotify api so far).
 
-They can save it somewhere for later in case they need a password reset.
+
+
+# How to install it and what are the requirements ?
+
+When cloning the repo, you should have a folder called "tools" in this folder you'll find the main schematics for the database (spotify_release.sql)
+
+Then if you want to add a few datas, you can import the csv files.
+
+![alt text](/public/ressources/tutoriel_image/tuto_img_1.png)
+
+
+
+## Env ##
+
+In a matter of learning and practicing, I included my database credentials into a ".env" file.
+
+This file is not included on the github, however, you will find a ".env.example" which contains the same variables as my .env
+
+All you need might need to adapt the "DB_PASS" if you have any on your device.
+
+![alt text](image.png)
+
+
+## Is there an order for the datas ?
+
+If you wish to use the csv to import some datas, I would recommend to follow this order, just in case some foreign keys are causing trouble.
+
+1. Users.csv
+2. Artists.csv
+3. Playlists.csv
+4. Categories.csv
+5. Tracks.csv
+6. Playlist_users_relations.csv
+7. Tracks_users_relations.csv
+ 
 
 
 ## 1) Users can :
@@ -64,20 +99,6 @@ They can save it somewhere for later in case they need a password reset.
     - And of course modifying the artist name and so on.
 
 
-
-## Can I import datas ?
-
-In the "tools" folder, you'll find several files designed to facilitate a smooth and functional installation of this project. The setup relies on a ".env" file for data connection. Please refer to the provided ".env.example" as a template to create your own ".env" file.
-
-If you wish to use the csv to import some datas, I would recommend to follow this order, just in case some foreign keys causing trouble.
-
-1. Users.csv
-2. Artists.csv
-3. Playlists.csv
-4. Categories.csv
-5. Tracks.csv
-6. Playlist_users_relations.csv
-7. Tracks_users_relations.csv
 
 
 ## Sources
