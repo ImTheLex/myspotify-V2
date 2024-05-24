@@ -36,7 +36,7 @@ In a matter of learning and practicing, I included my database credentials into 
 
 This file is not included on the github, however, you will find a ".env.example" which contains the same variables as my .env
 
-All you need might need to adapt the "DB_PASS" if you have any on your device.
+All you might need to do is to adapt the "DB_PASS" if you have any on your device.
 
 ![alt text](/public/ressources/tutoriel_image/tuto_img_2.png)
 
