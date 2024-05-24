@@ -33,11 +33,11 @@ They can save it somewhere for later in case they need a password reset.
 
     - Add music tracks, this requires that an Artist has published a music track.
 
-    ![Add Track](/public/ressources/tutoriel_image/image_3.png)
+    [Add Track](/public/ressources/tutoriel_image/image_3.png)
 
     - Delete playlists.
 
-    ![Delete Playlist](/public/ressources/tutoriel_image/image_4.png)
+    [Delete Playlist](/public/ressources/tutoriel_image/image_4.png)
 
     - Subscribe and unsubscribe playlists.
 
@@ -47,7 +47,7 @@ They can save it somewhere for later in case they need a password reset.
 
     - Create an Artist profile look after on your "profile" 
 
-    ![Create or Delete Artist](/public/ressources/tutoriel_image/image_5.png)
+    [Create or Delete Artist](/public/ressources/tutoriel_image/image_5.png)
 
 - Contact the "support" through the site.
 
