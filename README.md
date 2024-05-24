@@ -34,9 +34,11 @@ Then if you want to add a few datas, you can import the csv files.
 
 In a matter of learning and practicing, I included my database credentials into a ".env" file.
 
-This file is not included on the github, however, you will find a ".env.example" which contains the same variables as my .env
+This file is not included on the github, however, you will find a ".env.example" which contains the same variables as my ".env"
 
-All you might need to do is to adapt the "DB_PASS" if you have any on your device.
+All you might need to do is to :
+- Create a new ".env" or edit the ".env.example" and remove the ".example" from the name
+- Adapt the "DB_PASS" if you have any on your device
 
 ![alt text](/public/ressources/tutoriel_image/tuto_img_2.png)
 
