@@ -40,10 +40,13 @@
             </form>
             <div class="flex gap-y-2" >
             <?php $isSubscribed = false;
-            foreach($playlistdatas as $playlistdata){
-                if ($playlistdata['id'] === $playlisttodisplay['id']){
-                    $isSubscribed = true;
-                    break;
+            if($playlistdatas){
+
+                foreach($playlistdatas as $playlistdata){
+                    if ($playlistdata['id'] === $playlisttodisplay['id']){
+                        $isSubscribed = true;
+                        break;
+                    }
                 }
             }
             if ($playlisttodisplay['user_id'] !== $userdatas['id']){
