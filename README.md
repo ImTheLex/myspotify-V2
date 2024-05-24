@@ -41,7 +41,7 @@ All you need might need to adapt the "DB_PASS" if you have any on your device.
 ![alt text](/public/ressources/tutoriel_image/tuto_img_2.png)
 
 
-## Is there an order for the datas ?
+## Is there an order for the datas ? ##
 
 If you wish to use the csv to import some datas, I would recommend to follow this order, just in case some foreign keys are causing trouble.
 
@@ -51,57 +51,11 @@ If you wish to use the csv to import some datas, I would recommend to follow thi
 4. Categories.csv
 5. Tracks.csv
 6. Playlist_users_relations.csv
-7. Tracks_users_relations.csv
+7. Playlist_tracks_relations.csv
  
 
 
-## 1) Users can :
-
-- Manage playlists:
-    - Create using a "+" button.
-
-    ![Create Button](/public/ressources/tutoriel_image/image_1.png)
-
-    - Update by clicking on it, then look after an "edit" button.
-
-    ![Edit playlist](/public/ressources/tutoriel_image/image_2.png)
-
-    - Add music tracks, this requires that an Artist has published a music track.
-
-    ![Add Track](/public/ressources/tutoriel_image/image_3.png)
-
-    - Delete playlists.
-
-    ![Delete Playlist](/public/ressources/tutoriel_image/image_4.png)
-
-    - Subscribe and unsubscribe playlists.
-
-- Manage their profile.
-
-    - Update their account information as well as deleting it.s
-
-    - Create an Artist profile look after on your "profile" 
-
-    ![Create or Delete Artist](/public/ressources/tutoriel_image/image_5.png)
-
-- Contact the "support" through the site.
-
-    - The notification system also allow to interact with the administration so in case a user has a question, he can "submit" a ticket.
-    - Only 1 ticket can be submited at a time by a user until its responded.
-
-
-## 2) Artists can :
-
-- Manage their artist profile
-
-    - This includes adding tracks
-
-    - And of course modifying the artist name and so on.
-
-
-
-
-## Sources
+## Sources ##
 
 Trello :
 
@@ -116,7 +70,7 @@ FigJam :
 - https://www.figma.com/board/Kdqm6WEQHasQ7AynwDWGlk/todos-trello?t=exxS2U3lkUBDlh0n-0
 
 
-# What is wrong with the site ?
+# What is wrong with the site ? #
 
 A lot I guess lol, to be honest 
 
@@ -130,16 +84,9 @@ Here's a resume of what doesn't work yet:
 - Change password through your account (forgot password should work based on recover token)
 - Some audio related functionnalities
 - "Remember me" when logging in
-- Some "success" or "error" messages are not displayed yet.
+- Some "success" or "error" messages are not displayed
+- Some playlist responsive is not well handled
  
-
-## Important note ##
-
-In a matter of not overflowing github with my countless tests I "gitignored" the datas in those folders.
-However they may not be pushed in case they are empty, if they are not on the repo, ensure that you create them before using the "csv"
-
-![alt text](/public/ressources/tutoriel_image/image_6.png) 
-
 
 # Why is it this way ?
 
